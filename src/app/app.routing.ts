@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent} from './log/log.component';
+import { VehicleListComponent} from './vehicle-list/vehicle-list.component';
 
 const routes: Routes =[
   
@@ -21,7 +22,7 @@ const routes: Routes =[
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
   }]},
      { path: 'login',      component: LogComponent },
-    // { path: 'user-profile',   component: UserProfileComponent },
+     
     // { path: 'table-list',     component: TableListComponent },
     // { path: 'typography',     component: TypographyComponent },
     // { path: 'icons',          component: IconsComponent },

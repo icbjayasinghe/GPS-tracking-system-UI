@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent} from './log/log.component';
 import { VehicleListComponent} from './vehicle-list/vehicle-list.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes =[
   

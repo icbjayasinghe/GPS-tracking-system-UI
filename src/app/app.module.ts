@@ -31,6 +31,8 @@ import {
   MatRippleModule,
   MatTooltipModule,
 } from '@angular/material';
+import { VehicleServiceService } from './services/vehicle-service.service';
+import { UserService } from './services/user.service'
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import {
     
 
   ],
-  providers: [],
+  providers: [ 
+    VehicleServiceService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

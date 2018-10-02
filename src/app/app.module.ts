@@ -25,6 +25,13 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatRippleModule,
+  MatTooltipModule,
+} from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -34,6 +41,10 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatButtonModule,
+    MatInputModule,
+    MatRippleModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -42,6 +53,7 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
     AppComponent,
     AdminLayoutComponent,
     LogComponent,
+    
     
 
   ],

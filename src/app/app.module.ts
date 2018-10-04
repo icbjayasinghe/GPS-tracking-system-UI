@@ -18,21 +18,24 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+//import {MatDialog} from '@angular/material';
 
 import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
-import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { VehicleListComponent,DialogContentExampleDialog } from './vehicle-list/vehicle-list.component';
 import {
   MatButtonModule,
   MatInputModule,
   MatRippleModule,
   MatTooltipModule,
+  MatDialogModule
 } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
-import { UserService } from './services/user.service'
+import { UserService } from './services/user.service';
+
 
 
 @NgModule({
@@ -47,6 +50,7 @@ import { UserService } from './services/user.service'
     MatInputModule,
     MatRippleModule,
     MatTooltipModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -55,10 +59,12 @@ import { UserService } from './services/user.service'
     AppComponent,
     AdminLayoutComponent,
     LogComponent,
+    DialogContentExampleDialog
+    
     
     
 
-  ],
+  ],entryComponents: [DialogContentExampleDialog],
   providers: [ 
     VehicleServiceService,
     UserService],

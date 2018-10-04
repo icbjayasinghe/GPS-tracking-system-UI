@@ -12,7 +12,7 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 // import { LogComponent} from '../../log/log.component';
-import { VehicleListComponent } from '../../vehicle-list/vehicle-list.component';
+import { VehicleListComponent,DialogContentExampleDialog } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 
 import {
@@ -42,6 +42,7 @@ import {
     UpgradeComponent,
     VehicleListComponent,
     UserListComponent,
+    
     // LogComponent,
   ]
 })

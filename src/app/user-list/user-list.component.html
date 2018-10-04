@@ -5,25 +5,23 @@
               <div class="card">
                   <div class="card-header card-header-danger">
                       <h4 class="card-title ">User Table</h4>
-                      <p class="card-category"> Users of the GPS Tracking System</p>
+                      <p class="card-category"> User of the GPS Tracking System</p>
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table">
                               <thead class=" text-primary">
-                                  <th>ID</th>
-                                  <th>Name</th>
-                                  <th>Company</th>
-                                  <th>Number of Vehicles</th>
+                                  <th>User Name</th>
+                                  <th>User Type</th>
+                                  <th>Status</th>
                                   <th>Edit</th>
                                   <th>Delete</th>
                               </thead>
                               <tbody>
-                                  <tr>
-                                      <td>1</td>
-                                      <td>Dakota Rice</td>
-                                      <td>Niger</td>
-                                      <td>Oud-Turnhout</td>
+                                  <tr *ngFor= "let user of allUsers">
+                                      <td>{{user.name}}</td>
+                                      <td>{{user.userType}}</td>
+                                      <td>{{user.status}}</td>
                                       <td >
                                         <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                           <i class="material-icons">edit</i>
@@ -35,86 +33,7 @@
                                         </button>
                                       </td>
                                   </tr>
-                                  <tr>
-                                      <td>2</td>
-                                      <td>Minerva Hooper</td>
-                                      <td>Curaçao</td>
-                                      <td>Sinaai-Waas</td>
-                                      <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">edit</i>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">close</i>
-                                          </button>
-                                        </td>
-                                  </tr>
-                                  <tr>
-                                      <td>3</td>
-                                      <td>Sage Rodriguez</td>
-                                      <td>Netherlands</td>
-                                      <td>Baileux</td>
-                                      <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">edit</i>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">close</i>
-                                          </button>
-                                        </td>
-                                  </tr>
-                                  <tr>
-                                      <td>4</td>
-                                      <td>Philip Chaney</td>
-                                      <td>Korea, South</td>
-                                      <td>Overland Park</td>
-                                      <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">edit</i>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">close</i>
-                                          </button>
-                                        </td>
-                                  </tr>
-                                  <tr>
-                                      <td>5</td>
-                                      <td>Doris Greene</td>
-                                      <td>Malawi</td>
-                                      <td>Feldkirchen in Kärnten</td>
-                                      <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">edit</i>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">close</i>
-                                          </button>
-                                        </td>
-                                  </tr>
-                                  <tr>
-                                      <td>6</td>
-                                      <td>Mason Porter</td>
-                                      <td>Chile</td>
-                                      <td>Gloucester</td>
-                                      <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">edit</i>
-                                          </button>
-                                        </td>
-                                        <td>
-                                          <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                            <i class="material-icons">close</i>
-                                          </button>
-                                        </td>
-                                  </tr>
+                                 
                               </tbody>
                           </table>
                       </div>

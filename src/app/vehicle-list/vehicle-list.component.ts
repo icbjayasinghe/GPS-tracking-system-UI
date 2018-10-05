@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleServiceService} from '../services/vehicle-service.service'
+import { VehicleServiceService} from '../services/vehicle-service.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -9,15 +10,33 @@ import { VehicleServiceService} from '../services/vehicle-service.service'
 export class VehicleListComponent implements OnInit {
   allVehicles: any[];
   constructor(
-    private getVehicles:VehicleServiceService
-  ) { }
+    private getVehicles:VehicleServiceService,
+    public dialog: MatDialog
+  ) { };
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  };
+
+  
 
   ngOnInit() {
-    console.log(this.getVehicles.getAllVehicles().subscribe(result=>{
+    this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
-      
-      // console.log(this.allVehicles);
-    }));
+    });
   }
 
 }
+
+
+
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'dialog-content-example-dialog.html',
+})
+export class DialogContentExampleDialog {}
+

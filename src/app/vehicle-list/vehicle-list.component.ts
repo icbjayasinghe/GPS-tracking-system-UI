@@ -23,6 +23,8 @@ export class VehicleListComponent implements OnInit {
 
   
 
+  
+
   ngOnInit() {
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
@@ -38,5 +40,26 @@ export class VehicleListComponent implements OnInit {
   selector: 'dialog-content-example-dialog',
   templateUrl: 'dialog-content-example-dialog.html',
 })
-export class DialogContentExampleDialog {}
+export class DialogContentExampleDialog {
+  vehicleNo: String;
+  deviceImei: String;
+  userName: String;
+  vehicleDetails: String;
+
+  constructor(
+    private addNewVehicles:VehicleServiceService,
+  ) { };
+
+  addVehicle(){
+    const vehicleObj = { 
+      vehicleNo:this.vehicleNo,
+	    Imie:this.deviceImei,
+	    userName:this.userName,
+	    details:this.vehicleDetails
+    }
+    this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
+      console.log(res);
+    });
+  };
+}
 

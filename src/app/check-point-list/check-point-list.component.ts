@@ -8,15 +8,15 @@ import { CheckPointService } from '../services/check-point.service';
 })
 export class CheckPointListComponent implements OnInit {
   allCheckPoints: any[];
-
   constructor(
     private getCheckPoints:CheckPointService
   ) { }
 
   ngOnInit() {
-    console.log(this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
+    this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
       this.allCheckPoints = result;
-    }));
+    });
+    console.log(this.allCheckPoints);
   }
 
 }

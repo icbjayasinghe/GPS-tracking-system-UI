@@ -25,6 +25,16 @@ export class VehicleListComponent implements OnInit {
     });
   };
 
+  deleteConfirmDialog(){
+    const dialogRef = this.dialog.open(DeleteVehiclePopup,{
+      height: '350px',
+      width: '400px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  };
+
   ngOnInit() {
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
@@ -63,4 +73,10 @@ export class AddVehiclePopup {
     });
   };
 }
+
+@Component({
+  selector: 'delete-vehicle-popup',
+  templateUrl: 'delete-vehicle-popup.html',
+})
+export class DeleteVehiclePopup {}
 

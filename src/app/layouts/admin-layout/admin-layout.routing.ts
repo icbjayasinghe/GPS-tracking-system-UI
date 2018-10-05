@@ -8,7 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { VehicleListComponent,DialogContentExampleDialog} from '../../vehicle-list/vehicle-list.component';
+import { VehicleListComponent,AddVehiclePopup} from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent} from '../../check-point-list/check-point-list.component'
 

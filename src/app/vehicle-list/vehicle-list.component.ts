@@ -7,7 +7,6 @@ import {MatDialog} from '@angular/material';
   templateUrl: './vehicle-list.component.html',
   styleUrls: ['./vehicle-list.component.scss']
 })
-
 export class VehicleListComponent implements OnInit {
   allVehicles: any[];
   constructor(
@@ -29,9 +28,6 @@ export class VehicleListComponent implements OnInit {
   }
 
 }
-
-
-
 
 @Component({
   selector: 'dialog-content-example-dialog',

@@ -10,6 +10,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
 import { VehicleListComponent, DialogContentExampleDialog } from './vehicle-list/vehicle-list.component';
+import { AddUserPopUp } from './user-list/user-list.component';
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
@@ -44,10 +45,12 @@ import {MatDialog} from '@angular/material';
     AppComponent,
     AdminLayoutComponent,
     LogComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    AddUserPopUp
   ],
   entryComponents: [
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    AddUserPopUp
   ],
   providers: [ 
     VehicleServiceService,

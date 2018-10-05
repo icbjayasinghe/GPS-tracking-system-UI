@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 })
 
 export class VehicleListComponent implements OnInit {
+  interval: any;
   allVehicles: any[];
   constructor(
     private getVehicles:VehicleServiceService,
@@ -26,7 +27,13 @@ export class VehicleListComponent implements OnInit {
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
     });
+    this.interval = setInterval(() => { 
+      this.getVehicles.getAllVehicles().subscribe(result=>{
+        this.allVehicles = result;
+      });
+  }, 1000);
   }
+  
 
 }
 

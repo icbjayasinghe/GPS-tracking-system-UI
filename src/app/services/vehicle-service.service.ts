@@ -19,7 +19,13 @@ export class VehicleServiceService {
     headers.append('Content-Type','application/json');
     const url ="http://localhost:3000/addVehicle";
     return this.http.post(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
-    //return "hello";
+  }
+
+  deleteVehicle(vehiId){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    const url ="http://localhost:3000/deleteVehicle/"+vehiId;
+    return this.http.delete(url).pipe(map(res=>res.json()));
   }
 
 }

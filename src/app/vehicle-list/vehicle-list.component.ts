@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleServiceService} from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
-
+var vId;
 @Component({
   selector: 'app-vehicle-list',
   templateUrl: './vehicle-list.component.html',
@@ -25,13 +25,15 @@ export class VehicleListComponent implements OnInit {
     });
   };
 
-  deleteConfirmDialog(){
+  deleteConfirmDialog(vehicleId){
     const dialogRef = this.dialog.open(DeleteVehiclePopup,{
       height: '350px',
       width: '400px',
     });
+    vId=vehicleId;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      //console.log( vehicleId);
     });
   };
 
@@ -78,5 +80,14 @@ export class AddVehiclePopup {
   selector: 'delete-vehicle-popup',
   templateUrl: 'delete-vehicle-popup.html',
 })
-export class DeleteVehiclePopup {}
+export class DeleteVehiclePopup {
+  constructor(
+    private delVehicles:VehicleServiceService,
+  ) { };
+  deleteVehicle(){
+    this.delVehicles.deleteVehicle(vId).subscribe(res=>{
+      console.log(res);
+    });
+  }
+}
 

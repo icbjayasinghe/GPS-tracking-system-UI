@@ -10,7 +10,7 @@ export class CheckPointService {
   ) { }
 
   getAllCheckPoints(){
-    const url = "http://localhost:3000/viewVehicles"
+    const url = "http://localhost:3000/CheckPoint"
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 

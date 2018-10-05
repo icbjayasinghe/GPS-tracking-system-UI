@@ -7,23 +7,20 @@ import {MatDialog} from '@angular/material';
   templateUrl: './vehicle-list.component.html',
   styleUrls: ['./vehicle-list.component.scss']
 })
+
 export class VehicleListComponent implements OnInit {
   allVehicles: any[];
   constructor(
     private getVehicles:VehicleServiceService,
     public dialog: MatDialog
   ) { };
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   };
-
-  
-
-  
 
   ngOnInit() {
     this.getVehicles.getAllVehicles().subscribe(result=>{
@@ -32,9 +29,6 @@ export class VehicleListComponent implements OnInit {
   }
 
 }
-
-
-
 
 @Component({
   selector: 'dialog-content-example-dialog',

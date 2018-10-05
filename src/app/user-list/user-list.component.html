@@ -3,9 +3,13 @@
       <div class="row">
           <div class="col-md-12">
               <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title ">User Table</h4>
-                      <p class="card-category"> User of the GPS Tracking System</p>
+                <div class="card-header card-header-danger">
+                    <div class="row">
+                        <div class="col-md-9"><h4 class="card-title ">User Table</h4>
+                          <p class="card-category"> Users of the GPS Tracking System</p></div>
+                        <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-success btn-block" (click)="openDialog()">Add User</button></div>                           
+                    </div>                    
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
@@ -23,7 +27,7 @@
                                       <td>{{user.userType}}</td>
                                       <td>{{user.status}}</td>
                                       <td >
-                                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                        <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                           <i class="material-icons">edit</i>
                                         </button>
                                       </td>

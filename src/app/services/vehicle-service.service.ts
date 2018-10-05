@@ -14,4 +14,12 @@ export class VehicleServiceService {
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 
+  addNewVehicle(vehiObj){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    const url ="http://localhost:3000/addVehicle";
+    return this.http.post(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
+    //return "hello";
+  }
+
 }

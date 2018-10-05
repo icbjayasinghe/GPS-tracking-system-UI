@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Check Points Table</h4>
+                      <p class="card-category"> Check Points tracking by the GPS Tracking System</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>User Id</th>
+                                  <th>Location Name</th>
+                                  <th>Location Type Name</th>
+                                  <th>View Location</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor= "let checkPoint of allCheckPoints">
+                                      <td>{{checkPoint.userId}}</td>
+                                      <td>{{checkPoint.locationName}}</td>
+                                      <td>{{checkPoint.locationType}}</td>
+                                      <td >
+                                        <button mat-raised-button type="button" matTooltip="View Location" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">map</i>
+                                        </button>
+                                      </td>
+                                      <td >
+                                        <button mat-raised-button type="button" matTooltip="Edit Check Point" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                        </button>
+                                      </td>
+                                      <td>
+                                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">close</i>
+                                        </button>
+                                      </td>
+                                  </tr>
+                                 
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

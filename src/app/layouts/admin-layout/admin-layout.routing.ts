@@ -10,6 +10,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { VehicleListComponent} from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
+import { CheckPointListComponent} from '../../check-point-list/check-point-list.component'
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -63,5 +64,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'vehicle-list',   component: VehicleListComponent },
-    { path: 'user-list',      component: UserListComponent }
+    { path: 'user-list',      component: UserListComponent },
+    { path: 'check-point-list', component:CheckPointListComponent}
 ];

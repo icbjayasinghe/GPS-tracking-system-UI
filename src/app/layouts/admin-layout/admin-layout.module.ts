@@ -14,6 +14,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 // import { LogComponent} from '../../log/log.component';
 import { VehicleListComponent,DialogContentExampleDialog } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
+import { CheckPointListComponent } from '../../check-point-list/check-point-list.component';
 
 import {
   MatButtonModule,
@@ -42,7 +43,7 @@ import {
     UpgradeComponent,
     VehicleListComponent,
     UserListComponent,
-    
+    CheckPointListComponent,
     // LogComponent,
   ]
 })

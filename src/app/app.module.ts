@@ -31,7 +31,8 @@ import {
 } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
-
+import { CheckPointService } from './services/check-point.service';
+import { CheckPointListComponent } from './check-point-list/check-point-list.component';
 
 
 @NgModule({
@@ -56,14 +57,12 @@ import { UserService } from './services/user.service';
     AdminLayoutComponent,
     LogComponent,
     DialogContentExampleDialog
-    
-    
-    
-
   ],entryComponents: [DialogContentExampleDialog],
+
   providers: [ 
     VehicleServiceService,
-    UserService],
+    UserService,
+    CheckPointService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

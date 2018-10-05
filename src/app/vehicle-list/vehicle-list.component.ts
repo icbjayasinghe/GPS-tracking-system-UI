@@ -16,7 +16,10 @@ export class VehicleListComponent implements OnInit {
   ) { };
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    const dialogRef = this.dialog.open(AddVehiclePopup,{
+      height: '400px',
+      width: '600px',
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
@@ -30,17 +33,15 @@ export class VehicleListComponent implements OnInit {
       this.getVehicles.getAllVehicles().subscribe(result=>{
         this.allVehicles = result;
       });
-  }, 1000);
+    }, 1000);
   }
-  
-
 }
 
 @Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: 'dialog-content-example-dialog.html',
+  selector: 'add-vehicle-popup',
+  templateUrl: 'add-vehicle-popup.html',
 })
-export class DialogContentExampleDialog {
+export class AddVehiclePopup {
   vehicleNo: String;
   deviceImei: String;
   userName: String;

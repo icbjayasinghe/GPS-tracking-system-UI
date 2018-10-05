@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  interval: any;
   allUsers: any[];
   constructor(
     private getUsers:UserService,
@@ -16,7 +17,10 @@ export class UserListComponent implements OnInit {
   ) { };
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddUserPopUp);
+    const dialogRef = this.dialog.open(AddUserPopUp,{
+      height: '400px',
+      width: '600px',
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
@@ -26,6 +30,11 @@ export class UserListComponent implements OnInit {
     this.getUsers.getAllUsers().subscribe(result=>{
       this.allUsers = result;
     });
+    this.interval = setInterval(() => { 
+      this.getUsers.getAllUsers().subscribe(result=>{
+        this.allUsers = result;
+      });
+    }, 1000);
   }
 }
 
@@ -34,4 +43,24 @@ export class UserListComponent implements OnInit {
   selector: 'add-user-popup',
   templateUrl: 'add-user-popup.html',
 })
-export class AddUserPopUp {}
+export class AddUserPopUp {
+  userName: String;
+  userType: String;
+  userStatus: String;
+
+  constructor(
+    private addNewUser:UserService,
+  ) { };
+
+  addUser(){
+    const userObj = { 
+      name:this.userName,
+      password:this.userName,
+	    userType:this.userType,
+	    status:this.userStatus
+    }
+    this.addNewUser.addNewUser(userObj).subscribe(res=>{
+      console.log(res);
+    });
+  };
+}

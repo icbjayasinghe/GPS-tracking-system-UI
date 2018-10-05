@@ -11,4 +11,10 @@ export class UserService {
         return this.http.get(url).pipe(map(res=>res.json()));
     }
 
+    addNewUser(userObj){
+        let headers = new Headers();
+        headers.append('Content-Type','application/json');
+        const url ="http://localhost:3000/signup";
+        return this.http.post(url,userObj,{headers:headers}).pipe(map(res=>res.json()));
+      }
 }

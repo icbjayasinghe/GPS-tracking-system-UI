@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleServiceService} from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
+import { NotificationsComponent} from '../notifications/notifications.component'
 var vId;
 @Component({
   selector: 'app-vehicle-list',
@@ -58,10 +59,12 @@ export class AddVehiclePopup {
   deviceImei: String;
   userName: String;
   vehicleDetails: String;
-
+  //notification: NotificationsComponent
   constructor(
     private addNewVehicles:VehicleServiceService,
+    //private notification: NotificationsComponent
   ) { };
+
 
   addVehicle(){
     const vehicleObj = { 
@@ -71,9 +74,17 @@ export class AddVehiclePopup {
 	    details:this.vehicleDetails
     }
     this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
-      console.log(res);
+      if(res.success){
+        //this.notification.showNotification('top','left');
+        
+      }
+      else{
+
+      };
     });
   };
+
+  
 }
 
 @Component({

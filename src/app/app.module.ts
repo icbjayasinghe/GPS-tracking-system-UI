@@ -11,6 +11,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LogComponent } from './log/log.component';
 import { AddVehiclePopup,DeleteVehiclePopup,UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { AddUserPopUp } from './user-list/user-list.component';
+import { AddCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
@@ -48,13 +49,15 @@ import {MatDialog} from '@angular/material';
     AddVehiclePopup,
     AddUserPopUp,
     DeleteVehiclePopup,
-    UpdateVehiclePopup
+    UpdateVehiclePopup,
+    AddCheckPointPopup
   ],
   entryComponents: [
     AddVehiclePopup,
     AddUserPopUp,
     DeleteVehiclePopup,
-    UpdateVehiclePopup
+    UpdateVehiclePopup,
+    AddCheckPointPopup
   ],
   providers: [ 
     VehicleServiceService,

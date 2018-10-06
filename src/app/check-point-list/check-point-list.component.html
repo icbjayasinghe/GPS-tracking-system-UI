@@ -4,8 +4,12 @@
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Check Points Table</h4>
-                      <p class="card-category">Check Points tracking by the GPS Tracking System</p>
+                    <div class="row">
+                        <div class="col-md-9"><h4 class="card-title ">Locations Table</h4>
+                          <p class="card-category"> Locations of the GPS Tracking System</p></div>
+                        <div class="col-md-3">
+                            <button mat-raised-button class="btn btn-success btn-block" (click)="openDialog()" >Add Location</button></div>
+                    </div>
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">

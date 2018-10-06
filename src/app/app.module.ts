@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
-import { AddVehiclePopup,DeleteVehiclePopup } from './vehicle-list/vehicle-list.component';
+import { AddVehiclePopup,DeleteVehiclePopup,UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { AddUserPopUp } from './user-list/user-list.component';
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
@@ -47,12 +47,14 @@ import {MatDialog} from '@angular/material';
     LogComponent,
     AddVehiclePopup,
     AddUserPopUp,
-    DeleteVehiclePopup
+    DeleteVehiclePopup,
+    UpdateVehiclePopup
   ],
   entryComponents: [
     AddVehiclePopup,
     AddUserPopUp,
-    DeleteVehiclePopup
+    DeleteVehiclePopup,
+    UpdateVehiclePopup
   ],
   providers: [ 
     VehicleServiceService,

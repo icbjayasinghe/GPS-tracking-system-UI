@@ -38,6 +38,16 @@ export class VehicleListComponent implements OnInit {
     });
   };
 
+  updateDialog(){
+    const dialogRef = this.dialog.open(UpdateVehiclePopup,{
+      height: '400px',
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   ngOnInit() {
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
@@ -99,6 +109,21 @@ export class DeleteVehiclePopup {
     this.delVehicles.deleteVehicle(vId).subscribe(res=>{
       console.log(res);
     });
+  }
+}
+
+@Component({
+  selector: 'update-vehicle-popup',
+  templateUrl: 'update-vehicle-popup.html',
+})
+export class UpdateVehiclePopup {
+  constructor(
+    private updVehicles:VehicleServiceService,
+  ) { };
+  updateVehicle(){
+    // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
+    //   console.log(res);
+    // });
   }
 }
 

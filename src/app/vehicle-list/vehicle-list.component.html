@@ -29,7 +29,7 @@
                                         <td>{{vehicle.userName}}</td>
                                         <td>{{vehicle.vehicleDetails}}</td>
                                         <td >
-                                          <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog()">
                                             <i class="material-icons">edit</i>
                                           </button>
                                         </td>

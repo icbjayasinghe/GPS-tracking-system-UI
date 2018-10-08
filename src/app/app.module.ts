@@ -10,7 +10,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
 import { AddVehiclePopup,DeleteVehiclePopup,UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
-import { AddUserPopUp } from './user-list/user-list.component';
+import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
 import { AddCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
@@ -50,14 +50,16 @@ import {MatDialog} from '@angular/material';
     AddUserPopUp,
     DeleteVehiclePopup,
     UpdateVehiclePopup,
-    AddCheckPointPopup
+    AddCheckPointPopup,
+    DeleteUserPopup
   ],
   entryComponents: [
     AddVehiclePopup,
     AddUserPopUp,
     DeleteVehiclePopup,
     UpdateVehiclePopup,
-    AddCheckPointPopup
+    AddCheckPointPopup,
+    DeleteUserPopup
   ],
   providers: [ 
     VehicleServiceService,

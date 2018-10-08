@@ -93,8 +93,6 @@ export class AddVehiclePopup {
       };
     });
   };
-
-  
 }
 
 @Component({

@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 })
 export class CheckPointListComponent implements OnInit {
   allCheckPoints: any[];
+  interval: any;
   constructor(
     public dialog:MatDialog,
     private getCheckPoints:CheckPointService
@@ -28,9 +29,12 @@ export class CheckPointListComponent implements OnInit {
     this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
       this.allCheckPoints = result;
     });
-    console.log(this.allCheckPoints);
+    this.interval = setInterval(() => { 
+      this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
+        this.allCheckPoints = result;
+      });
+    }, 1000);
   }
-
 }
 
 @Component({
@@ -38,12 +42,25 @@ export class CheckPointListComponent implements OnInit {
   templateUrl: 'add-check-point-popup.html',
 })
 export class AddCheckPointPopup {
+  userId : String ;
+  locationName : String ;
+  locationType : String ;
+  latitude : String ;
+  longitude : String ;
+
   constructor(
-    //private updVehicles:VehicleServiceService,
+    private addNewCheckPoints:CheckPointService,
   ) { };
   addCheckPoint(){
-    // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
-    //   console.log(res);
-    // });
-  }
+    const checkPointObj = { 
+      userId:this.userId,
+      locationName:this.locationName,
+	    locationType:this.locationType,
+      latitude:this.latitude,
+      longitude:this.longitude
+    }
+    this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res=>{
+      console.log(res);
+    });
+  };
 }

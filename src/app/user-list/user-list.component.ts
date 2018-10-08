@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {MatDialog} from '@angular/material';
 
+var uId;
+
 //user list component
 @Component({
   selector: 'app-user-list',
@@ -23,6 +25,18 @@ export class UserListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+    });
+  };
+
+  deleteConfirmDialog(userId){
+    const dialogRef = this.dialog.open(DeleteUserPopup,{
+      height: '350px',
+      width: '400px',
+    });
+    uId=userId;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      console.log( userId);
     });
   };
 
@@ -63,4 +77,19 @@ export class AddUserPopUp {
       console.log(res);
     });
   };
+}
+
+@Component({
+  selector: 'delete-user-popup',
+  templateUrl: 'delete-user-popup.html',
+})
+export class DeleteUserPopup {
+  constructor(
+    private delUser:UserService,
+  ) { };
+  deleteUser(){
+    this.delUser.deleteUser(uId).subscribe(res=>{
+      console.log(res);
+    });
+  }
 }

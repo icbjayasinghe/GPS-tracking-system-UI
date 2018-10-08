@@ -16,5 +16,12 @@ export class UserService {
         headers.append('Content-Type','application/json');
         const url ="http://localhost:3000/signup";
         return this.http.post(url,userObj,{headers:headers}).pipe(map(res=>res.json()));
-      }
+    }
+
+    deleteUser(userId){
+        let headers = new Headers();
+        headers.append('Content-Type','application/json');
+        const url ="http://localhost:3000/userDelete/"+userId;
+        return this.http.put(url,userId).pipe(map(res=>res.json()));
+    }
 }

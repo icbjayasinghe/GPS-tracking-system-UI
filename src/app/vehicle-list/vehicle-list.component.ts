@@ -75,7 +75,6 @@ export class AddVehiclePopup {
     //private notification: NotificationsComponent
   ) { };
 
-
   addVehicle(){
     const vehicleObj = { 
       vehicleNo:this.vehicleNo,
@@ -85,11 +84,9 @@ export class AddVehiclePopup {
     }
     this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
       if(res.success){
-        //this.notification.showNotification('top','left');
-        
+        //this.notification.showNotification('top','left');      
       }
       else{
-
       };
     });
   };
@@ -103,6 +100,7 @@ export class DeleteVehiclePopup {
   constructor(
     private delVehicles:VehicleServiceService,
   ) { };
+
   deleteVehicle(){
     this.delVehicles.deleteVehicle(vId).subscribe(res=>{
       console.log(res);
@@ -118,6 +116,7 @@ export class UpdateVehiclePopup {
   constructor(
     private updVehicles:VehicleServiceService,
   ) { };
+  
   updateVehicle(){
     // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
     //   console.log(res);

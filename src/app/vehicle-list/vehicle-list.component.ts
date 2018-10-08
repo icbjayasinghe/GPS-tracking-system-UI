@@ -3,6 +3,7 @@ import { VehicleServiceService} from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 import { NotificationsComponent} from '../notifications/notifications.component'
 var vId;
+var vehi;
 @Component({
   selector: 'app-vehicle-list',
   templateUrl: './vehicle-list.component.html',
@@ -11,6 +12,10 @@ var vId;
 export class VehicleListComponent implements OnInit {
   interval: any;
   allVehicles: any[];
+  vehicleNo: String;
+  deviceImei: String;
+  userName: String;
+  vehicleDetails: String;
   constructor(
     private getVehicles:VehicleServiceService,
     public dialog: MatDialog
@@ -38,14 +43,21 @@ export class VehicleListComponent implements OnInit {
     });
   };
 
-  updateDialog(){
+  updateDialog(vehicle){
+    vehi = vehicle;
     const dialogRef = this.dialog.open(UpdateVehiclePopup,{
       height: '400px',
       width: '600px',
-    });
+    },);
+    
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      //console.log(vehi);
     });
+    //console.log(vehi);
+    //this.vehicleDetails=vehi;
+    
   }
 
   ngOnInit() {
@@ -82,6 +94,7 @@ export class AddVehiclePopup {
 	    userName:this.userName,
 	    details:this.vehicleDetails
     }
+  
     this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
       if(res.success){
         //this.notification.showNotification('top','left');      
@@ -113,11 +126,24 @@ export class DeleteVehiclePopup {
   templateUrl: 'update-vehicle-popup.html',
 })
 export class UpdateVehiclePopup {
-  constructor(
-    private updVehicles:VehicleServiceService,
-  ) { };
+  vehicleNo: String;
+  deviceImei: String;
+  userName: String;
+  vehicleDetails: String;
+  vehicle= vehi;
   
+  
+  constructor(
+    private updVehicles:VehicleServiceService
+  ) { 
+    this.vehicleNo=vehi.vehicleNo;
+    this.deviceImei=vehi.imeiNo;
+    this.userName=vehi.userName;
+    this.vehicleDetails=vehi;
+    //console.log(vehi);
+  };
   updateVehicle(){
+    console.log(this.vehicleNo);
     // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
     //   console.log(res);
     // });

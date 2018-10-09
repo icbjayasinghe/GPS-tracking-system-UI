@@ -10,28 +10,28 @@ export class VehicleServiceService {
   ) { }
 
   getAllVehicles(){
-    const url = "http://localhost:3000/viewVehicles"
+    const url = "http://localhost:3000/vehicle"
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 
   addNewVehicle(vehiObj){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/addVehicle";
+    const url ="http://localhost:3000/vehicle";
     return this.http.post(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 
   deleteVehicle(vehiId){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/deleteVehicle/"+vehiId;
+    const url ="http://localhost:3000/vehicle/"+vehiId;
     return this.http.delete(url).pipe(map(res=>res.json()));
   }
 
   updateVehicle(vehiId,vehiObj){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/updateVehicle/"+vehiId;
+    const url ="http://localhost:3000/vehicle/"+vehiId;
     return this.http.put(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 

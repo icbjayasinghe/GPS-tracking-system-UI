@@ -113,7 +113,6 @@ export class DeleteVehiclePopup {
   constructor(
     private delVehicles:VehicleServiceService,
   ) { };
-
   deleteVehicle(){
     this.delVehicles.deleteVehicle(vId).subscribe(res=>{
       console.log(res);
@@ -131,7 +130,6 @@ export class UpdateVehiclePopup {
   userName: String;
   vehicleDetails: String;
   vehicle= vehi;
-  
   
   constructor(
     private updVehicles:VehicleServiceService

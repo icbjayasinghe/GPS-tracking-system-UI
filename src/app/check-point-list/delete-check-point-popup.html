@@ -1,0 +1,23 @@
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../assets/img/baseline_delete_forever_black_48dp.png" alt="delete"><br>
+            <h3 style="text-align: center"><b>Are you sure?</b></h3><br>
+            
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"><h5 style="text-align: center">This location will not in the system anymore. You can't undo this action</h5></div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4"> <button mat-button mat-dialog-close class="btn btn-block" >Cancel</button></div>
+            <div class="col-md-4"> <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-danger btn-block" (click)="deleteCheckPoint()">Delete</button></div>
+            <div class="col-md-2"></div>
+        </div>
+    
+</mat-dialog-content>

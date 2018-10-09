@@ -28,4 +28,11 @@ export class VehicleServiceService {
     return this.http.delete(url).pipe(map(res=>res.json()));
   }
 
+  updateVehicle(vehiId,vehiObj){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    const url ="http://localhost:3000/updateVehicle/"+vehiId;
+    return this.http.put(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
+  }
+
 }

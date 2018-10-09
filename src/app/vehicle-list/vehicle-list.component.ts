@@ -125,23 +125,26 @@ export class DeleteVehiclePopup {
   templateUrl: 'update-vehicle-popup.html',
 })
 export class UpdateVehiclePopup {
-  vehicleNo: String;
-  deviceImei: String;
-  userName: String;
-  vehicleDetails: String;
-  vehicle= vehi;
+  id = vehi._id;
+  vehicleNo = vehi.vehicleNo;
+  deviceImei = vehi.imeiNo;
+  userName = vehi.userName;
+  vehicleDetails = vehi.vehicleDetails;
   
   constructor(
     private updVehicles:VehicleServiceService
-  ) { 
-    this.vehicleNo=vehi.vehicleNo;
-    this.deviceImei=vehi.imeiNo;
-    this.userName=vehi.userName;
-    this.vehicleDetails=vehi;
-    //console.log(vehi);
-  };
+  ) { };
   updateVehicle(){
-    console.log(this.vehicleNo);
+    const vehicleObj = { 
+      vehicleNo:this.vehicleNo,
+	    Imie:this.deviceImei,
+	    userName:this.userName,
+	    details:this.vehicleDetails
+    }
+    this.updVehicles.updateVehicle(this.id,vehicleObj).subscribe(res=>{
+      console.log(res);
+    });
+    //console.log(this.id);
     // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
     //   console.log(res);
     // });

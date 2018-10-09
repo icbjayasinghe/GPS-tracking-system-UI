@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, } from '@angular/core';
+
+
 
 declare const google: any;
 
@@ -8,118 +10,129 @@ lng: number;
 label?: string;
 draggable?: boolean;
 }
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
-})
+  styleUrls: ['./maps.component.css'],
+    })
 export class MapsComponent implements OnInit {
+
+    lat = 7.2906;
+    lng = 80.6337;
 
   constructor() { }
 
   ngOnInit() {
 
-    var myLatlng = new google.maps.LatLng(7.2906, 80.6337);
-    var mapOptions = {
+    /*const myLatlng = new google.maps.LatLng(7.2906, 80.6337);
+    const mapOptions = {
         zoom: 8,
-        center: myLatlng,
-        scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+        ceter: myLatlng,
+        scrollwheel: false,
         styles: [{
-            "featureType": "water",
-            "stylers": [{
-                "saturation": 43
+            'featureType': 'water',
+            'stylers': [{
+                'saturation': 43
             }, {
-                "lightness": -11
+                'lightness': -11
             }, {
-                "hue": "#0088ff"
+                'hue': '#0088ff'
             }]
         }, {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "hue": "#ff0000"
+            'featureType': 'road',
+            'elementType': 'geometry.fill',
+            'stylers': [{
+                'hue': '#ff0000'
             }, {
-                "saturation": -100
+                'saturation': -100
             }, {
-                "lightness": 99
+                'lightness': 99
             }]
         }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-                "color": "#808080"
+            'featureType': 'road',
+            'elementType': 'geometry.stroke',
+            'stylers': [{
+                'color': '#808080'
             }, {
-                "lightness": 54
+                'lightness': 54
             }]
         }, {
-            "featureType": "landscape.man_made",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ece2d9"
+            'featureType': 'landscape.man_made',
+            'elementType': 'geometry.fill',
+            'stylers': [{
+                'color': '#ece2d9'
             }]
         }, {
-            "featureType": "poi.park",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ccdca1"
+            'featureType': 'poi.park',
+            'elementType': 'geometry.fill',
+            'stylers': [{
+                'color': '#ccdca1'
             }]
         }, {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-                "color": "#767676"
+            'featureType': 'road',
+            'elementType': 'labels.text.fill',
+            'stylers': [{
+                'color': '#767676'
             }]
         }, {
-            "featureType": "road",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-                "color": "#ffffff"
+            'featureType': 'road',
+            'elementType': 'labels.text.stroke',
+            'stylers': [{
+                'color': '#ffffff'
             }]
         }, {
-            "featureType": "poi",
-            "stylers": [{
-                "visibility": "off"
+            'featureType': 'poi',
+            'stylers': [{
+                'visibility': 'off'
             }]
         }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "visibility": "on"
+            'featureType': 'landscape.natural',
+            'elementType': 'geometry.fill',
+            'stylers': [{
+                'visibility': 'on'
             }, {
-                "color": "#b8cb93"
+                'color': '#b8cb93'
             }]
         }, {
-            "featureType": "poi.park",
-            "stylers": [{
-                "visibility": "on"
+            'featureType': 'poi.park',
+            'stylers': [{
+                'visibility': 'on'
             }]
         }, {
-            "featureType": "poi.sports_complex",
-            "stylers": [{
-                "visibility": "on"
+            'featureType': 'poi.sports_complex',
+            'stylers': [{
+                'visibility': 'on'
             }]
         }, {
-            "featureType": "poi.medical",
-            "stylers": [{
-                "visibility": "on"
+            'featureType': 'poi.medical',
+            'stylers': [{
+                'visibility': 'on'
             }]
         }, {
-            "featureType": "poi.business",
-            "stylers": [{
-                "visibility": "simplified"
+            'featureType': 'poi.business',
+            'stylers': [{
+                'visibility': 'simplified'
             }]
         }]
 
     };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    /*var marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
         position: myLatlng,
         title: "Hello World!"
-    });*/
+    });
 
     // To add the marker to the map, call setMap();
-    //marker.setMap(map);
+    marker.setMap(map);*/
   }
+
+  onChooseLocation(event) {
+      this.lat = event.coords.lat;
+      this.lng = event.coords.lng;
+      console.log('Latitudes :' + this.lat);
+      console.log('Longitudes :' + this.lng);
+    }
 
 }

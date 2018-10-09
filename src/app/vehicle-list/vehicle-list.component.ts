@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import { NotificationsComponent} from '../notifications/notifications.component'
 var vId;
 var vehi;
+declare var $: any;
 @Component({
   selector: 'app-vehicle-list',
   templateUrl: './vehicle-list.component.html',
@@ -94,12 +95,61 @@ export class AddVehiclePopup {
 	    userName:this.userName,
 	    details:this.vehicleDetails
     }
-  
+    
     this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
       if(res.success){
+        
+        const type = ['success'];
+        //const color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+          icon: "done_outline",
+          message: "Successfully added<b> new vehicle</b> "
+
+      },{
+          type: 'success',
+          timer: 4000,
+          placement: {
+              from: "top",
+              align: "center"
+          },
+          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+            '<i class="material-icons" data-notify="icon">check_circle</i> ' +
+            '<span data-notify="title">{1}</span> ' +
+            '<span data-notify="message">{2}</span>' +
+            '<div class="progress" data-notify="progressbar">' +
+              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            '</div>' +
+            '<a href="{3}" target="{4}" data-notify="url"></a>' +
+          '</div>'
+      });
         //this.notification.showNotification('top','left');      
       }
       else{
+        const type = ['success'];
+        //const color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+          icon: "done_outline",
+          message: "Somthing went <b> wrong</b> "
+
+      },{
+          type: 'danger',
+          timer: 4000,
+          placement: {
+              from: "top",
+              align: "center"
+          },
+          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">error</i></button>' +
+            '<i class="material-icons" data-notify="icon">check_circle</i> ' +
+            '<span data-notify="title">{1}</span> ' +
+            '<span data-notify="message">{2}</span>' +
+            '<div class="progress" data-notify="progressbar">' +
+              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            '</div>' +
+            '<a href="{3}" target="{4}" data-notify="url"></a>' +
+          '</div>'
+      });
       };
     });
   };
@@ -151,4 +201,5 @@ export class UpdateVehiclePopup {
     // });
   }
 }
+
 

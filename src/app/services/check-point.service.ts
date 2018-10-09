@@ -21,4 +21,12 @@ export class CheckPointService {
     return this.http.post(url,checkPointObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 
+  deleteCheckPoint(cpId){
+    console.log(cpId+'service');
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    const url ="http://localhost:3000/CheckPoint/delete/"+cpId;
+    return this.http.get(url).pipe(map(res=>res.json()));
+  }
+
 }

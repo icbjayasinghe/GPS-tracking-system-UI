@@ -113,7 +113,6 @@ export class DeleteVehiclePopup {
   constructor(
     private delVehicles:VehicleServiceService,
   ) { };
-
   deleteVehicle(){
     this.delVehicles.deleteVehicle(vId).subscribe(res=>{
       console.log(res);

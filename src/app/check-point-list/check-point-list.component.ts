@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CheckPointService } from '../services/check-point.service';
 import {MatDialog} from '@angular/material';
 
+var cpId;
+
 @Component({
   selector: 'app-check-point-list',
   templateUrl: './check-point-list.component.html',
@@ -20,6 +22,17 @@ export class CheckPointListComponent implements OnInit {
       height: '400px',
       width: '600px',
     });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  };
+
+  deleteConfirmDialog(checkPointId){
+    const dialogRef = this.dialog.open(DeleteCheckPointPopup,{
+      height: '350px',
+      width: '400px',
+    });
+    cpId=checkPointId;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
@@ -47,7 +60,6 @@ export class AddCheckPointPopup {
   locationType : String ;
   latitude : String ;
   longitude : String ;
-
   constructor(
     private addNewCheckPoints:CheckPointService,
   ) { };
@@ -63,4 +75,19 @@ export class AddCheckPointPopup {
       console.log(res);
     });
   };
+}
+
+@Component({
+  selector: 'delete-check-point-popup',
+  templateUrl: 'delete-check-point-popup.html',
+})
+export class DeleteCheckPointPopup {
+  constructor(
+    private delCheckPoint:CheckPointService,
+  ) { };
+  deleteCheckPoint(){
+    this.delCheckPoint.deleteCheckPoint(cpId).subscribe(res=>{
+      console.log(res);
+    });
+  }
 }

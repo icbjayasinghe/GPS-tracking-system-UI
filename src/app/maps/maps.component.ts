@@ -20,6 +20,7 @@ export class MapsComponent implements OnInit {
 
     lat = 7.2906;
     lng = 80.6337;
+    markers = [];
 
   constructor() { }
 
@@ -129,10 +130,17 @@ export class MapsComponent implements OnInit {
   }
 
   onChooseLocation(event) {
+      const newMarker = {
+          lat: event.coords.lat,
+          lng: event.coords.lng,
+          draggable: false
+      };
+
       this.lat = event.coords.lat;
       this.lng = event.coords.lng;
       console.log('Latitudes :' + this.lat);
       console.log('Longitudes :' + this.lng);
+      this.markers.push(newMarker);
     }
 
 }

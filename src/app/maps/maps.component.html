@@ -1,1 +1,10 @@
-<div id="map"></div>
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChooseLocation($event)">
+    <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [draggable]="m.draggable"></agm-marker>
+    <agm-polyline  [strokeColor]="'#FF0000'" [strokeOpacity]="1.0" [strokeWeight]="2">
+        <agm-polyline-point *ngFor="let polyline of polylines;" [latitude]="polyline.lat" [longitude]="polyline.lng">
+        </agm-polyline-point>
+    </agm-polyline>
+</agm-map>
+

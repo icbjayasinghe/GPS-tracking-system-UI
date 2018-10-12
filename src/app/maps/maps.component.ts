@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare const google: any;
 
-interface Marker {
-lat: number;
-lng: number;
-label?: string;
-draggable?: boolean;
-}
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
@@ -15,111 +8,68 @@ draggable?: boolean;
 })
 export class MapsComponent implements OnInit {
 
+    lat = 7.2906;
+    lng = 80.6337;
+    markers = [];
+
+    polylines = [
+        {lat: 6.8575136, lng: 79.9088256},
+        {lat: 6.856712, lng: 79.9100736},
+        {lat: 6.8532288, lng: 79.9154048},
+        {lat: 6.8523952, lng: 79.9179968},
+        {lat: 6.8512784, lng: 79.9210304},
+        {lat: 6.8498104, lng: 79.92336},
+        {lat: 6.8483344, lng: 79.9256},
+        {lat: 6.8476136, lng: 79.9266496},
+        {lat: 6.8454536, lng: 79.9297344},
+        {lat: 6.844792, lng: 79.9321472},
+        {lat: 6.8450528, lng: 79.935008},
+        {lat: 6.8453928, lng: 79.9439296},
+        {lat: 6.8460832, lng: 79.9465088},
+        {lat: 6.8437952, lng: 79.9568832},
+        {lat: 6.8434248, lng: 79.9602304},
+        {lat: 6.8418432, lng: 79.9632576},
+        {lat: 6.8409368, lng: 79.9661504},
+        {lat: 6.8393232, lng: 79.9720768},
+        {lat: 6.8394216, lng: 79.9748992},
+        {lat: 6.838888, lng: 79.97856},
+        {lat: 6.8384088, lng: 79.9807104},
+        {lat: 6.8375968, lng: 79.9840704},
+        {lat: 6.8386896, lng: 79.986464},
+        {lat: 6.8395912, lng: 79.9900288},
+        {lat: 6.8397648, lng: 79.9930816},
+        {lat: 6.8399632, lng: 79.9949632},
+        {lat: 6.8404968, lng: 79.9972672},
+        {lat: 6.8408984, lng: 79.9990848},
+        {lat: 6.8412464, lng: 80.002496},
+        {lat: 6.841308, lng: 80.0036928},
+        {lat: 6.841532, lng: 80.00496},
+        {lat: 6.8426768, lng: 80.0060864},
+        {lat: 6.8448936, lng: 80.0097664},
+        {lat: 6.8447152, lng: 80.0137088},
+        {lat: 6.8446552, lng: 80.0147264}
+
+    ];
+
   constructor() { }
 
   ngOnInit() {
-
-    var myLatlng = new google.maps.LatLng(7.2906, 80.6337);
-    var mapOptions = {
-        zoom: 8,
-        center: myLatlng,
-        scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        styles: [{
-            "featureType": "water",
-            "stylers": [{
-                "saturation": 43
-            }, {
-                "lightness": -11
-            }, {
-                "hue": "#0088ff"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "hue": "#ff0000"
-            }, {
-                "saturation": -100
-            }, {
-                "lightness": 99
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-                "color": "#808080"
-            }, {
-                "lightness": 54
-            }]
-        }, {
-            "featureType": "landscape.man_made",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ece2d9"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ccdca1"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-                "color": "#767676"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-                "color": "#ffffff"
-            }]
-        }, {
-            "featureType": "poi",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "visibility": "on"
-            }, {
-                "color": "#b8cb93"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.sports_complex",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.medical",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.business",
-            "stylers": [{
-                "visibility": "simplified"
-            }]
-        }]
-
-    };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    /*var marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!"
-    });*/
-
-    // To add the marker to the map, call setMap();
-    //marker.setMap(map);
   }
 
-}
+      onChooseLocation(event) {
+          const newMarker = {
+              lat: event.coords.lat,
+              lng: event.coords.lng,
+              draggable: false
+          };
+
+          this.lat = event.coords.lat;
+          this.lng = event.coords.lng;
+          console.log('Latitudes :' + this.lat);
+          console.log('Longitudes :' + this.lng);
+          this.markers.push(newMarker);
+      }
+
+
+  }
+

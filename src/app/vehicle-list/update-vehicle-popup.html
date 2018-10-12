@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Add new User</h2>
+<h2 mat-dialog-title>Add new vehicle</h2>
 <mat-dialog-content class="mat-typography">
-  <form>
+  <form >
     <div class="row">
         <div class="col-md-12">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="User Name" name="userName" [(ngModel)]="userName">
+              <input matInput placeholder="Vehicle Number" name="vehicleNo" [(ngModel)]="vehicleNo" disabled>
             </mat-form-field>
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="User Type" name="userType" [(ngModel)]="userType">
+          <input matInput placeholder="Device IMEI" name="deviceImei"  [(ngModel)]="deviceImei" disabled>
         </mat-form-field>
       </div>
     </div>
@@ -20,15 +20,22 @@
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Status" name="userStatus" [(ngModel)]="userStatus">
+          <input matInput placeholder="User Name" name="userName" [(ngModel)]="userName" disabled>
         </mat-form-field>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Vehicle Details" name="vehicleDetails" [(ngModel)]="vehicleDetails">
+        </mat-form-field>
+      </div>
+    </div>
   </form>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addUser()">Add</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)=updateVehicle()>Add</button>
 </mat-dialog-actions>
 
 

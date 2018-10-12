@@ -4,11 +4,10 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent} from './log/log.component';
-import { VehicleListComponent,DialogContentExampleDialog} from './vehicle-list/vehicle-list.component';
+import { AddVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 
-const routes: Routes =[
-  
+const routes: Routes =[  
   {
     path: '',
     redirectTo: 'login',

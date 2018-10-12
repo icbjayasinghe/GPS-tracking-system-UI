@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {MatDialog} from '@angular/material';
 
+var uId;
+
 //user list component
 @Component({
   selector: 'app-user-list',
@@ -9,6 +11,7 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  interval: any;
   allUsers: any[];
   constructor(
     private getUsers:UserService,
@@ -16,9 +19,24 @@ export class UserListComponent implements OnInit {
   ) { };
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddUserPopUp);
+    const dialogRef = this.dialog.open(AddUserPopUp,{
+      height: '400px',
+      width: '600px',
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+    });
+  };
+
+  deleteConfirmDialog(userId){
+    const dialogRef = this.dialog.open(DeleteUserPopup,{
+      height: '350px',
+      width: '400px',
+    });
+    uId=userId;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      console.log( userId);
     });
   };
 
@@ -26,6 +44,11 @@ export class UserListComponent implements OnInit {
     this.getUsers.getAllUsers().subscribe(result=>{
       this.allUsers = result;
     });
+    this.interval = setInterval(() => { 
+      this.getUsers.getAllUsers().subscribe(result=>{
+        this.allUsers = result;
+      });
+    }, 1000);
   }
 }
 
@@ -34,4 +57,39 @@ export class UserListComponent implements OnInit {
   selector: 'add-user-popup',
   templateUrl: 'add-user-popup.html',
 })
-export class AddUserPopUp {}
+export class AddUserPopUp {
+  userName: String;
+  userType: String;
+  userStatus: String;
+
+  constructor(
+    private addNewUser:UserService,
+  ) { };
+
+  addUser(){
+    const userObj = { 
+      name:this.userName,
+      password:this.userName,
+	    userType:this.userType,
+	    status:this.userStatus
+    }
+    this.addNewUser.addNewUser(userObj).subscribe(res=>{
+      console.log(res);
+    });
+  };
+}
+
+@Component({
+  selector: 'delete-user-popup',
+  templateUrl: 'delete-user-popup.html',
+})
+export class DeleteUserPopup {
+  constructor(
+    private delUser:UserService,
+  ) { };
+  deleteUser(){
+    this.delUser.deleteUser(uId).subscribe(res=>{
+      console.log(res);
+    });
+  }
+}

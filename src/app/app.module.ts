@@ -9,9 +9,15 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
+<<<<<<< HEAD
 import { AddVehiclePopup, DeleteVehiclePopup, UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
 import { AddCheckPointPopup } from './check-point-list/check-point-list.component'
+=======
+import { AddVehiclePopup,DeleteVehiclePopup,UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
+import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
+import { AddCheckPointPopup, DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
+>>>>>>> 68cd25347e2b6e4cc311618396dc1a81b2c86cfe
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
@@ -51,7 +57,12 @@ import {MatDialog} from '@angular/material';
     DeleteVehiclePopup,
     UpdateVehiclePopup,
     AddCheckPointPopup,
+<<<<<<< HEAD
     DeleteUserPopup
+=======
+    DeleteUserPopup,
+    DeleteCheckPointPopup
+>>>>>>> 68cd25347e2b6e4cc311618396dc1a81b2c86cfe
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -59,7 +70,12 @@ import {MatDialog} from '@angular/material';
     DeleteVehiclePopup,
     UpdateVehiclePopup,
     AddCheckPointPopup,
+<<<<<<< HEAD
     DeleteUserPopup
+=======
+    DeleteUserPopup,
+    DeleteCheckPointPopup
+>>>>>>> 68cd25347e2b6e4cc311618396dc1a81b2c86cfe
   ],
   providers: [
     VehicleServiceService,

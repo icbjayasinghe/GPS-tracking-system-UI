@@ -15,7 +15,6 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { VehicleListComponent } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent } from '../../check-point-list/check-point-list.component';
-import { AgmCoreModule } from '@agm/core';
 
 import {
   MatButtonModule,
@@ -32,7 +31,6 @@ import {
     MatRippleModule,
     MatInputModule,
     MatTooltipModule,
-      AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [
     DashboardComponent,

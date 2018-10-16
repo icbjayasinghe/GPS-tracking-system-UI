@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import {MatDialog} from '@angular/material';
 
-var uId;
+let uId;
 
-//user list component
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -14,12 +14,12 @@ export class UserListComponent implements OnInit {
   interval: any;
   allUsers: any[];
   constructor(
-    private getUsers:UserService,
+    private getUsers: UserService,
     public dialog: MatDialog
   ) { };
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddUserPopUp,{
+    const dialogRef = this.dialog.open(AddUserPopUp, {
       height: '400px',
       width: '600px',
     });
@@ -28,12 +28,12 @@ export class UserListComponent implements OnInit {
     });
   };
 
-  deleteConfirmDialog(userId){
-    const dialogRef = this.dialog.open(DeleteUserPopup,{
+  deleteConfirmDialog(userId) {
+    const dialogRef = this.dialog.open(DeleteUserPopup, {
       height: '350px',
       width: '400px',
     });
-    uId=userId;
+    uId = userId;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       console.log( userId);
@@ -41,39 +41,44 @@ export class UserListComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.getUsers.getAllUsers().subscribe(result=>{
+    this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
     });
-    this.interval = setInterval(() => { 
-      this.getUsers.getAllUsers().subscribe(result=>{
+    this.interval = setInterval(() => {
+      this.getUsers.getAllUsers().subscribe(result => {
         this.allUsers = result;
       });
     }, 1000);
   }
 }
 
-//add user popup component
+
 @Component({
   selector: 'add-user-popup',
   templateUrl: 'add-user-popup.html',
 })
 export class AddUserPopUp {
-  userName: String;
-  userType: String;
-  userStatus: String;
+  fullName: String;
+  user: String;
+  address: String;
+  contactNumber: String;
+  emailAddress: String;
+  role: String;
 
   constructor(
-    private addNewUser:UserService,
+    private addNewUser: UserService,
   ) { };
 
-  addUser(){
-    const userObj = { 
-      name:this.userName,
-      password:this.userName,
-	    userType:this.userType,
-	    status:this.userStatus
-    }
-    this.addNewUser.addNewUser(userObj).subscribe(res=>{
+  addUser() {
+    const userObj = {
+      fullName : this.fullName,
+      user: this.user,
+      role: this.role,
+        address: this.address,
+        contactNumber: this.contactNumber,
+        emailAddress: this.emailAddress
+    };
+    this.addNewUser.addNewUser(userObj).subscribe(res => {
       console.log(res);
     });
   };
@@ -85,10 +90,10 @@ export class AddUserPopUp {
 })
 export class DeleteUserPopup {
   constructor(
-    private delUser:UserService,
+    private delUser: UserService,
   ) { };
-  deleteUser(){
-    this.delUser.deleteUser(uId).subscribe(res=>{
+  deleteUser() {
+    this.delUser.deleteUser(uId).subscribe(res => {
       console.log(res);
     });
   }

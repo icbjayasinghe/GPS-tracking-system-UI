@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
-import { AddVehiclePopup,DeleteVehiclePopup,UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
+import { AddVehiclePopup, DeleteVehiclePopup, UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
 import { AddCheckPointPopup, DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
@@ -40,7 +40,7 @@ import {MatDialog} from '@angular/material';
     MatRippleModule,
     MatTooltipModule,
     MatDialogModule,
-    AgmCoreModule.forRoot({apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'})
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [
     AppComponent,

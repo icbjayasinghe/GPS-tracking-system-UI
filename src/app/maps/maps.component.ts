@@ -12,7 +12,7 @@ export class MapsComponent implements OnInit {
     lng = 80.6337;
     markers = [];
     truckIcon: any;
-    vehicleDetails: MapService;
+    
     vehicleData: any;
 
     polylines = []; /*[
@@ -61,11 +61,14 @@ export class MapsComponent implements OnInit {
         }
     ];*/
 
-  constructor() {}
+  constructor(public vehicleDetails: MapService) {}
 
 
   ngOnInit() {
-      this.vehicleData = this.vehicleDetails.getTrackingData();
+      this.vehicleData = this.vehicleDetails.getTrackingData().subscribe(result=>{
+        console.log(result);
+      });
+      
       if (this.vehicleData === []) {
          this.polylines = this.vehicleData;
       }

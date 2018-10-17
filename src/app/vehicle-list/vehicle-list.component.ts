@@ -18,7 +18,7 @@ export class VehicleListComponent implements OnInit {
   userName: String;
   vehicleDetails: String;
   constructor(
-    private getVehicles:VehicleServiceService,
+    private getVehicles: VehicleServiceService,
     public dialog: MatDialog
   ) { };
 

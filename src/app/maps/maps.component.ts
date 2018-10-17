@@ -59,7 +59,9 @@ export class MapsComponent implements OnInit {
         }
     ];
 
-  constructor() { }
+  constructor(
+      private mapService : MapService
+  ) { }
 
   ngOnInit() {
       this.rebuildPolylines();

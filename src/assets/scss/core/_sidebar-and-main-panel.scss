@@ -189,7 +189,7 @@
             display: block;
             height: auto;
             white-space: nowrap;
-            color: #a9afbb;
+            color: #71767a;
         }
 
         i{
@@ -199,7 +199,7 @@
             line-height: 30px;
             width: 30px;
             text-align: center;
-            color: #a9afbb;
+            color: #71767a;
         }
     }
 
@@ -328,7 +328,7 @@
         @include sidebar-active-color($black-color);
     }
 
-    &[data-background-color="red"]{
+    &[data-background-color="black"]{
         @include sidebar-background-color($brand-danger, $white-color);
 
         .user,

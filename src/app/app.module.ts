@@ -16,6 +16,7 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, Mat
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
+import { MapService} from './services/map.service'
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -66,7 +67,8 @@ import {MatDialog} from '@angular/material';
   providers: [ 
     VehicleServiceService,
     UserService,
-    CheckPointService
+    CheckPointService,
+    MapService
   ],
   bootstrap: [
     AppComponent

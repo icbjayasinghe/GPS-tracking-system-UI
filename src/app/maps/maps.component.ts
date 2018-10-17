@@ -17,6 +17,7 @@ export class MapsComponent implements OnInit {
 
   constructor(private vehicleData: MapService) {}
 
+
   ngOnInit() {
       this.vehicleDetails = this.vehicleData.getTrackingData();
       if (this.vehicleDetails === []) {

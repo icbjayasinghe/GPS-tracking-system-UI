@@ -5,5 +5,13 @@
         <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.lat" [longitude]="t.lng">
         </agm-polyline-point>
     </agm-polyline>
-    <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" ></agm-marker>
+    <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" >
+        <agm-info-window>Vehicle IMEI : {{m.imei}}
+            <br>
+            Vehicle Speed : {{m.speed}}
+            <br>
+            Current Position Latitudes: {{m.lat}}
+            <br>
+            Current Position Longitudes: {{m.lng}}</agm-info-window>
+    </agm-marker>
 </agm-map>

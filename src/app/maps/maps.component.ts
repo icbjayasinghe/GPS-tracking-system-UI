@@ -93,8 +93,10 @@ export class MapsComponent implements OnInit {
                     this.truckIcon = './src/assets/img/yellow-truck-front.png';
                 }
                 const endMarker = {
+                    imei: this.polylines[i].imeiNumber,
                     lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lat,
                     lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lng,
+                    speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
                     truckIcon: this.truckIcon
                 };
                 this.markEndLocation(endMarker);

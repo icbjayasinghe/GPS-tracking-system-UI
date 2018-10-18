@@ -119,7 +119,9 @@ export class MapsComponent implements OnInit {
 
 
     markEndLocation(endMarker: any) {
+        this.markers.pop();
         this.markers.push(endMarker);
+        
     }
   }
 

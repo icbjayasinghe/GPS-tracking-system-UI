@@ -12,8 +12,6 @@ export class MapsComponent implements OnInit {
     lng = 80.6337;
     markers = [];
     truckIcon: any;
-    
-    vehicleData: any;
 
     polylines = []; /*[
         {imeiNumber: 356307045861738,
@@ -65,15 +63,10 @@ export class MapsComponent implements OnInit {
 
 
   ngOnInit() {
-      this.vehicleData = this.vehicleDetails.getTrackingData().subscribe(result=>{
-        console.log(result);
-        if (result === []) {
-            this.polylines = result;
-         }
+      this.vehicleDetails.getTrackingData().subscribe(result => {
+          this.rebuildPolylines(result);
       });
-      
-      
-      this.rebuildPolylines();
+
   }
 
       /*onChooseLocation(event) {
@@ -92,8 +85,10 @@ export class MapsComponent implements OnInit {
 
       }*/
 
-    private rebuildPolylines() {
+    private rebuildPolylines(result = []) {
+        this.polylines = result;
         if (this.polylines !== []) {
+            console.log(this.polylines);
             for (let i = 0; i < this.polylines.length; i++) {
 
                 if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 60) {
@@ -105,8 +100,8 @@ export class MapsComponent implements OnInit {
                 }
                 const endMarker = {
                     imei: this.polylines[i].imeiNumber,
-                    lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lat,
-                    lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lng,
+                    lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].latitude,
+                    lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].longitude,
                     speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
                     truckIcon: this.truckIcon
                 };

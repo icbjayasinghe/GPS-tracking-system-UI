@@ -72,7 +72,7 @@ export class MapsComponent implements OnInit {
         this.vehicleDetails.getTrackingData().subscribe(result => {
             this.rebuildPolylines(result);
         });
-      }, 1000);
+      }, 10000);
 
   }
 

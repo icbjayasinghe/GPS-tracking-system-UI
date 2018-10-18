@@ -112,16 +112,9 @@ export class MapsComponent implements OnInit {
                     speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
                     truckIcon: this.truckIcon
                 };
-                this.markEndLocation(endMarker);
+                this.markers[i] = endMarker;
             }
         }
-    }
-
-
-    markEndLocation(endMarker: any) {
-        this.markers.pop();
-        this.markers.push(endMarker);
-        
     }
   }
 

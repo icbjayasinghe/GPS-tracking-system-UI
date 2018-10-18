@@ -8,6 +8,7 @@ import { MapService} from '../services/map.service'
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
+    interval: any;
     lat = 7.2906;
     lng = 80.6337;
     markers = [];
@@ -63,9 +64,15 @@ export class MapsComponent implements OnInit {
 
 
   ngOnInit() {
-      this.vehicleDetails.getTrackingData().subscribe(result => {
-          this.rebuildPolylines(result);
-      });
+    //   this.vehicleDetails.getTrackingData().subscribe(result => {
+    //       this.rebuildPolylines(result);
+    //   });
+
+      this.interval = setInterval(() => {
+        this.vehicleDetails.getTrackingData().subscribe(result => {
+            this.rebuildPolylines(result);
+        });
+      }, 1000);
 
   }
 
@@ -112,7 +119,9 @@ export class MapsComponent implements OnInit {
 
 
     markEndLocation(endMarker: any) {
+        this.markers.pop();
         this.markers.push(endMarker);
+        
     }
   }
 

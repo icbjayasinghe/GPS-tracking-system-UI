@@ -67,11 +67,12 @@ export class MapsComponent implements OnInit {
   ngOnInit() {
       this.vehicleData = this.vehicleDetails.getTrackingData().subscribe(result=>{
         console.log(result);
+        if (result === []) {
+            this.polylines = result;
+         }
       });
       
-      if (this.vehicleData === []) {
-         this.polylines = this.vehicleData;
-      }
+      
       this.rebuildPolylines();
   }
 

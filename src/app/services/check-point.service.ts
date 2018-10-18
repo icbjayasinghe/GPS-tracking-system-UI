@@ -10,23 +10,22 @@ export class CheckPointService {
   ) { }
 
   getAllCheckPoints(){
-    const url = "http://localhost:3000/CheckPoint"
+    const url = "http://localhost:3000/checkpoint"
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 
   addNewCheckPoint(checkPointObj){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/CheckPoint";
+    const url ="http://localhost:3000/checkpoint";
     return this.http.post(url,checkPointObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 
   deleteCheckPoint(cpId){
-    console.log(cpId+'service');
+    console.log(cpId);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/CheckPoint/delete/"+cpId;
-    return this.http.get(url).pipe(map(res=>res.json()));
+    const url ="http://localhost:3000/checkpoint/"+cpId;
+    return this.http.delete(url).pipe(map(res=>res.json()));
   }
-
 }

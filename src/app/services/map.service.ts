@@ -11,7 +11,7 @@ export class MapService {
   }
 
   getTrackingData(){
-    const url = "http://localhost:3000/api/vehicle/trackingData/356307045861738"
+    const url = "http://localhost:3000/api/vehicle"
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 }

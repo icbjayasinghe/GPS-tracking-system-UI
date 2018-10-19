@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService} from '../services/map.service'
-import {escape} from 'querystring';
 
 
 @Component({
@@ -71,9 +70,6 @@ export class MapsComponent implements OnInit {
 
 
     ngOnInit() {
-        //   this.vehicleDetails.getTrackingData().subscribe(result => {
-        //       this.rebuildPolylines(result);
-        //   });
         this.interval = setInterval(() => {
             this.vehicleDetails.getTrackingData().subscribe(result => {
                 this.getSeconds(result);
@@ -116,6 +112,7 @@ export class MapsComponent implements OnInit {
                     lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].latitude,
                     lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].longitude,
                     speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
+                    num: this.polylines[i].vehicleNumber,
                     truckIcon: this.truckIcon
                 };
                 this.markers[i] = endMarker;

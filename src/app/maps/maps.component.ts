@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService} from '../services/map.service'
+import {escape} from 'querystring';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class MapsComponent implements OnInit {
     lng = 80.6337;
     markers = [];
     truckIcon: any;
+    oldIndex = -1;
 
     polylines = []; /*[
         {imeiNumber: 356307045861738,
@@ -67,7 +69,6 @@ export class MapsComponent implements OnInit {
     //   this.vehicleDetails.getTrackingData().subscribe(result => {
     //       this.rebuildPolylines(result);
     //   });
-
       this.interval = setInterval(() => {
         this.vehicleDetails.getTrackingData().subscribe(result => {
             this.rebuildPolylines(result);
@@ -95,7 +96,6 @@ export class MapsComponent implements OnInit {
     private rebuildPolylines(result = []) {
         this.polylines = result;
         if (this.polylines !== []) {
-            console.log(this.polylines);
             for (let i = 0; i < this.polylines.length; i++) {
 
                 if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 60) {
@@ -105,6 +105,7 @@ export class MapsComponent implements OnInit {
                 } else {
                     this.truckIcon = './src/assets/img/yellow-truck-front.png';
                 }
+                this.polylines[i].routeVisibility = 0.0;
                 const endMarker = {
                     imei: this.polylines[i].imeiNumber,
                     lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].latitude,
@@ -113,6 +114,24 @@ export class MapsComponent implements OnInit {
                     truckIcon: this.truckIcon
                 };
                 this.markers[i] = endMarker;
+            }
+            if (this.oldIndex !== -1) {
+                    this.polylines[this.oldIndex].routeVisibility = 1.0;
+                }
+            console.log(this.polylines);
+        }
+    }
+
+    setRouteVisible(iemi: any) {
+        if (this.oldIndex !== -1) {
+            this.polylines[this.oldIndex].routeVisibility = 0.0;
+        }
+        for (let i = 0; i < this.polylines.length; i++) {
+            if (this.polylines[i].imeiNumber === iemi) {
+                if (this.polylines[i].routeVisibility === 0.0) {
+                    this.oldIndex = i;
+                    this.polylines[i].routeVisibility = 1.0;
+                }
             }
         }
     }

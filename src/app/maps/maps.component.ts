@@ -72,7 +72,7 @@ export class MapsComponent implements OnInit {
     ngOnInit() {
         this.interval = setInterval(() => {
             this.vehicleDetails.getTrackingData().subscribe(result => {
-                this.getSeconds(result);
+                this.moniterNewData(result);
             });
         }, 10000);
 
@@ -138,12 +138,12 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    private getSeconds(result = []) {
+    private moniterNewData(result = []) {
         this.oldDataAmount = this.dataAmount;
         for (let i = 0; i < result.length; i++) {
             this.dataAmount = result[i].trackingData.length;
         }
-        if (this.dataAmount > this.oldDataAmount) {
+        if (this.dataAmount !== this.oldDataAmount) {
             this.rebuildPolylines(result);
         }
     }

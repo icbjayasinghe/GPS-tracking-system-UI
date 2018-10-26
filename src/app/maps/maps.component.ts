@@ -99,9 +99,9 @@ export class MapsComponent implements OnInit {
         if (this.polylines !== []) {
             for (let i = 0; i < this.polylines.length; i++) {
 
-                if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 60) {
+                if (this.polylines[i].trackingData[0].speed > 60) {
                     this.truckIcon = './src/assets/img/red-truck-front.png';
-                } else if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 5) {
+                } else if (this.polylines[i].trackingData[0].speed > 5) {
                     this.truckIcon = './src/assets/img/green-truck-front.png';
                 } else {
                     this.truckIcon = './src/assets/img/yellow-truck-front.png';
@@ -109,10 +109,11 @@ export class MapsComponent implements OnInit {
                 this.polylines[i].routeVisibility = 0.0;
                 const endMarker = {
                     imei: this.polylines[i].imeiNumber,
-                    lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].latitude,
-                    lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].longitude,
-                    speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
+                    lat: this.polylines[i].trackingData[0].latitude,
+                    lng: this.polylines[i].trackingData[0].longitude,
+                    speed: this.polylines[i].trackingData[0].speed,
                     num: this.polylines[i].vehicleNumber,
+                    tim: this.polylines[i].trackingData[0].date,
                     truckIcon: this.truckIcon
                 };
                 this.markers[i] = endMarker;

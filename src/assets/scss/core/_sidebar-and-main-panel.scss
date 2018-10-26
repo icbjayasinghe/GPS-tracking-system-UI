@@ -295,7 +295,7 @@
         }
     }
 
-
+//for changing icon colour
     &[data-background-color="black"]{
         @include sidebar-background-color($gray-base, $white-color);
 
@@ -328,8 +328,8 @@
         @include sidebar-active-color($black-color);
     }
 
-    &[data-background-color="black"]{
-        @include sidebar-background-color($brand-danger, $white-color);
+    &[data-background-color="white"]{
+        @include sidebar-background-color($black-color, $white-color);
 
         .user,
         .logo,

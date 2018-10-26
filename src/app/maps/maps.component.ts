@@ -16,6 +16,7 @@ export class MapsComponent implements OnInit {
     oldIndex = -1;
     dataAmount = 0;
     oldDataAmount = 0;
+    userMarkers = [];
 
     polylines = [];
 
@@ -78,7 +79,7 @@ export class MapsComponent implements OnInit {
 
     }
 
-    /*onChooseLocation(event) {
+    onChooseLocation(event) {
 
         const newMarker = {
             lat: event.coords.lat,
@@ -90,9 +91,9 @@ export class MapsComponent implements OnInit {
         this.lng = event.coords.lng;
         console.log('Latitudes :' + this.lat);
         console.log('Longitudes :' + this.lng);
-        this.markers.push(newMarker);
+        this.userMarkers.push(newMarker);
 
-    }*/
+    }
 
     private rebuildPolylines(result = []) {
         this.polylines = result;

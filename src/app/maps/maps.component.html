@@ -1,5 +1,6 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
+<!-- set this angular function in side agm-map tag - (mapClick)="onChooseLocation($event)" -->
 <agm-map [latitude]="lat" [longitude]="lng">
     <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
         <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
@@ -18,5 +19,9 @@
             <br>
             Time : {{m.tim}}
         </agm-info-window>
+    </agm-marker>
+
+    <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
+
     </agm-marker>
 </agm-map>

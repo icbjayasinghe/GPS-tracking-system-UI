@@ -10,8 +10,8 @@ import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
 import { DeleteVehiclePopup, UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
-import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
-import { AddCheckPointPopup, DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
+import { DeleteUserPopup } from './user-list/user-list.component';
+import { DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';

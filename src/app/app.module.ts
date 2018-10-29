@@ -20,7 +20,7 @@ import { CheckPointService } from './services/check-point.service';
 import { MapService} from './services/map.service';
 import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup} from './components/navbar/navbar.component';
 import { AuthService} from './services/auth.service'
-import { AddVehiclePopup} from './components/navbar/navbar.component';
+
 
 
 

@@ -16,6 +16,7 @@ export class MapsComponent implements OnInit {
     oldIndex = -1;
     dataAmount = 0;
     oldDataAmount = 0;
+    userMarkers = [];
 
     polylines = [];
 
@@ -72,13 +73,13 @@ export class MapsComponent implements OnInit {
     ngOnInit() {
         this.interval = setInterval(() => {
             this.vehicleDetails.getTrackingData().subscribe(result => {
-                this.getSeconds(result);
+                this.moniterNewData(result);
             });
         }, 10000);
 
     }
 
-    /*onChooseLocation(event) {
+    onChooseLocation(event) {
 
         const newMarker = {
             lat: event.coords.lat,
@@ -90,9 +91,9 @@ export class MapsComponent implements OnInit {
         this.lng = event.coords.lng;
         console.log('Latitudes :' + this.lat);
         console.log('Longitudes :' + this.lng);
-        this.markers.push(newMarker);
+        this.userMarkers.push(newMarker);
 
-    }*/
+    }
 
     private rebuildPolylines(result = []) {
         this.polylines = result;
@@ -139,12 +140,12 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    private getSeconds(result = []) {
+    private moniterNewData(result = []) {
         this.oldDataAmount = this.dataAmount;
         for (let i = 0; i < result.length; i++) {
             this.dataAmount = result[i].trackingData.length;
         }
-        if (this.dataAmount > this.oldDataAmount) {
+        if (this.dataAmount !== this.oldDataAmount) {
             this.rebuildPolylines(result);
         }
     }

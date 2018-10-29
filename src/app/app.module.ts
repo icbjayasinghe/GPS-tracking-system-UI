@@ -1,10 +1,10 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
+import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -16,8 +16,13 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, Mat
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
+
 import { MapService} from './services/map.service';
 import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup} from './components/navbar/navbar.component';
+import { AuthService} from './services/auth.service'
+import { AddVehiclePopup} from './components/navbar/navbar.component';
+
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -65,11 +70,12 @@ import {MatDialog} from '@angular/material';
     DeleteUserPopup,
     DeleteCheckPointPopup
   ],
-  providers: [ 
-    VehicleServiceService,
-    UserService,
-    CheckPointService,
-    MapService
+  providers: [
+      VehicleServiceService,
+      UserService,
+      CheckPointService,
+      MapService,
+      AuthService
   ],
   bootstrap: [
     AppComponent

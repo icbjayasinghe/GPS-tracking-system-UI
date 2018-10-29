@@ -16,11 +16,9 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, Mat
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
-import { MapService} from './services/map.service'
+import { MapService} from './services/map.service';
+import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup} from './components/navbar/navbar.component';
 import { AuthService} from './services/auth.service'
-import { AddVehiclePopup} from './components/navbar/navbar.component';
-
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';

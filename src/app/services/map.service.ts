@@ -5,9 +5,7 @@ import { map} from 'rxjs/operators';
 @Injectable()
 export class MapService {
 
-  constructor(
-    private http:Http,
-  ) { 
+  constructor( private http: Http ) {
   }
 
   getTrackingData(){

@@ -8,115 +8,146 @@ import { MapService} from '../services/map.service'
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
+    interval: any;
     lat = 7.2906;
     lng = 80.6337;
     markers = [];
     truckIcon: any;
-    
-    vehicleData: any;
+    oldIndex = -1;
+    dataAmount = 0;
+    oldDataAmount = 0;
+    userMarkers = [];
 
-    polylines = []; /*[
-        {imeiNumber: 356307045861738,
-            trackingData: [
-        {lat: 6.8575136, lng: 79.9088256, speed: 2},
-        {lat: 6.856712, lng: 79.9100736, speed: 46},
-        {lat: 6.8532288, lng: 79.9154048, speed: 47},
-        {lat: 6.8523952, lng: 79.9179968, speed: 30},
-        {lat: 6.8512784, lng: 79.9210304, speed: 45},
-        {lat: 6.8498104, lng: 79.92336, speed: 22},
-        {lat: 6.8483344, lng: 79.9256, speed: 1},
-        {lat: 6.8476136, lng: 79.9266496, speed: 8},
-        {lat: 6.8454536, lng: 79.9297344, speed: 9},
-        {lat: 6.844792, lng: 79.9321472, speed: 34},
-        {lat: 6.8450528, lng: 79.935008, speed: 34},
-        {lat: 6.8453928, lng: 79.9439296, speed: 32},
-        {lat: 6.8460832, lng: 79.9465088, speed: 43},
-        {lat: 6.8437952, lng: 79.9568832, speed: 30}
-        ]
-        },
-        {imeiNumber: 356307045863458,
-            trackingData: [{lat: 6.8434248, lng: 79.9602304, speed: 40},
-                {lat: 6.8418432, lng: 79.9632576, speed: 7},
-                {lat: 6.8409368, lng: 79.9661504, speed: 16},
-                {lat: 6.8393232, lng: 79.9720768, speed: 47},
-                {lat: 6.8394216, lng: 79.9748992, speed: 40},
-                {lat: 6.838888, lng: 79.97856, speed: 46},
-                {lat: 6.8384088, lng: 79.9807104, speed: 39},
-                {lat: 6.8375968, lng: 79.9840704, speed: 50},
-                {lat: 6.8386896, lng: 79.986464, speed: 42},
-                {lat: 6.8395912, lng: 79.9900288, speed: 50},
-                {lat: 6.8397648, lng: 79.9930816, speed: 35},
-                {lat: 6.8399632, lng: 79.9949632, speed: 27},
-                {lat: 6.8404968, lng: 79.9972672, speed: 26},
-                {lat: 6.8408984, lng: 79.9990848, speed: 27},
-                {lat: 6.8412464, lng: 80.002496, speed: 7},
-                {lat: 6.841308, lng: 80.0036928, speed: 25},
-                {lat: 6.841532, lng: 80.00496, speed: 8},
-                {lat: 6.8426768, lng: 80.0060864, speed: 19},
-                {lat: 6.8448936, lng: 80.0097664, speed: 42},
-                {lat: 6.8447152, lng: 80.0137088, speed: 21},
-                {lat: 6.8446552, lng: 80.0147264, speed: 10},
-                {lat: 6.8405832, lng: 80.0216448, speed: 5}
-            ]
-        }
-    ];*/
+    polylines = [];
 
-  constructor(public vehicleDetails: MapService) {}
+    /*[
+           {imeiNumber: 356307045861738,
+               trackingData: [
+           {lat: 6.8575136, lng: 79.9088256, speed: 2},
+           {lat: 6.856712, lng: 79.9100736, speed: 46},
+           {lat: 6.8532288, lng: 79.9154048, speed: 47},
+           {lat: 6.8523952, lng: 79.9179968, speed: 30},
+           {lat: 6.8512784, lng: 79.9210304, speed: 45},
+           {lat: 6.8498104, lng: 79.92336, speed: 22},
+           {lat: 6.8483344, lng: 79.9256, speed: 1},
+           {lat: 6.8476136, lng: 79.9266496, speed: 8},
+           {lat: 6.8454536, lng: 79.9297344, speed: 9},
+           {lat: 6.844792, lng: 79.9321472, speed: 34},
+           {lat: 6.8450528, lng: 79.935008, speed: 34},
+           {lat: 6.8453928, lng: 79.9439296, speed: 32},
+           {lat: 6.8460832, lng: 79.9465088, speed: 43},
+           {lat: 6.8437952, lng: 79.9568832, speed: 30}
+           ]
+           },
+           {imeiNumber: 356307045863458,
+               trackingData: [{lat: 6.8434248, lng: 79.9602304, speed: 40},
+                   {lat: 6.8418432, lng: 79.9632576, speed: 7},
+                   {lat: 6.8409368, lng: 79.9661504, speed: 16},
+                   {lat: 6.8393232, lng: 79.9720768, speed: 47},
+                   {lat: 6.8394216, lng: 79.9748992, speed: 40},
+                   {lat: 6.838888, lng: 79.97856, speed: 46},
+                   {lat: 6.8384088, lng: 79.9807104, speed: 39},
+                   {lat: 6.8375968, lng: 79.9840704, speed: 50},
+                   {lat: 6.8386896, lng: 79.986464, speed: 42},
+                   {lat: 6.8395912, lng: 79.9900288, speed: 50},
+                   {lat: 6.8397648, lng: 79.9930816, speed: 35},
+                   {lat: 6.8399632, lng: 79.9949632, speed: 27},
+                   {lat: 6.8404968, lng: 79.9972672, speed: 26},
+                   {lat: 6.8408984, lng: 79.9990848, speed: 27},
+                   {lat: 6.8412464, lng: 80.002496, speed: 7},
+                   {lat: 6.841308, lng: 80.0036928, speed: 25},
+                   {lat: 6.841532, lng: 80.00496, speed: 8},
+                   {lat: 6.8426768, lng: 80.0060864, speed: 19},
+                   {lat: 6.8448936, lng: 80.0097664, speed: 42},
+                   {lat: 6.8447152, lng: 80.0137088, speed: 21},
+                   {lat: 6.8446552, lng: 80.0147264, speed: 10},
+                   {lat: 6.8405832, lng: 80.0216448, speed: 5}
+               ]
+           }
+       ];*/
+
+    constructor(public vehicleDetails: MapService) {
+    }
 
 
-  ngOnInit() {
-      this.vehicleData = this.vehicleDetails.getTrackingData().subscribe(result=>{
-        console.log(result);
-      });
-      
-      if (this.vehicleData === []) {
-         this.polylines = this.vehicleData;
-      }
-      this.rebuildPolylines();
-  }
+    ngOnInit() {
+        this.interval = setInterval(() => {
+            this.vehicleDetails.getTrackingData().subscribe(result => {
+                this.moniterNewData(result);
+            });
+        }, 10000);
 
-      /*onChooseLocation(event) {
+    }
 
-          const newMarker = {
-              lat: event.coords.lat,
-              lng: event.coords.lng,
-              draggable: false
-          };
+    onChooseLocation(event) {
 
-          this.lat = event.coords.lat;
-          this.lng = event.coords.lng;
-          console.log('Latitudes :' + this.lat);
-          console.log('Longitudes :' + this.lng);
-          this.markers.push(newMarker);
+        const newMarker = {
+            lat: event.coords.lat,
+            lng: event.coords.lng,
+            draggable: false
+        };
 
-      }*/
+        this.lat = event.coords.lat;
+        this.lng = event.coords.lng;
+        console.log('Latitudes :' + this.lat);
+        console.log('Longitudes :' + this.lng);
+        this.userMarkers.push(newMarker);
 
-    private rebuildPolylines() {
+    }
+
+    private rebuildPolylines(result = []) {
+        this.polylines = result;
         if (this.polylines !== []) {
             for (let i = 0; i < this.polylines.length; i++) {
 
-                if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 60) {
+                if (this.polylines[i].trackingData[0].speed > 60) {
                     this.truckIcon = './src/assets/img/red-truck-front.png';
-                } else if (this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed > 5) {
+                } else if (this.polylines[i].trackingData[0].speed > 5) {
                     this.truckIcon = './src/assets/img/green-truck-front.png';
                 } else {
                     this.truckIcon = './src/assets/img/yellow-truck-front.png';
                 }
+                this.polylines[i].routeVisibility = 0.0;
                 const endMarker = {
                     imei: this.polylines[i].imeiNumber,
-                    lat: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lat,
-                    lng: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].lng,
-                    speed: this.polylines[i].trackingData[this.polylines[i].trackingData.length - 1].speed,
+                    lat: this.polylines[i].trackingData[0].latitude,
+                    lng: this.polylines[i].trackingData[0].longitude,
+                    speed: this.polylines[i].trackingData[0].speed,
+                    num: this.polylines[i].vehicleNumber,
+                    tim: this.polylines[i].trackingData[0].date,
                     truckIcon: this.truckIcon
                 };
-                this.markEndLocation(endMarker);
+                this.markers[i] = endMarker;
+            }
+            if (this.oldIndex !== -1) {
+                this.polylines[this.oldIndex].routeVisibility = 1.0;
+            }
+            console.log(this.polylines);
+        }
+    }
+
+    setRouteVisible(iemi: any) {
+        if (this.oldIndex !== -1) {
+            this.polylines[this.oldIndex].routeVisibility = 0.0;
+        }
+        for (let i = 0; i < this.polylines.length; i++) {
+            if (this.polylines[i].imeiNumber === iemi) {
+                if (this.polylines[i].routeVisibility === 0.0) {
+                    this.oldIndex = i;
+                    this.polylines[i].routeVisibility = 1.0;
+                }
             }
         }
     }
 
-
-    markEndLocation(endMarker: any) {
-        this.markers.push(endMarker);
+    private moniterNewData(result = []) {
+        this.oldDataAmount = this.dataAmount;
+        for (let i = 0; i < result.length; i++) {
+            this.dataAmount = result[i].trackingData.length;
+        }
+        if (this.dataAmount !== this.oldDataAmount) {
+            this.rebuildPolylines(result);
+        }
     }
-  }
+}
 

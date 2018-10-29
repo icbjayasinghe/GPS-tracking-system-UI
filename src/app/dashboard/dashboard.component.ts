@@ -66,6 +66,8 @@ export class DashboardComponent implements OnInit {
 
       seq2 = 0;
   };
+
+  
   ngOnInit() {
    
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -150,3 +152,4 @@ export class DashboardComponent implements OnInit {
   }
 
 }
+

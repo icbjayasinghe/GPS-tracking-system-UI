@@ -28,8 +28,8 @@
         color: $font-color;
     }
     .sidebar-background:after{
-        background: $background-color;
-        opacity: .8;
+        background: #2f2e33;//change sidebar background colour
+        opacity: 1;
     }
 }
 
@@ -42,7 +42,7 @@
                 @include shadow-big-color($font-color);
 
                 i{
-                    color: rgba($font-color, .8);
+                    color: rgba(#FEFEFE, .8);//sidebar inside icon colour
                 }
             }
         }
@@ -52,7 +52,7 @@
 @mixin set-background-color-button($color){
 
     li.active > a{
-        background-color: $color;
+        background-color: #171717;//sidebar button colour
         @include shadow-big-color($color);
     }
 }

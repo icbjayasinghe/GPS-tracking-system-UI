@@ -9,14 +9,15 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
-import { AddVehiclePopup, DeleteVehiclePopup, UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
+import { DeleteVehiclePopup, UpdateVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { AddUserPopUp, DeleteUserPopup } from './user-list/user-list.component';
 import { AddCheckPointPopup, DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
-import { MapService} from './services/map.service'
+import { MapService} from './services/map.service';
+import { AddVehiclePopup} from './components/navbar/navbar.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';

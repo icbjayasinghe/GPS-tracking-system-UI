@@ -6,9 +6,9 @@ import { UserProfileComponent} from '../../user-profile/user-profile.component';
 import { VehicleServiceService} from '../../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 import { NotificationsComponent} from '../../notifications/notifications.component'
-import {AuthService} from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { CheckPointService } from '../../services/check-point.service';
+
 var vId;
 var vehi;
 declare var $: any;
@@ -31,8 +31,6 @@ export class NavbarComponent implements OnInit {
         private element: ElementRef, 
         private router: Router,
         private getVehicles: VehicleServiceService,
-        public dialog: MatDialog,
-        private auth: AuthService
         private getUsers: UserService,
         public dialog: MatDialog
         ) {
@@ -159,13 +157,7 @@ export class NavbarComponent implements OnInit {
           console.log(`Dialog result: ${result}`);
         });
       };
-  
-    logoutUser() {
-        this.auth.logout();
-        this.router.navigate(['/login']);
-        return false;
-    }
-  
+
     addUserDialog() {
         const dialogRef = this.dialog.open(AddUserPopUp, {
           height: '400px',
@@ -185,6 +177,7 @@ export class NavbarComponent implements OnInit {
           console.log(`Dialog result: ${result}`);
         });
       };
+    
 }
 
 @Component({

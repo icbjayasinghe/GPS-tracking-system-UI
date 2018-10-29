@@ -298,7 +298,7 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'add-check-point-popup.html',
   })
   export class AddCheckPointPopup {
-    userId : String ;
+    userName : String ;
     locationName : String ;
     locationType : String ;
     latitude : String ;
@@ -308,13 +308,14 @@ export class NavbarComponent implements OnInit {
     ) { };
     addCheckPoint(){
       const checkPointObj = { 
-        userId:this.userId,
+        userName:this.userName,
         locationName:this.locationName,
-          locationType:this.locationType,
+        locationType:this.locationType,
         latitude:this.latitude,
         longitude:this.longitude
       }
-      this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res=>{
+      //console.log(checkPointObj);
+      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res=>{
         console.log(res);
       });
     };

@@ -9,23 +9,23 @@ export class CheckPointService {
     private http:Http,
   ) { }
 
-  getAllCheckPoints(){
-    const url = "http://localhost:3000/checkpoint"
+  getAllCheckPoints(userName){
+    const url = "http://localhost:3000/api/user/location/"+userName;
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 
-  addNewCheckPoint(checkPointObj){
+  addNewCheckPoint(checkPointObj, userName){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/checkpoint";
-    return this.http.post(url,checkPointObj,{headers:headers}).pipe(map(res=>res.json()));
+    const url ="http://localhost:3000/api/user/location/"+userName;
+    return this.http.put(url,checkPointObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 
   deleteCheckPoint(cpId){
     console.log(cpId);
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/checkpoint/"+cpId;
+    const url ="http://localhost:3000/api/user/removeLocation/"+cpId;
     return this.http.delete(url).pipe(map(res=>res.json()));
   }
 }

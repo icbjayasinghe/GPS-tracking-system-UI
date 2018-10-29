@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -11,7 +12,8 @@ export class LogComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,7 +24,15 @@ export class LogComponent implements OnInit {
       password: this.password
     };
     this.auth.loggingData(user).subscribe(result => {
-            console.log(result);
+            if (result.success) {
+              console.log(result);
+              this.auth.storeData(result);
+              this.router.navigate(['/dashboard']);
+            } else {
+              console.log(result);
+              this.router.navigate(['/login']);
+
+            }
         });
     }
 }

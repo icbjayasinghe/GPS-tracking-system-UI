@@ -39,13 +39,13 @@ export class CheckPointListComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
-      this.allCheckPoints = result;
-    });
+    // this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
+    //   this.allCheckPoints = result;
+    // });
     this.interval = setInterval(() => { 
-      this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
-        this.allCheckPoints = result;
-      });
+      // this.getCheckPoints.getAllCheckPoints().subscribe(result=>{
+      //   this.allCheckPoints = result;
+      // });
     }, 1000);
   }
 }
@@ -71,9 +71,9 @@ export class AddCheckPointPopup {
       latitude:this.latitude,
       longitude:this.longitude
     }
-    this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res=>{
-      console.log(res);
-    });
+    // this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res=>{
+    //   console.log(res);
+    // });
   };
 }
 

@@ -8,12 +8,12 @@
                         <h4 class="card-title">Login</h4>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form (submit)="loggingData()">
                             <div class="row">
                               <div class="col-md-1"></div>
                                 <div class="col-md-10">
                                     <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Email address" type="email">
+                                      <input matInput placeholder="Email address" type="email" name = "email" [(ngModel)]="email">
                                     </mat-form-field>
                                 </div>
                               <div class="col-md-1"></div>
@@ -22,7 +22,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Password" type="password">
+                                    <input matInput placeholder="Password" type="password" name = "password" [(ngModel)]="password">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-1"></div>

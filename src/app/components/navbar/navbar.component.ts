@@ -6,6 +6,9 @@ import { UserProfileComponent} from '../../user-profile/user-profile.component';
 import { VehicleServiceService} from '../../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 import { NotificationsComponent} from '../../notifications/notifications.component'
+import { UserService } from '../../services/user.service';
+import { CheckPointService } from '../../services/check-point.service';
+
 var vId;
 var vehi;
 declare var $: any;
@@ -28,6 +31,7 @@ export class NavbarComponent implements OnInit {
         private element: ElementRef, 
         private router: Router,
         private getVehicles: VehicleServiceService,
+        private getUsers: UserService,
         public dialog: MatDialog
         ) {
       this.location = location;
@@ -153,6 +157,26 @@ export class NavbarComponent implements OnInit {
           console.log(`Dialog result: ${result}`);
         });
       };
+
+    addUserDialog() {
+        const dialogRef = this.dialog.open(AddUserPopUp, {
+          height: '400px',
+          width: '600px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+    };
+
+    addCheckPointDialog() {
+        const dialogRef = this.dialog.open(AddCheckPointPopup,{
+          height: '400px',
+          width: '600px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      };
     
 }
 
@@ -168,6 +192,7 @@ export class NavbarComponent implements OnInit {
     //notification: NotificationsComponent
     constructor(
       private addNewVehicles:VehicleServiceService,
+      private getCheckPoints:CheckPointService
       //private notification: NotificationsComponent
     ) { };
   
@@ -237,3 +262,62 @@ export class NavbarComponent implements OnInit {
       });
     };
   }
+  @Component({
+    selector: 'add-user-popup',
+    templateUrl: 'add-user-popup.html',
+  })
+  export class AddUserPopUp {
+    fullName: String;
+    user: String;
+    address: String;
+    contactNumber: String;
+    emailAddress: String;
+    role: String;
+  
+    constructor(
+      private addNewUser: UserService,
+    ) { };
+  
+    addUser() {
+      const userObj = {
+        fullName : this.fullName,
+        user: this.user,
+        role: this.role,
+          address: this.address,
+          contactNumber: this.contactNumber,
+          emailAddress: this.emailAddress
+      };
+      this.addNewUser.addNewUser(userObj).subscribe(res => {
+        console.log(res);
+      });
+    };
+  }
+
+  @Component({
+    selector: 'add-check-point-popup',
+    templateUrl: 'add-check-point-popup.html',
+  })
+  export class AddCheckPointPopup {
+    userId : String ;
+    locationName : String ;
+    locationType : String ;
+    latitude : String ;
+    longitude : String ;
+    constructor(
+      private addNewCheckPoints:CheckPointService,
+    ) { };
+    addCheckPoint(){
+      const checkPointObj = { 
+        userId:this.userId,
+        locationName:this.locationName,
+          locationType:this.locationType,
+        latitude:this.latitude,
+        longitude:this.longitude
+      }
+      this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res=>{
+        console.log(res);
+      });
+    };
+  }
+  
+  

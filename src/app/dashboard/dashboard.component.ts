@@ -96,6 +96,7 @@ export class DashboardComponent implements OnInit {
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
     });
+    //for refreshing the user table
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
         if(result.length != userVal){

@@ -48,8 +48,8 @@
         overflow: auto;
         width: 105px;//sidebar button
         z-index: 4;
-
-        padding-bottom: 30px;
+        padding-top: 50%;
+        padding-bottom: 50%;
 
         .dropdown .dropdown-backdrop{
             display: none !important;

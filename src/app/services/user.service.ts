@@ -14,7 +14,7 @@ export class UserService {
     addNewUser(userObj){
         let headers = new Headers();
         headers.append('Content-Type','application/json');
-        const url ="http://localhost:3000/user";
+        const url ="http://localhost:3000/api/user";
         return this.http.post(url,userObj,{headers:headers}).pipe(map(res=>res.json()));
     }
 

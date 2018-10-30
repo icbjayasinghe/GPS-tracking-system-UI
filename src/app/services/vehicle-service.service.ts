@@ -10,7 +10,7 @@ export class VehicleServiceService {
   ) { }
 
   getAllVehicles(){
-    const url = "http://localhost:3000/vehicle"
+    const url = "http://localhost:3000/api/vehicle"
     return this.http.get(url).pipe(map(res=>res.json()));
   }
 

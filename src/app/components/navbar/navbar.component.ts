@@ -208,9 +208,9 @@ export class NavbarComponent implements OnInit {
     addVehicle(){
       const vehicleObj = { 
         vehicleNo:this.vehicleNo,
-          Imie:this.deviceImei,
-          userName:this.userName,
-          details:this.vehicleDetails
+        Imie:this.deviceImei,
+        userName:this.userName,
+        vehicleDetails:this.vehicleDetails
       }
       
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{

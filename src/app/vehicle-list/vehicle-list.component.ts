@@ -13,9 +13,8 @@ declare var $: any;
 export class VehicleListComponent implements OnInit {
   interval: any;
   allVehicles: any[];
-  vehicleNo: String;
-  deviceImei: String;
-  userName: String;
+  vehicleNumber: String;
+  imeiNumber: String;
   vehicleDetails: String;
   constructor(
     private getVehicles: VehicleServiceService,

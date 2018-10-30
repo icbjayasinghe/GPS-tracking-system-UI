@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-import { UserService } from '../services/user.service'
+import { UserService } from '../services/user.service';
+import { VehicleServiceService } from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 
 let uId;
+var vId;
+var vehi;
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +18,16 @@ export class DashboardComponent implements OnInit {
   interval: any;
   allUsers: any[];
   menuItems: any[];
+  allVehicles: any[];
+  vehicleNumber: String;
+  imeiNumber: String;
+  vehicleDetails: String;
   constructor(
     private getUsers: UserService,
+    private getVehicles: VehicleServiceService,
     public dialog: MatDialog
   ) { };
+
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -79,6 +89,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
+    });
+    this.getVehicles.getAllVehicles().subscribe(result=>{
+      this.allVehicles = result;
     });
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {

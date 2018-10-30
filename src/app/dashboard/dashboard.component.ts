@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { UserService } from '../services/user.service'
+import {MatDialog} from '@angular/material';
+
+let uId;
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +11,14 @@ import * as Chartist from 'chartist';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  interval: any;
+  allUsers: any[];
   menuItems: any[];
-  constructor() { }
+  constructor(
+    private getUsers: UserService,
+    public dialog: MatDialog
+  ) { };
+
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -67,8 +76,16 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
 
-  
   ngOnInit() {
+    this.getUsers.getAllUsers().subscribe(result => {
+      this.allUsers = result;
+    });
+    this.interval = setInterval(() => {
+      this.getUsers.getAllUsers().subscribe(result => {
+        this.allUsers = result;
+      });
+    }, 1000);
+ 
    
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 

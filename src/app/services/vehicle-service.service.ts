@@ -17,21 +17,21 @@ export class VehicleServiceService {
   addNewVehicle(vehiObj){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/vehicle";
+    const url ="http://localhost:3000/api/vehicle";
     return this.http.post(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 
   deleteVehicle(vehiId){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/vehicle/"+vehiId;
+    const url ="http://localhost:3000/api/vehicle/"+vehiId;
     return this.http.delete(url).pipe(map(res=>res.json()));
   }
 
   updateVehicle(vehiId,vehiObj){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    const url ="http://localhost:3000/vehicle/"+vehiId;
+    const url ="http://localhost:3000/api/vehicle/"+vehiId;
     return this.http.put(url,vehiObj,{headers:headers}).pipe(map(res=>res.json()));
   }
 

@@ -86,18 +86,39 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
 
+  
   ngOnInit() {
+    var userVal;
+    var vehicleVal;
     this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
+      userVal= result.length;
     });
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
+      vehicleVal = result.length;
     });
+    //for refreshing the user table
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
-        this.allUsers = result;
-      });
+        if(result.length != userVal){
+          this.allUsers = result;
+          userVal=result.length;
+        }
+      }
+      );
     }, 1000);
+
+    this.interval = setInterval(() => {
+      this.getVehicles.getAllVehicles().subscribe(result => {
+        if(result.length != vehicleVal){
+          this.allVehicles = result;
+          vehicleVal=result.length;
+        }
+      }
+      );
+    }, 1000);
+ 
  
    
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -179,6 +200,9 @@ export class DashboardComponent implements OnInit {
 
     //   //start animation for the Emails Subscription Chart
     //   this.startAnimationForBarChart(websiteViewsChart);
+  }
+  checkUserIsAdded(result){
+
   }
 
 }

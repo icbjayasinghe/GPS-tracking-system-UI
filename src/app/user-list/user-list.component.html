@@ -18,15 +18,16 @@
                                   <th>Name</th>
                                   <th>User Name</th>
                                   <th>Contact Number</th>
-                                  <th>User Type</th>
+                                  <th>Email Address</th>
                                   <th>Edit</th>
                                   <th>Delete</th>
                               </thead>
                               <tbody>
                                   <tr *ngFor= "let user of allUsers">
-                                      <td>{{user.name}}</td>
-                                      <td>{{user.userType}}</td>
-                                      <td>{{user.status}}</td>
+                                      <td>{{user.fullName}}</td>
+                                      <td>{{user.userName}}</td>
+                                      <td>{{user.contactNumber}}</td>
+                                      <td>{{user.emailAddress}}</td>
                                       <td >
                                         <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                           <i class="material-icons">edit</i>

@@ -99,7 +99,6 @@ export class MapsComponent implements OnInit {
         this.polylines = result;
         if (this.polylines !== []) {
             for (let i = 0; i < this.polylines.length; i++) {
-
                 if (this.polylines[i].trackingData[0].speed > 60) {
                     this.truckIcon = './src/assets/img/red-truck-front.png';
                 } else if (this.polylines[i].trackingData[0].speed > 5) {
@@ -142,8 +141,12 @@ export class MapsComponent implements OnInit {
 
     private moniterNewData(result = []) {
         this.oldDataAmount = this.dataAmount;
+        this.dataAmount = 0;
         for (let i = 0; i < result.length; i++) {
-            this.dataAmount = result[i].trackingData.length;
+            if (result[i].trackingData.length === 0) {
+                result.splice(i, i + 1);
+            }
+            this.dataAmount = this.dataAmount + result[i].trackingData.length;
         }
         if (this.dataAmount !== this.oldDataAmount) {
             this.rebuildPolylines(result);

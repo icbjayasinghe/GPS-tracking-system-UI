@@ -282,7 +282,7 @@ export class NavbarComponent implements OnInit {
     address: String;
     contactNumber: String;
     emailAddress: String;
-    role: String;
+    userName: String;
   
     constructor(
       private addNewUser: UserService,
@@ -291,11 +291,10 @@ export class NavbarComponent implements OnInit {
     addUser() {
       const userObj = {
         fullName : this.fullName,
-        user: this.user,
-        role: this.role,
-          address: this.address,
-          contactNumber: this.contactNumber,
-          emailAddress: this.emailAddress
+        address: this.address,
+        contactNumber: this.contactNumber,
+        emailAddress: this.emailAddress,
+        userName: this.userName        
       };
       this.addNewUser.addNewUser(userObj).subscribe(res => {
         console.log(res);

@@ -126,7 +126,40 @@
       <div class="row">
           <div class="col-lg-6 col-md-12">
               <div class="card">
-                  <div class="card-header card-header-tabs card-header-primary">
+                    <div class="card-header card-header-danger">
+                            <h4 class="card-title">User Details</h4>
+                            <p class="card-category">Users of the GPS Tracking System</p>
+                        </div>
+                        <div class="card-body table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>Name</th>
+                                  <th>User Name</th>
+                                  <th>Contact Number</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor= "let user of allUsers">
+                                      <td>{{user.fullName}}</td>
+                                      <td>{{user.userName}}</td>
+                                      <td>{{user.contactNumber}}</td>
+                                      <td >
+                                        <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                        </button>
+                                      </td>
+                                      <td>
+                                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(user._id)">
+                                          <i class="material-icons">close</i>
+                                        </button>
+                                      </td>
+                                  </tr>
+                                 
+                              </tbody>
+                          </table>
+                        </div>
+                  <!-- <div class="card-header card-header-tabs card-header-primary">
                       <div class="nav-tabs-navigation">
                           <div class="nav-tabs-wrapper">
                               <span class="nav-tabs-title">Notifications:</span>
@@ -366,42 +399,40 @@
                               </table>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
               </div>
           </div>
           <div class="col-lg-6 col-md-12">
               <div class="card">
-                  <div class="card-header card-header-warning">
-                      <h4 class="card-title">User Stats</h4>
-                      <p class="card-category">New user added on 15th September, 2018</p>
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Vehicle Details</h4>
+                      <p class="card-category">Vehicle Details of the GPS Tracking System</p>
                   </div>
                   <div class="card-body table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
-                            <th>Name</th>
-                            <th>User Name</th>
-                            <th>Contact Number</th>
-                            <th>Email Address</th>
+                            <th>Vehicle Number</th>
+                            <th>Device IMEI</th>
+                            <th>Vehicle Details</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor= "let user of allUsers">
-                                <td>{{user.fullName}}</td>
-                                <td>{{user.userName}}</td>
-                                <td>{{user.contactNumber}}</td>
+                            <tr *ngFor= "let vehicle of allVehicles ">
+                                <td>{{vehicle.vehicleNumber}}</td>
+                                <td>{{vehicle.imeiNumber}}</td>
+                                <td>{{vehicle.vehicleDetails}}</td>
                                 <td >
-                                  <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                    <i class="material-icons">edit</i>
-                                  </button>
+                                    <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
+                                        <i class="material-icons">edit</i>
+                                    </button>
                                 </td>
                                 <td>
-                                  <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(user._id)">
-                                    <i class="material-icons">close</i>
-                                  </button>
+                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(vehicle._id)">
+                                        <i class="material-icons">close</i>
+                                    </button>
                                 </td>
                             </tr>
-                           
                         </tbody>
                     </table>
                   </div>

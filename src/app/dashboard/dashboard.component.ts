@@ -89,12 +89,14 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit() {
     var userVal;
+    var vehicleVal;
     this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
       userVal= result.length;
     });
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
+      vehicleVal = result.length;
     });
     //for refreshing the user table
     this.interval = setInterval(() => {
@@ -103,9 +105,20 @@ export class DashboardComponent implements OnInit {
           this.allUsers = result;
           userVal=result.length;
         }
-        
-      });
+      }
+      );
     }, 1000);
+
+    this.interval = setInterval(() => {
+      this.getVehicles.getAllVehicles().subscribe(result => {
+        if(result.length != vehicleVal){
+          this.allVehicles = result;
+          vehicleVal=result.length;
+        }
+      }
+      );
+    }, 1000);
+ 
  
    
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */

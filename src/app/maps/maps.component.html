@@ -1,27 +1,34 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <!-- set this angular function in side agm-map tag - (mapClick)="onChooseLocation($event)" -->
-<agm-map [latitude]="lat" [longitude]="lng">
-    <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
-        <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
-        </agm-polyline-point>
-    </agm-polyline>
-    <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-        <agm-info-window>Vehicle IMEI : {{m.imei}}
-            <br>
-            Vehicle Speed : {{m.speed}}
-            <br>
-            Vehicle Number : {{m.num}}
-            <br>
-            Current Position Latitudes: {{m.lat}}
-            <br>
-            Current Position Longitudes: {{m.lng}}
-            <br>
-            Time : {{m.tim}}
-        </agm-info-window>
-    </agm-marker>
+<div class="row"  style="background-color: #40434a">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">Hello</div>
+    <div class="col-md-10">
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
+                <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+                </agm-polyline-point>
+            </agm-polyline>
+            <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
+                <agm-info-window>Vehicle IMEI : {{m.imei}}
+                    <br>
+                    Vehicle Speed : {{m.speed}}
+                    <br>
+                    Vehicle Number : {{m.num}}
+                    <br>
+                    Current Position Latitudes: {{m.lat}}
+                    <br>
+                    Current Position Longitudes: {{m.lng}}
+                    <br>
+                    Time : {{m.tim}}
+                </agm-info-window>
+            </agm-marker>
+        
+            <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
+        
+            </agm-marker>
+        </agm-map>
 
-    <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
-
-    </agm-marker>
-</agm-map>
+    </div>
+</div>

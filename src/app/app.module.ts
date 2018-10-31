@@ -27,7 +27,7 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule} from '@angular/material';
+import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,MatSelectModule} from '@angular/material';
 
 
 @NgModule({
@@ -44,9 +44,11 @@ import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule}
     MatRippleModule,
     MatTooltipModule,
     MatDialogModule,
+
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatSelectModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [

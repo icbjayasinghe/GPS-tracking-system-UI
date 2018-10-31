@@ -27,7 +27,7 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog,MatSelectModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -42,6 +42,7 @@ import {MatDialog} from '@angular/material';
     MatRippleModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSelectModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [

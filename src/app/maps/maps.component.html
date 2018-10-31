@@ -2,9 +2,29 @@
 <!-- the component as the initial center of the map: -->
 <!-- set this angular function in side agm-map tag - (mapClick)="onChooseLocation($event)" -->
 <div class="row"  style="background-color: #40434a">
-    <div class="col-md-1"></div>
-    <div class="col-md-1">Hello</div>
-    <div class="col-md-10">
+    <!-- <div class="col-md-1"></div> -->
+    <div class="col-md-3 wrap">
+            <a class="font">History</a> 
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10" style="text-align: center">
+                        <mat-form-field class="example-full-width" >
+                            <input matInput placeholder="Vehicle" name="vehicle" [(ngModel)]="vehicle" >
+                         </mat-form-field>
+                         <mat-form-field class="example-full-width" >
+                                <input matInput [matDatepicker]="from" placeholder="From">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field class="example-full-width" >
+                                <input matInput [matDatepicker]="to" placeholder="To">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                         </mat-form-field>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-9">
         <agm-map [latitude]="lat" [longitude]="lng">
             <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
                 <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
@@ -32,3 +52,19 @@
 
     </div>
 </div>
+
+<style>
+    .wrap{
+        text-align: center;
+        /* margin: 5px;  */
+        color: aliceblue;
+        padding-top: 8%; 
+    }
+    .font{
+        font-family:Helvetica, sans-serif;
+        font: outline;
+        font-variant-caps: all-petite-caps;
+        font-size: large;
+    }
+    
+</style>

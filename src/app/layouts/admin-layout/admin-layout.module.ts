@@ -22,6 +22,9 @@ import {
   MatInputModule,
   MatRippleModule,
   MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -32,6 +35,9 @@ import {
     MatRippleModule,
     MatInputModule,
     MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule,
       AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [

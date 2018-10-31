@@ -1,27 +1,70 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <!-- set this angular function in side agm-map tag - (mapClick)="onChooseLocation($event)" -->
-<agm-map [latitude]="lat" [longitude]="lng">
-    <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
-        <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
-        </agm-polyline-point>
-    </agm-polyline>
-    <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-        <agm-info-window>Vehicle IMEI : {{m.imei}}
-            <br>
-            Vehicle Speed : {{m.speed}}
-            <br>
-            Vehicle Number : {{m.num}}
-            <br>
-            Current Position Latitudes: {{m.lat}}
-            <br>
-            Current Position Longitudes: {{m.lng}}
-            <br>
-            Time : {{m.tim}}
-        </agm-info-window>
-    </agm-marker>
+<div class="row"  style="background-color: #40434a">
+    <!-- <div class="col-md-1"></div> -->
+    <div class="col-md-3 wrap">
+            <a class="font">History</a> 
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10" style="text-align: center">
+                        <mat-form-field class="example-full-width" >
+                            <input matInput placeholder="Vehicle" name="vehicle" [(ngModel)]="vehicle" >
+                         </mat-form-field>
+                         <mat-form-field class="example-full-width" >
+                                <input matInput [matDatepicker]="from" placeholder="From">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field class="example-full-width" >
+                                <input matInput [matDatepicker]="to" placeholder="To">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                         </mat-form-field>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-9">
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
+                <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+                </agm-polyline-point>
+            </agm-polyline>
+            <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
+                <agm-info-window>Vehicle IMEI : {{m.imei}}
+                    <br>
+                    Vehicle Speed : {{m.speed}}
+                    <br>
+                    Vehicle Number : {{m.num}}
+                    <br>
+                    Current Position Latitudes: {{m.lat}}
+                    <br>
+                    Current Position Longitudes: {{m.lng}}
+                    <br>
+                    Time : {{m.tim}}
+                </agm-info-window>
+            </agm-marker>
+        
+            <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
+        
+            </agm-marker>
+        </agm-map>
 
-    <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
+    </div>
+</div>
 
-    </agm-marker>
-</agm-map>
+<style>
+    .wrap{
+        text-align: center;
+        /* margin: 5px;  */
+        color: aliceblue;
+        padding-top: 8%; 
+    }
+    .font{
+        font-family:Helvetica, sans-serif;
+        font: outline;
+        font-variant-caps: all-petite-caps;
+        font-size: large;
+    }
+    
+</style>

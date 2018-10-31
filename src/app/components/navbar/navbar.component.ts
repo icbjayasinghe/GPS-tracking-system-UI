@@ -10,6 +10,7 @@ import {AuthService} from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { CheckPointService } from '../../services/check-point.service';
 
+
 var vId;
 var vehi;
 declare var $: any;
@@ -186,8 +187,6 @@ export class NavbarComponent implements OnInit {
           console.log(`Dialog result: ${result}`);
         });
       };
-    
-
 }
 
 @Component({
@@ -195,26 +194,33 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'add-vehicle-popup.html',
   })
   export class AddVehiclePopup {
-    vehicleNo: String;
-    deviceImei: String;
-    userName: String;
+    vehicleNumber: String;
+    imeiNumber: String;
+    userId: String;
     vehicleDetails: String;
+    allUser: any[];
     //notification: NotificationsComponent
     constructor(
       private addNewVehicles:VehicleServiceService,
+      private getUsers: UserService
       //private notification: NotificationsComponent
-    ) { };
+    ) { 
+      this.getUsers.getAllUsers().subscribe(result=>
+        this.allUser =result
+        )
+    };  
   
     addVehicle(){
       const vehicleObj = { 
-        vehicleNo:this.vehicleNo,
-        Imie:this.deviceImei,
-        userName:this.userName,
+        vehicleNumber:this.vehicleNumber,
+        imeiNumber:this.imeiNumber,
+        userId:this.userId,
         vehicleDetails:this.vehicleDetails
       }
       
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
         if(res.success){
+          console.log(this.userId);
           
           const type = ['success'];
           //const color = Math.floor((Math.random() * 4) + 1);

@@ -18,16 +18,20 @@ export class UserService {
     }
 
     addNewUser(userObj){
-        let headers = new Headers();
-        headers.append('Content-Type','application/json');
-        const url ="http://localhost:3000/api/user";
-        return this.http.post(url,userObj,{headers:headers}).pipe(map(res=>res.json()));
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/user';
+        return this.http.post(url, userObj, { headers: headers}).pipe(map(res => res.json()));
     }
 
     deleteUser(userId){
-        let headers = new Headers();
-        headers.append('Content-Type','application/json');
-        const url ="http://localhost:3000/api/user/deleteUser/"+userId;
-        return this.http.put(url,userId).pipe(map(res=>res.json()));
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/user/deleteUser/' + userId;
+        return this.http.put(url, userId, { headers: headers}).pipe(map(res => res.json()));
     }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { tokenNotExpired } from 'angular2-jwt';
 import { Http, Headers} from '@angular/http';
 import { map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +10,8 @@ export class AuthService {
   token: any;
   profile: any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private router: Router ) { }
 
     loggingData(user) {
     this.user = user;
@@ -32,7 +35,12 @@ export class AuthService {
     }
 
     fetchToken() {
-      this.token = localStorage.getItem('token');
+      if (tokenNotExpired('token') === false) {
+          localStorage.clear();
+          this.router.navigate(['/login']);
+          window.location.reload();
+      }
+        this.token = localStorage.getItem('token');
     }
 
     logout() {

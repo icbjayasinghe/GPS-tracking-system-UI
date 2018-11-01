@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Http,Headers} from '@angular/http';
+import { Http, Headers} from '@angular/http';
 import { map} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class VehicleServiceService {
 
   constructor(
-    private http:Http,
+    private http: Http,
+    private auth: AuthService
   ) { }
 
-  getAllVehicles(){
-    const url = "http://localhost:3000/api/vehicle"
-    return this.http.get(url).pipe(map(res=>res.json()));
+  getAllVehicles() {
+      const headers = new Headers();
+      this.auth.fetchToken();
+      headers.append('Authorization', this.auth.token);
+      headers.append('Content-Type', 'application/json');
+    const url = 'http://localhost:3000/api/vehicle';
+    return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
 
   addNewVehicle(vehiObj){

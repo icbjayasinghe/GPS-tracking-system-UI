@@ -20,6 +20,8 @@ export class MapsComponent implements OnInit {
     oldDataAmount = 0;
     userMarkers = [];
     allVehiclesResult:any;
+    vehicleId:String;
+    picker1:String;
 
     polylines = [];
 
@@ -118,12 +120,9 @@ export class MapsComponent implements OnInit {
         }
     }
     
-    // allVehicles(){
-    //     this.vehicles.getAllVehicles().subscribe(result=>{
-    //         console.log(result);
-    //         this.allVehiclesResult = result;
-
-    //     })
-    // }
+    requestHistory(){
+        var obj={vehicleId:this.vehicleId, picker1:this.picker1}
+        console.log(obj);
+    }
 }
 

@@ -8,20 +8,28 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10" style="text-align: center">
-                        <mat-form-field class="example-full-width" >
-                            <input matInput placeholder="Vehicle" name="vehicle" [(ngModel)]="vehicle" >
-                         </mat-form-field>
-                         <mat-form-field class="example-full-width" >
-                                <input matInput [matDatepicker]="picker1" placeholder="From">
-                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                         </mat-form-field>
-                         <mat-form-field class="example-full-width" >
-                                <input matInput [matDatepicker]="picker2" placeholder="To">
-                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
-                         </mat-form-field>
-                         
+                    <mat-form-field>
+                        <mat-select placeholder="Select Vehicle" [(ngModel)]="vehicleId" name="vehicleId">
+                          <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle._id">
+                            {{vehicle.vehicleNumber}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" >
+                        <input matInput [matDatepicker]="picker1" placeholder="From">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" >
+                        <input matInput [matDatepicker]="picker2" placeholder="To">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <!-- <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Address" name="address" [(ngModel)]="address">
+                    </mat-form-field> -->
+                        <button mat-button>Clear</button>
+                        <button mat-button cdkFocusInitial (click)="requestHistory()">Filter</button>
                 </div>
             </div>
     </div>

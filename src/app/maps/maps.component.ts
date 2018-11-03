@@ -110,15 +110,11 @@ export class MapsComponent implements OnInit {
         this.oldDataAmount = this.dataAmount;
         this.dataAmount = 0;
         for (let i = 0; i < result.length; i++) {
-            console.log(i);
             this.dataAmount = this.dataAmount + result[i].trackingData.length;
             if (result[i].trackingData.length === 0) {
                 result.splice(i, 1);
                 i--;
             }
-            console.log(result[i].trackingData.length);
-            console.log(result.length);
-            console.log(i);
         }
         if (this.dataAmount !== this.oldDataAmount) {
             this.rebuildPolylines(result);

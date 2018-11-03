@@ -372,14 +372,29 @@
 .main-panel{
     position: relative;
     float: right;
-    //width: $sidebar-width;
-    width: 94%;//I add for extending window
+    width: $sidebar-width;
+    // width: 95.5%;//I add for extending window
     @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
      .main-content{
         margin-top: 70px;
         padding: 30px 15px;//main content left right padding
         min-height: calc(100vh - 123px);
+    }
+
+    .map-content{
+        margin-top: -30px;
+        margin-bottom: -30;
+        padding: 30px 10px;//main content left right padding
+        min-height: calc(100vh - 123px);
+        // height: 1000px;
+        //margin-bottom: 0;
+        position: static;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        
     }
 
      .footer{

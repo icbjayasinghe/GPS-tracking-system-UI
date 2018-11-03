@@ -23,12 +23,14 @@ export class AuthService {
 
     storeData(result) {
         this.profile = {
+            _id: result._id,
             address: result.address,
             contactNumber: result.contactNumber,
             emailAddress: result.emailAddress,
             fullName: result.fullName,
             status: result.status,
-            userName: result.userName };
+            userName: result.userName,
+            role: result.role};
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(this.profile));
         this.user = this.profile;
@@ -41,6 +43,11 @@ export class AuthService {
           window.location.reload();
       }
         this.token = localStorage.getItem('token');
+    }
+
+    findUser() {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      return this.user.role === 'Admin';
     }
 
     logout() {

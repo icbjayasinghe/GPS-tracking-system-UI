@@ -1,13 +1,23 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <!-- set this angular function in side agm-map tag - (mapClick)="onChooseLocation($event)" -->
-<div class="row"  style="background-color: #40434a">
+<!-- <div class="main-content"> -->
+<!-- <div class="container-fluid"> -->
+<div class="row map-content"  style="background-color: #40434a">
     <!-- <div class="col-md-1"></div> -->
-    <div class="col-md-3 wrap">
-            <a class="font">History</a> 
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10" style="text-align: center">
+    <div class="col-md-3 wrap ">
+         <div class="row ">
+                <!-- <div class="col-md-2"></div> -->
+
+                <div class="col-md-12" style="text-align: center">
+                        <!-- <div class="row" > -->
+                                <!-- <div class="col-md-2"></div> -->
+                                <!-- <div class="col-md-10"> -->
+                                    <a class="font">History</a> 
+                                    <hr>
+                    
+                                <!-- </div> -->
+                            <!-- </div> -->
                     <mat-form-field>
                         <mat-select placeholder="Select Vehicle" [(ngModel)]="vehicleId" name="vehicleId">
                           <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle._id">
@@ -16,20 +26,20 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" >
-                        <input matInput [matDatepicker]="picker1" placeholder="From">
+                        <input matInput [matDatepicker]="picker1" placeholder="From" [(ngModel)]="dateFrom" name="dateFrom">
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" >
-                        <input matInput [matDatepicker]="picker2" placeholder="To">
+                        <input matInput [matDatepicker]="picker2" placeholder="To" [(ngModel)]="dateTo" name="dateTo">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
                     <!-- <mat-form-field class="example-full-width">
                         <input matInput placeholder="Address" name="address" [(ngModel)]="address">
                     </mat-form-field> -->
-                        <button mat-button>Clear</button>
-                        <button mat-button cdkFocusInitial (click)="requestHistory()">Filter</button>
+                        <!-- <button mat-button>Clear</button> -->
+                        <button mat-stroked-button (click)="requestHistory()">SHOW HISTORY</button>
                 </div>
             </div>
     </div>
@@ -61,7 +71,8 @@
 
     </div>
 </div>
-
+<!-- </div> -->
+<!-- </div> -->
 <style>
     .wrap{
         text-align: center;

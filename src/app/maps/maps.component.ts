@@ -21,7 +21,8 @@ export class MapsComponent implements OnInit {
     userMarkers = [];
     allVehiclesResult:any;
     vehicleId:String;
-    picker1:String;
+    dateFrom:String;
+    dateTo:String;
 
     polylines = [];
 
@@ -121,8 +122,8 @@ export class MapsComponent implements OnInit {
     }
     
     requestHistory(){
-        var obj={vehicleId:this.vehicleId, picker1:this.picker1}
-        console.log(obj);
+        var historyObj={vehicleId:this.vehicleId, dateFrom:this.dateFrom, dateTo:this.dateTo};
+        console.log(historyObj);
     }
 }
 

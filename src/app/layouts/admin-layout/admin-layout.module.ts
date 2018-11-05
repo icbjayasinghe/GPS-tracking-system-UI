@@ -16,6 +16,7 @@ import { AgmCoreModule } from '@agm/core';
 import { VehicleListComponent } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent } from '../../check-point-list/check-point-list.component';
+import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component'
 
 import {
   MatButtonModule,
@@ -55,6 +56,7 @@ import {
     VehicleListComponent,
     UserListComponent,
     CheckPointListComponent,
+    VehicleMapComponent
     // LogComponent,
   ]
 })

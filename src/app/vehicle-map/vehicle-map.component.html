@@ -1,0 +1,24 @@
+<agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
+  <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
+      <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+      </agm-polyline-point>
+  </agm-polyline>
+  <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
+      <agm-info-window>Vehicle IMEI : {{m.imei}}
+          <br>
+          Vehicle Speed : {{m.speed}}
+          <br>
+          Vehicle Number : {{m.num}}
+          <br>
+          Current Position Latitudes: {{m.lat}}
+          <br>
+          Current Position Longitudes: {{m.lng}}
+          <br>
+          Time : {{m.tim}}
+      </agm-info-window>
+  </agm-marker>
+
+  <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
+
+  </agm-marker>
+</agm-map>

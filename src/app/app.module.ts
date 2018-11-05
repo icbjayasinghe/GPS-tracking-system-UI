@@ -28,6 +28,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,MatSelectModule} from '@angular/material';
+import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,
     UpdateVehiclePopup,
     AddCheckPointPopup,
     DeleteUserPopup,
-    DeleteCheckPointPopup
+    DeleteCheckPointPopup,
   ],
   entryComponents: [
     AddVehiclePopup,

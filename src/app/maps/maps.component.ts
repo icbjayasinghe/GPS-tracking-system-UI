@@ -35,7 +35,7 @@ export class MapsComponent implements OnInit {
         this.interval = setInterval(() => {
             this.vehicleDetails.getTrackingData().subscribe(result => {
                 this.moniterNewData(result);
-                //this.getUserVehicles(result);
+                this.getUserVehicles(result);
             });
         }, 10000);
 

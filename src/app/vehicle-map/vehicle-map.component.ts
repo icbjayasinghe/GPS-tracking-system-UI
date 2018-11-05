@@ -18,7 +18,7 @@ export class VehicleMapComponent implements OnInit {
   dataAmount = 0;
   oldDataAmount = 0;
   userMarkers = [];
-  allVehiclesResult:any;
+  //allVehiclesResult:any;
   vehicleId:String;
 
   polylines = [];
@@ -32,13 +32,13 @@ export class VehicleMapComponent implements OnInit {
     this.interval = setInterval(() => {
       this.vehicleDetails.getTrackingData().subscribe(result => {
           this.moniterNewData(result);
-          this.getUserVehicles(result);
+          //this.getUserVehicles(result);
       });
   }, 10000);
   }
-  getUserVehicles(result){
-    this.allVehiclesResult = result;
-}
+//   getUserVehicles(result){
+//     this.allVehiclesResult = result;
+// }
 
 onChooseLocation(event) {
 

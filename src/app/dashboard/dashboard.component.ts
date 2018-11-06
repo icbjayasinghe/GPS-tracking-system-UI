@@ -86,6 +86,18 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
 
+  deleteConfirmDialog(userId) {
+    const dialogRef = this.dialog.open(DeleteUserPopup, {
+      height: '350px',
+      width: '400px',
+    });
+    uId = userId;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      console.log( userId);
+    });
+  };
+
   
   ngOnInit() {
     var userVal;
@@ -207,3 +219,17 @@ export class DashboardComponent implements OnInit {
 
 }
 
+@Component({
+  selector: 'delete-user-popup',
+  templateUrl: 'delete-user-popup.html',
+})
+export class DeleteUserPopup {
+  constructor(
+    private delUser: UserService,
+  ) { };
+  deleteUser() {
+    this.delUser.deleteUser(uId).subscribe(res => {
+      console.log(res);
+    });
+  }
+}

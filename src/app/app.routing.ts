@@ -6,18 +6,20 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LogComponent} from './log/log.component';
 import { AddVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import {AuthGuard} from './auth.guard';
 
-const routes: Routes =[  
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full',
+    pathMatch: 'full'
   }, {
     path: '',
     component: AdminLayoutComponent,
     children: [
         {
       path: '',
+
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
   }]},
      { path: 'login',      component: LogComponent },

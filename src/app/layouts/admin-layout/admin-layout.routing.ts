@@ -12,6 +12,7 @@ import { VehicleListComponent} from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent} from '../../check-point-list/check-point-list.component';
 import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component';
+import {AuthGuard} from '../../auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -56,16 +57,16 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'vehicle-list',   component: VehicleListComponent },
-    { path: 'user-list',      component: UserListComponent },
-    { path: 'check-point-list', component:CheckPointListComponent},
-    { path: 'vehicleMap', component: VehicleMapComponent}
+    { path: 'dashboard',      component: DashboardComponent},
+    { path: 'user-profile',   component: UserProfileComponent, canActivate: [ AuthGuard ]  },
+    { path: 'table-list',     component: TableListComponent, canActivate: [ AuthGuard ]  },
+    { path: 'typography',     component: TypographyComponent, canActivate: [ AuthGuard ]  },
+    { path: 'icons',          component: IconsComponent, canActivate: [ AuthGuard ]  },
+    { path: 'maps',           component: MapsComponent, canActivate: [ AuthGuard ]  },
+    { path: 'notifications',  component: NotificationsComponent, canActivate: [ AuthGuard ]  },
+    { path: 'upgrade',        component: UpgradeComponent, canActivate: [ AuthGuard ]  },
+    { path: 'vehicle-list',   component: VehicleListComponent, canActivate: [ AuthGuard ]  },
+    { path: 'user-list',      component: UserListComponent, canActivate: [ AuthGuard ]  },
+    { path: 'check-point-list', component: CheckPointListComponent, canActivate: [ AuthGuard ] },
+    { path: 'vehicleMap', component: VehicleMapComponent, canActivate: [ AuthGuard ] }
 ];

@@ -62,6 +62,10 @@ export class AuthService {
         return tokenNotExpired('token');
     }
 
+    getProfileData() {
+        return JSON.parse(localStorage.getItem('user'));
+    }
+
 }
 
 

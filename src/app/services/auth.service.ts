@@ -6,19 +6,20 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  user: any;
-  token: any;
-  profile: any;
+    user: any;
+    token: any;
+    profile: any;
 
-  constructor(private http: Http,
-              private router: Router ) { }
+    constructor(private http: Http,
+                private router: Router) {
+    }
 
     loggingData(user) {
-    this.user = user;
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const url = 'http://localhost:3000/login';
-    return this.http.post(url, this.user, { headers: headers}).pipe(map(res => res.json()));
+        this.user = user;
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/login';
+        return this.http.post(url, this.user, {headers: headers}).pipe(map(res => res.json()));
     }
 
     storeData(result) {
@@ -30,31 +31,37 @@ export class AuthService {
             fullName: result.fullName,
             status: result.status,
             userName: result.userName,
-            role: result.role};
+            role: result.role
+        };
         localStorage.setItem('token', result.token);
         localStorage.setItem('user', JSON.stringify(this.profile));
         this.user = this.profile;
     }
 
     fetchToken() {
-      if (!tokenNotExpired('token')) {
-          localStorage.clear();
-          this.router.navigate(['/login']);
-          window.location.reload();
-      }
+        if (!tokenNotExpired('token')) {
+            localStorage.clear();
+            this.router.navigate(['/login']);
+            window.location.reload();
+        }
         this.token = localStorage.getItem('token');
     }
 
     findUser() {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      return this.user.role === 'Admin';
+        this.user = JSON.parse(localStorage.getItem('user'));
+        return this.user.role === 'Admin';
     }
 
     logout() {
-      this.token = null ;
-      this.user = null ;
-      localStorage.clear();
+        this.token = null;
+        this.user = null;
+        localStorage.clear();
     }
+
+    loggedIn() {
+        return tokenNotExpired('token');
+    }
+
 }
 
 

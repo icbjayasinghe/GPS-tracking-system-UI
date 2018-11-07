@@ -28,7 +28,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,MatSelectModule} from '@angular/material';
 import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
-import { DeleteUserPopup } from './dashboard/dashboard.component'
+import { DeleteUserPopup } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { DeleteUserPopup } from './dashboard/dashboard.component'
       UserService,
       CheckPointService,
       MapService,
-      AuthService
+      AuthService,
+      AuthGuard
   ],
   bootstrap: [
     AppComponent

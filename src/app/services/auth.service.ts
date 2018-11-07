@@ -37,7 +37,7 @@ export class AuthService {
     }
 
     fetchToken() {
-      if (tokenNotExpired('token') === false) {
+      if (!tokenNotExpired('token')) {
           localStorage.clear();
           this.router.navigate(['/login']);
           window.location.reload();

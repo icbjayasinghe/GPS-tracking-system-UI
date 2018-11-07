@@ -18,7 +18,7 @@ export class MapService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-      let url = 'http://localhost:3000/api/vehicle/' + this.auth.profile._id;
+      let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
       if (this.auth.findUser()) {
         url = 'http://localhost:3000/api/vehicle';
       }

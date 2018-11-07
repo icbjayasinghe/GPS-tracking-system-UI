@@ -125,8 +125,8 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
-
-    if (this.isAdmin){
+    this.isAdmin = this.auth.findUser();
+    if (this.isAdmin) {
       this.columnNum = 6;
       this.cardNum = 3;
     } else {

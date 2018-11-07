@@ -259,21 +259,21 @@ export class DeleteUserPopup {
 })
 export class UpdateVehiclePopup {
   id = vehi._id;
-  vehicleNo = vehi.vehicleNo;
-  deviceImei = vehi.imeiNo;
+  vehicleNo = vehi.vehicleNumber;
+  deviceImei = vehi.imeiNumber;
   userName = vehi.userName;
   vehicleDetails = vehi.vehicleDetails;
-  
   constructor(
     private updVehicles:VehicleServiceService
   ) { };
   updateVehicle(){
-    const vehicleObj = { 
+    var vehicleObj = { 
       vehicleNo:this.vehicleNo,
 	    Imie:this.deviceImei,
 	    userName:this.userName,
 	    details:this.vehicleDetails
     }
+    console.log(vehi);
     this.updVehicles.updateVehicle(this.id,vehicleObj).subscribe(res=>{
       if(res.success){
         //const type = ['success'];

@@ -1,14 +1,14 @@
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div *ngIf="isAdmin" class="col-lg-3 col-md-6 col-sm-6">
               <a [routerLink]="['/user-list']"><div class="card card-stats">
                   <div class="card-header card-header-warning card-header-icon">
                       <div class="card-icon">
                           <i class="material-icons" >supervisor_account</i>
                       </div>
                       <p class="card-category">Users</p>
-                      <h3 class="card-title">13</h3>
+                      <h3 class="card-title">{{userVal}}</h3>
                   </div>
                   <div class="card-footer"> 
                         <div class="stats">
@@ -17,7 +17,7 @@
                         </div>
               </div></a>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/vehicle-list']">
               <div class="card card-stats">
                   <div class="card-header card-header-success card-header-icon">
@@ -25,7 +25,7 @@
                           <i class="material-icons">local_shipping</i>
                       </div>
                       <p class="card-category">Vehicles</p>
-                      <h3 class="card-title">56</h3>
+                      <h3 class="card-title">{{vehicleVal}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
@@ -35,7 +35,7 @@
               </div>
             </a>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/maps']">
               <div class="card card-stats">
                   <div class="card-header card-header-danger card-header-icon">
@@ -53,7 +53,7 @@
               </div>
             </a>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/notifications']">
               <div class="card card-stats">
                   <div class="card-header card-header-info card-header-icon">
@@ -124,7 +124,7 @@
           </div>
       </div> -->
       <div class="row">
-          <div class="col-lg-6 col-md-12">
+          <div class="col-lg-6 col-md-12" *ngIf="isAdmin">
               <div class="card">
                     <div class="card-header card-header-danger">
                             <h4 class="card-title">User Details</h4>
@@ -136,14 +136,14 @@
                                   <th>Name</th>
                                   <th>User Name</th>
                                   <th>Contact Number</th>
-                                  <th>Edit</th>
+                                  <th >Edit</th>
                                   <th>Delete</th>
                               </thead>
                               <tbody>
                                   <tr *ngFor= "let user of allUsers">
                                       <td>{{user.fullName}}</td>
                                       <td>{{user.userName}}</td>
-                                      <td>{{user.contactNumber}}</td>
+                                      <td >{{user.contactNumber}}</td>
                                       <td >
                                         <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                           <i class="material-icons">edit</i>
@@ -402,7 +402,7 @@
                   </div> -->
               </div>
           </div>
-          <div class="col-lg-6 col-md-12">
+          <div class="col-lg-{{columnNum}} col-md-12">
               <div class="card">
                   <div class="card-header card-header-danger">
                       <h4 class="card-title">Vehicle Details</h4>
@@ -414,20 +414,20 @@
                             <th>Vehicle Number</th>
                             <th>Device IMEI</th>
                             <th>Vehicle Details</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th *ngIf="isAdmin">Edit</th>
+                            <th *ngIf="isAdmin">Delete</th>
                         </thead>
                         <tbody>
                             <tr *ngFor= "let vehicle of allVehicles ">
                                 <td>{{vehicle.vehicleNumber}}</td>
                                 <td>{{vehicle.imeiNumber}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
-                                <td >
+                                <td *ngIf="isAdmin">
                                     <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
                                         <i class="material-icons">edit</i>
                                     </button>
                                 </td>
-                                <td>
+                                <td *ngIf="isAdmin">
                                     <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(vehicle._id)">
                                         <i class="material-icons">close</i>
                                     </button>

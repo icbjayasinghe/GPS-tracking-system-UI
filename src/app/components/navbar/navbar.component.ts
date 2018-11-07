@@ -22,6 +22,8 @@ declare var $: any;
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    isAdmin: any;
+    profile: any;
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
@@ -44,7 +46,9 @@ export class NavbarComponent implements OnInit {
 
     
     ngOnInit(){
-      this.listTitles = ROUTES.filter(listTitle => listTitle);
+        this.isAdmin = this.auth.findUser();
+        this.profile = this.auth.getProfileData();
+        this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {

@@ -29,7 +29,7 @@
                         </p>
                     </a>
                 </li> -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="isAdmin">
                     <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         
                         <!-- <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon"> -->
@@ -72,8 +72,8 @@
                                                 </a>
                                             </div>
                                             <div class="card-body">
-                                                <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                                                <h4 class="card-title">Alec Thompson</h4>
+                                                <h6 class="card-category text-gray">{{profile.role}}</h6>
+                                                <h4 class="card-title">{{profile.fullName}}</h4>
                                                 <!-- <p class="card-description">
                                                     Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                                                 </p> -->

@@ -16,7 +16,10 @@ export class VehicleServiceService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-    const url = 'http://localhost:3000/api/vehicle';
+      let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
+      if (this.auth.findUser()) {
+          url = 'http://localhost:3000/api/vehicle';
+      }
     return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
 

@@ -3,6 +3,7 @@ import * as Chartist from 'chartist';
 import { UserService } from '../services/user.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
+import {AuthService} from '../services/auth.service';
 
 let uId;
 var vId;
@@ -22,10 +23,16 @@ export class DashboardComponent implements OnInit {
   vehicleNumber: String;
   imeiNumber: String;
   vehicleDetails: String;
+  isAdmin: any;
+  columnNum: number;
+  cardNum: number;
+  userVal: number
+  vehicleVal: number
   constructor(
     private getUsers: UserService,
     private getVehicles: VehicleServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: AuthService
   ) { };
 
 
@@ -100,22 +107,28 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
-    var userVal;
-    var vehicleVal;
+
+    if (this.isAdmin){
+      this.columnNum = 6;
+      this.cardNum = 3;
+    } else {
+      this.columnNum = 12;
+      this.cardNum = 4;
+    }
     this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
-      userVal= result.length;
+      this.userVal = result.length;
     });
     this.getVehicles.getAllVehicles().subscribe(result=>{
       this.allVehicles = result;
-      vehicleVal = result.length;
+      this.vehicleVal = result.length;
     });
     //for refreshing the user table
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
-        if(result.length != userVal){
+        if(result.length != this.userVal){
           this.allUsers = result;
-          userVal=result.length;
+          this.userVal = result.length;
         }
       }
       );
@@ -123,9 +136,9 @@ export class DashboardComponent implements OnInit {
 
     this.interval = setInterval(() => {
       this.getVehicles.getAllVehicles().subscribe(result => {
-        if(result.length != vehicleVal){
+        if(result.length != this.vehicleVal){
           this.allVehicles = result;
-          vehicleVal=result.length;
+          this.vehicleVal = result.length;
         }
       }
       );

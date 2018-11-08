@@ -31,8 +31,8 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
 
     constructor(
-        location: Location,  
-        private element: ElementRef, 
+        location: Location,
+        private element: ElementRef,
         private router: Router,
         private getVehicles: VehicleServiceService,
         private auth: AuthService,
@@ -41,10 +41,10 @@ export class NavbarComponent implements OnInit {
         ) {
       this.location = location;
       this.sidebarVisible = false;
-      
+
     }
 
-    
+
     ngOnInit(){
         this.isAdmin = this.auth.findUser();
         this.profile = this.auth.getProfileData();
@@ -173,6 +173,16 @@ export class NavbarComponent implements OnInit {
         return false;
     }
 
+    changePasswordDialog() {
+        const dialogRef = this.dialog.open(AddUserPopUp, {
+            height: '400px',
+            width: '600px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    };
+
     addUserDialog() {
         const dialogRef = this.dialog.open(AddUserPopUp, {
           height: '400px',
@@ -209,30 +219,30 @@ export class NavbarComponent implements OnInit {
       private addNewVehicles:VehicleServiceService,
       private getUsers: UserService
       //private notification: NotificationsComponent
-    ) { 
+    ) {
       this.getUsers.getAllUsers().subscribe(result=>
         this.allUser =result
         )
-    };  
-  
+    };
+
     addVehicle(){
-      const vehicleObj = { 
+      const vehicleObj = {
         vehicleNumber:this.vehicleNumber,
         imeiNumber:this.imeiNumber,
         userId:this.userId,
         vehicleDetails:this.vehicleDetails
       }
-      
+
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
         if(res.success){
           console.log(this.userId);
-          
+
           const type = ['success'];
           //const color = Math.floor((Math.random() * 4) + 1);
           $.notify({
             icon: "done_outline",
             message: "Successfully added<b> new vehicle</b> "
-  
+
         },{
             type: 'success',
             timer: 4000,
@@ -251,7 +261,7 @@ export class NavbarComponent implements OnInit {
               '<a href="{3}" target="{4}" data-notify="url"></a>' +
             '</div>'
         });
-          //this.notification.showNotification('top','left');      
+          //this.notification.showNotification('top','left');
         }
         else{
           const type = ['success'];
@@ -259,7 +269,7 @@ export class NavbarComponent implements OnInit {
           $.notify({
             icon: "done_outline",
             message: "Somthing went <b> wrong</b> "
-  
+
           },{
             type: 'danger',
             timer: 4000,
@@ -294,18 +304,18 @@ export class NavbarComponent implements OnInit {
     contactNumber: String;
     emailAddress: String;
     userName: String;
-  
+
     constructor(
       private addNewUser: UserService,
     ) { };
-  
+
     addUser() {
       const userObj = {
         fullName : this.fullName,
         address: this.address,
         contactNumber: this.contactNumber,
         emailAddress: this.emailAddress,
-        userName: this.userName        
+        userName: this.userName
       };
       this.addNewUser.addNewUser(userObj).subscribe(res => {
         console.log(res);
@@ -327,7 +337,7 @@ export class NavbarComponent implements OnInit {
       private addNewCheckPoints:CheckPointService,
     ) { };
     addCheckPoint(){
-      const checkPointObj = { 
+      const checkPointObj = {
         userName:this.userName,
         locationName:this.locationName,
         locationType:this.locationType,
@@ -340,5 +350,5 @@ export class NavbarComponent implements OnInit {
       });
     };
   }
-  
+
 

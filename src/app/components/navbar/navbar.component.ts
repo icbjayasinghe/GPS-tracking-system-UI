@@ -234,6 +234,7 @@ export class NavbarComponent implements OnInit {
       }
       console.log(vehicleObj);
       
+
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
         if(res.success){
           console.log(this.userId);

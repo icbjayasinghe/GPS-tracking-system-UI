@@ -220,8 +220,9 @@ export class NavbarComponent implements OnInit {
         vehicleNumber:this.vehicleNumber,
         imeiNumber:this.imeiNumber,
         userId:this.userId,
-        vehicleDetails:this.vehicleDetails
+        details:this.vehicleDetails
       }
+      console.log(vehicleObj);
       
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
         if(res.success){

@@ -174,7 +174,7 @@ export class NavbarComponent implements OnInit {
     }
 
     changePasswordDialog() {
-        const dialogRef = this.dialog.open(AddUserPopUp, {
+        const dialogRef = this.dialog.open(ChangePasswordPopup, {
             height: '400px',
             width: '600px',
         });
@@ -230,8 +230,10 @@ export class NavbarComponent implements OnInit {
         vehicleNumber:this.vehicleNumber,
         imeiNumber:this.imeiNumber,
         userId:this.userId,
-        vehicleDetails:this.vehicleDetails
+        details:this.vehicleDetails
       }
+      console.log(vehicleObj);
+      
 
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
         if(res.success){
@@ -351,4 +353,30 @@ export class NavbarComponent implements OnInit {
     };
   }
 
-
+  @Component({
+    selector: 'change-password-popup',
+    templateUrl: 'change-password-popup.html',
+  })
+  export class ChangePasswordPopup {
+    userName : String ;
+    locationName : String ;
+    locationType : String ;
+    latitude : String ;
+    longitude : String ;
+    constructor(
+      private addNewCheckPoints:CheckPointService,
+    ) { };
+    addCheckPoint(){
+      const checkPointObj = {
+        userName:this.userName,
+        locationName:this.locationName,
+        locationType:this.locationType,
+        latitude:this.latitude,
+        longitude:this.longitude
+      }
+      //console.log(checkPointObj);
+      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res=>{
+        console.log(res);
+      });
+    };
+  }

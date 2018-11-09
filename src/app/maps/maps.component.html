@@ -4,6 +4,7 @@
 <div class="row no-gutter" >
     <!-- <div class="col-md-1"></div> -->
     <div class="col-md-2 wrap">
+        <form #formcontrol="ngForm">
          <div class="row ">
                 <!-- <div class="col-md-2"></div> -->
 
@@ -17,19 +18,19 @@
                                 <!-- </div> -->
                             <!-- </div> -->
                     <mat-form-field>
-                        <mat-select placeholder="Select Vehicle" [(ngModel)]="vehicleId" name="vehicleId">
+                        <mat-select placeholder="Select Vehicle" [(ngModel)]="vehicleId" name="vehicleId" [required]="true">
                           <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle._id">
                             {{vehicle.vehicleNumber}}
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" >
-                        <input matInput [matDatepicker]="picker1" placeholder="From" [(ngModel)]="dateFrom" name="dateFrom">
+                        <input matInput [matDatepicker]="picker1" placeholder="From" [(ngModel)]="dateFrom" name="dateFrom" required>
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" >
-                        <input matInput [matDatepicker]="picker2" placeholder="To" [(ngModel)]="dateTo" name="dateTo">
+                        <input matInput [matDatepicker]="picker2" placeholder="To" [(ngModel)]="dateTo" name="dateTo" required>
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
@@ -37,9 +38,10 @@
                         <input matInput placeholder="Address" name="address" [(ngModel)]="address">
                     </mat-form-field> -->
                         <!-- <button mat-button>Clear</button> -->
-                        <button mat-stroked-button (click)="requestHistory()">SHOW HISTORY</button>
+                        <button mat-stroked-button cdkFocusInitial [disabled]="(!formcontrol.form.valid)" (click)="requestHistory()">SHOW HISTORY</button>
                 </div>
             </div>
+        </form>
     </div>
     <div class="col-md-10 map ">
         <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">

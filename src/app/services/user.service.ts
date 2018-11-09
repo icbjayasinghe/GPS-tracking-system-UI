@@ -34,4 +34,13 @@ export class UserService {
         const url = 'http://localhost:3000/api/user/deleteUser/' + userId;
         return this.http.put(url, userId, { headers: headers}).pipe(map(res => res.json()));
     }
+
+    changePassword(userPasswordDetails) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/user/changePassword';
+        return this.http.post(url, userPasswordDetails, { headers: headers}).pipe(map(res => res.json()));
+    }
 }

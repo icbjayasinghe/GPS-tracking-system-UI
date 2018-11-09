@@ -358,25 +358,31 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'change-password-popup.html',
   })
   export class ChangePasswordPopup {
-    userName : String ;
-    locationName : String ;
-    locationType : String ;
-    latitude : String ;
-    longitude : String ;
+      currentPassword: string;
+      newPassword: string;
+      confirmPassword: string;
     constructor(
-      private addNewCheckPoints:CheckPointService,
+      private changeUserPassword: UserService,
+      private auth: AuthService,
+      private router: Router,
     ) { };
-    addCheckPoint(){
-      const checkPointObj = {
-        userName:this.userName,
-        locationName:this.locationName,
-        locationType:this.locationType,
-        latitude:this.latitude,
-        longitude:this.longitude
-      }
-      //console.log(checkPointObj);
-      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res=>{
-        console.log(res);
+    changePassword() {
+      const userPasswordDetails = {
+          userId: this.auth.getProfileData()._id,
+          currentPassword: this.currentPassword,
+          newPassword: this.newPassword,
+          confirmPassword: this.confirmPassword
+      };
+      this.changeUserPassword.changePassword(userPasswordDetails).subscribe(result => {
+          if (result.success) {
+              this.auth.logout();
+              this.router.navigate(['/login']);
+              window.location.reload();
+              return false;
+          } else {
+              this.router.navigate(['/dashboard']);
+
+          }
       });
     };
   }

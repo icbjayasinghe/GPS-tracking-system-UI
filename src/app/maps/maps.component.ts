@@ -19,10 +19,9 @@ export class MapsComponent implements OnInit {
     dataAmount = 0;
     oldDataAmount = 0;
     userMarkers = [];
-    allVehiclesResult:any;
-    vehicleId:String;
-    dateFrom:String;
-    dateTo:String;
+    allVehiclesResult: any;
+    vehicleNumber: String;
+    dateFrom: String;
 
     polylines = [];
 
@@ -32,13 +31,9 @@ export class MapsComponent implements OnInit {
 
 
     ngOnInit() {
-        this.interval = setInterval(() => {
             this.vehicleDetails.getTrackingData().subscribe(result => {
-                this.moniterNewData(result);
                 this.getUserVehicles(result);
             });
-        }, 10000);
-
     }
 
     getUserVehicles(result){
@@ -119,10 +114,12 @@ export class MapsComponent implements OnInit {
             this.rebuildPolylines(result);
         }
     }
-    
-    requestHistory(){
-        var historyObj={vehicleId:this.vehicleId, dateFrom:this.dateFrom, dateTo:this.dateTo};
-        console.log(historyObj);
+
+    requestHistory() {
+        const historyObj = {vehicleNumber: this.vehicleNumber, dateFrom: this.dateFrom};
+        this.vehicleDetails.getVehicleHistory(historyObj).subscribe(result => {
+            console.log(result);
+        });
     }
 }
 

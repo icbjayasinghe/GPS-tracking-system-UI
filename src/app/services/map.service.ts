@@ -24,4 +24,13 @@ export class MapService {
       }
       return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
+
+  getVehicleHistory(historyObj: any) {
+      const headers = new Headers();
+      this.auth.fetchToken();
+      headers.append('Authorization', this.auth.token);
+      headers.append('Content-Type', 'application/json');
+      const url = 'http://localhost:3000/api/searchHistory';
+      return this.http.post(url, historyObj, {headers: headers}).pipe(map(res => res.json()));
+  }
 }

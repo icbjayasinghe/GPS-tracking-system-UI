@@ -1,10 +1,11 @@
 <div class="overlay col-md-2">
+    <!-- <div class="nav"> -->
 <ul >
-    <li *ngFor="let m of markers">
-      {{m.num}}
+    <li *ngFor="let m of markers" class="listblock" >
+      <a><img src="../../assets/img/dot.png" alt=""  class="dotImg">{{m.num}}</a> <br>  
     </li>
-  </ul>
-
+</ul>
+<!-- </div> -->
 </div>
 <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
   <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
@@ -45,4 +46,18 @@
     font: bold;
     /* background:transparent; */
 }
+
+.listblock ul li a {
+    /* padding: 5px 30px 5px 10px; */
+    display: block;
+}
+ul{
+    list-style-type: none;
+}
+
+.dotImg{
+    width: 15%;
+    height: 15%;
+}
+
 </style>

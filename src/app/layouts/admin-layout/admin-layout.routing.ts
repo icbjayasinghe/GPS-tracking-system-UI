@@ -57,7 +57,7 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent},
+    { path: 'dashboard',      component: DashboardComponent, canActivate: [ AuthGuard ]},
     { path: 'user-profile',   component: UserProfileComponent, canActivate: [ AuthGuard ]  },
     { path: 'table-list',     component: TableListComponent, canActivate: [ AuthGuard ]  },
     { path: 'typography',     component: TypographyComponent, canActivate: [ AuthGuard ]  },

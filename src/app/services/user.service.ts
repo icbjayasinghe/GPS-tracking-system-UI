@@ -43,4 +43,12 @@ export class UserService {
         const url = 'http://localhost:3000/api/user/changePassword';
         return this.http.post(url, userPasswordDetails, { headers: headers}).pipe(map(res => res.json()));
     }
+    restPassword(userRestPasswordDetails) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/user/resetPassword';
+        return this.http.post(url, userRestPasswordDetails, { headers: headers}).pipe(map(res => res.json()));
+    }
 }

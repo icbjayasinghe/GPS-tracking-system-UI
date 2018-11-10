@@ -138,6 +138,7 @@
                                   <th>Contact Number</th>
                                   <th >Edit</th>
                                   <th>Delete</th>
+                                  <th>Rest Password</th>
                               </thead>
                               <tbody>
                                   <tr *ngFor= "let user of allUsers">
@@ -153,6 +154,13 @@
                                         <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(user._id)">
                                           <i class="material-icons">close</i>
                                         </button>
+                                      </td>
+                                      <td>
+                                          <button mat-raised-button type="button" matTooltip="Rest Password" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon" (click)="restClick(user._id, user.fullName, user.userName)">
+                                              <i class="material-icons">
+                                                  settings_backup_restore
+                                              </i>
+                                          </button>
                                       </td>
                                   </tr>
                                  

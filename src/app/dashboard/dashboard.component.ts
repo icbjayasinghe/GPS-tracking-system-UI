@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material';
 import {AuthService} from '../services/auth.service';
 
 let uId;
+let userfullName;
+let currentUserName;
 var vId;
 var vehi;
 declare var $: any;
@@ -26,8 +28,8 @@ export class DashboardComponent implements OnInit {
   isAdmin: any;
   columnNum: number;
   cardNum: number;
-  userVal: number
-  vehicleVal: number
+  userVal: number;
+  vehicleVal: number;
   constructor(
     private getUsers: UserService,
     private getVehicles: VehicleServiceService,
@@ -69,6 +71,18 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   };
+    restClick(userId: any, name: string, userName: string) {
+        const dialogRef = this.dialog.open(RestPasswordPopup, {
+            height: '350px',
+            width: '400px',
+        });
+        userfullName = name;
+        uId = userId;
+        currentUserName = userName;
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    }
   startAnimationForBarChart(chart){
       let seq2: any, delays2: any, durations2: any;
 
@@ -265,6 +279,30 @@ export class DeleteUserPopup {
   }
 }
 
+
+@Component({
+    selector: 'rest-password-popup',
+    templateUrl: 'rest-password-popup.html',
+})
+export class RestPasswordPopup {
+    restUser: string;
+    public username: string;
+    constructor(
+        private user: UserService,
+    ) { };
+    ngOnInit() {
+      this.username = userfullName;
+    }
+    restPassword() {
+        const userRestPasswordDetails = {
+          userId : uId,
+          userName : currentUserName
+        };
+        this.user.restPassword(userRestPasswordDetails).subscribe(res => {
+            console.log(res);
+        });
+    }
+}
 
 @Component({
   selector: 'update-vehicle-popup',

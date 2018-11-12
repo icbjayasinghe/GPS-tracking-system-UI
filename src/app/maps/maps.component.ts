@@ -40,21 +40,6 @@ export class MapsComponent implements OnInit {
         this.allVehiclesResult = result;
     }
 
-    onChooseLocation(event) {
-
-        const newMarker = {
-            lat: event.coords.lat,
-            lng: event.coords.lng,
-            draggable: false
-        };
-
-        this.lat = event.coords.lat;
-        this.lng = event.coords.lng;
-        console.log('Latitudes :' + this.lat);
-        console.log('Longitudes :' + this.lng);
-        this.userMarkers.push(newMarker);
-
-    }
 
     private rebuildPolylines(result = []) {
         this.polylines = result;
@@ -100,25 +85,21 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    private moniterNewData(result = []) {
-        this.oldDataAmount = this.dataAmount;
-        this.dataAmount = 0;
+    private customizeData(result = []) {
+        this.markers = [];
         for (let i = 0; i < result.length; i++) {
-            this.dataAmount = this.dataAmount + result[i].trackingData.length;
             if (result[i].trackingData.length === 0) {
                 result.splice(i, 1);
                 i--;
             }
         }
-        if (this.dataAmount !== this.oldDataAmount) {
             this.rebuildPolylines(result);
-        }
     }
 
     requestHistory() {
         const historyObj = {vehicleNumber: this.vehicleNumber, dateFrom: this.dateFrom};
         this.vehicleDetails.getVehicleHistory(historyObj).subscribe(result => {
-            console.log(result);
+            this.customizeData(result);
         });
     }
 }

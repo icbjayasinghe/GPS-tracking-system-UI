@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-log',
   templateUrl: './log.component.html',
@@ -31,7 +32,7 @@ export class LogComponent implements OnInit {
         } else {
             console.log(result);
             this.router.navigate(['/login']);
-
+            this.auth.displayMessage(result, 'danger', 'top');
         }
         });
     }

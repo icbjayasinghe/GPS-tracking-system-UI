@@ -27,12 +27,13 @@ export class UserService {
     }
 
     deleteUser(userId){
+        console.log(userId);
         const headers = new Headers();
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
         const url = 'http://localhost:3000/api/user/deleteUser/' + userId;
-        return this.http.put(url, userId, { headers: headers}).pipe(map(res => res.json()));
+        return this.http.get(url, { headers: headers}).pipe(map(res => res.json()));
     }
 
     changePassword(userPasswordDetails) {

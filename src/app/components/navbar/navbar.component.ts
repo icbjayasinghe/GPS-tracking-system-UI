@@ -221,7 +221,7 @@ export class NavbarComponent implements OnInit {
       //private notification: NotificationsComponent
     ) {
       this.getUsers.getAllUsers().subscribe(result=>
-        this.allUser =result
+        this.allUser = result
         )
     };
 
@@ -375,6 +375,7 @@ export class NavbarComponent implements OnInit {
       };
       this.changeUserPassword.changePassword(userPasswordDetails).subscribe(result => {
           if (result.success) {
+              this.auth.displayMessage(result, 'success', 'top');
               this.auth.logout();
               this.router.navigate(['/login']);
               window.location.reload();

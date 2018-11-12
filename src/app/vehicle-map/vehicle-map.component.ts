@@ -58,6 +58,7 @@ onChooseLocation(event) {
 
 private rebuildPolylines(result = []) {
     this.polylines = result;
+    this.markers.length = 0;
     if (this.polylines !== []) {
         for (let i = 0; i < this.polylines.length; i++) {
             if (this.polylines[i].trackingData[0].speed > 60) {

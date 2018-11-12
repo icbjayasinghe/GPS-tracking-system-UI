@@ -107,15 +107,15 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
 
-  deleteConfirmDialog(userId) {
+  deleteConfirmDialog(userId, name) {
     const dialogRef = this.dialog.open(DeleteUserPopup, {
       height: '350px',
       width: '400px',
     });
     uId = userId;
+    userfullName = name;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      console.log( userId);
     });
   };
 
@@ -269,12 +269,22 @@ export class DashboardComponent implements OnInit {
   templateUrl: 'delete-user-popup.html',
 })
 export class DeleteUserPopup {
+    public username: string;
+
+    ngOnInit() {
+        this.username = userfullName;
+    }
   constructor(
     private delUser: UserService,
+    private auth: AuthService
   ) { };
   deleteUser() {
     this.delUser.deleteUser(uId).subscribe(res => {
-      console.log(res);
+        if(res.success) {
+            this.auth.displayMessage(res, 'success', 'top');
+        } else {
+            this.auth.displayMessage(res, 'danger', 'top');
+        }
     });
   }
 }
@@ -289,6 +299,7 @@ export class RestPasswordPopup {
     public username: string;
     constructor(
         private user: UserService,
+        private auth: AuthService
     ) { };
     ngOnInit() {
       this.username = userfullName;
@@ -299,7 +310,11 @@ export class RestPasswordPopup {
           userName : currentUserName
         };
         this.user.restPassword(userRestPasswordDetails).subscribe(res => {
-            console.log(res);
+            if(res.success) {
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
         });
     }
 }

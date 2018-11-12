@@ -48,7 +48,7 @@ export class UserService {
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
-        const url = 'http://localhost:3000/api/user/resetPassword';
+        const url = 'http://localhost:3000/api/user/restPassword';
         return this.http.post(url, userRestPasswordDetails, { headers: headers}).pipe(map(res => res.json()));
     }
 }

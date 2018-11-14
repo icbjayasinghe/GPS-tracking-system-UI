@@ -30,6 +30,7 @@ import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,
 import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
 import { DeleteUserPopup,UpdateVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import {DataService} from './services/data.service';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { AuthGuard } from './auth.guard';
       CheckPointService,
       MapService,
       AuthService,
-      AuthGuard
+      AuthGuard,
+      DataService
   ],
   bootstrap: [
     AppComponent

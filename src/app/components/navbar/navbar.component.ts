@@ -175,7 +175,7 @@ export class NavbarComponent implements OnInit {
 
     changePasswordDialog() {
         const dialogRef = this.dialog.open(ChangePasswordPopup, {
-            height: '400px',
+            height: '450px',
             width: '600px',
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -185,7 +185,7 @@ export class NavbarComponent implements OnInit {
 
     addUserDialog() {
         const dialogRef = this.dialog.open(AddUserPopUp, {
-          height: '400px',
+          height: '450px',
           width: '600px',
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -195,8 +195,8 @@ export class NavbarComponent implements OnInit {
 
     addCheckPointDialog() {
         const dialogRef = this.dialog.open(AddCheckPointPopup,{
-          height: '400px',
-          width: '600px',
+          height: '500px',
+          width: '800px',
         });
         dialogRef.afterClosed().subscribe(result => {
           console.log(`Dialog result: ${result}`);
@@ -214,11 +214,10 @@ export class NavbarComponent implements OnInit {
     userId: String;
     vehicleDetails: String;
     allUser: any[];
-    //notification: NotificationsComponent
     constructor(
-      private addNewVehicles:VehicleServiceService,
-      private getUsers: UserService
-      //private notification: NotificationsComponent
+      private addNewVehicles: VehicleServiceService,
+      private getUsers: UserService,
+      private auth: AuthService
     ) {
       this.getUsers.getAllUsers().subscribe(result=>
         this.allUser = result
@@ -227,70 +226,18 @@ export class NavbarComponent implements OnInit {
 
     addVehicle(){
       const vehicleObj = {
-        vehicleNumber:this.vehicleNumber,
-        imeiNumber:this.imeiNumber,
-        userId:this.userId,
-        details:this.vehicleDetails
-      }
-      console.log(vehicleObj);
-      
+        vehicleNumber: this.vehicleNumber,
+        imeiNumber: this.imeiNumber,
+        userId: this.userId,
+        details: this.vehicleDetails
+      };
 
-      this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res=>{
-        if(res.success){
-          console.log(this.userId);
-
-          const type = ['success'];
-          //const color = Math.floor((Math.random() * 4) + 1);
-          $.notify({
-            icon: "done_outline",
-            message: "Successfully added<b> new vehicle</b> "
-
-        },{
-            type: 'success',
-            timer: 4000,
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-              '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-              '<i class="material-icons" data-notify="icon">check_circle</i> ' +
-              '<span data-notify="title">{1}</span> ' +
-              '<span data-notify="message">{2}</span>' +
-              '<div class="progress" data-notify="progressbar">' +
-                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-              '</div>' +
-              '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            '</div>'
-        });
-          //this.notification.showNotification('top','left');
+      this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res => {
+        if (res.success) {
+            this.auth.displayMessage(res, 'success', 'top');
+        } else {
+            this.auth.displayMessage(res, 'danger', 'top');
         }
-        else{
-          const type = ['success'];
-          //const color = Math.floor((Math.random() * 4) + 1);
-          $.notify({
-            icon: "done_outline",
-            message: "Somthing went <b> wrong</b> "
-
-          },{
-            type: 'danger',
-            timer: 4000,
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-              '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">error</i></button>' +
-              '<i class="material-icons" data-notify="icon">check_circle</i> ' +
-              '<span data-notify="title">{1}</span> ' +
-              '<span data-notify="message">{2}</span>' +
-              '<div class="progress" data-notify="progressbar">' +
-                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-              '</div>' +
-              '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            '</div>'
-          });
-        };
       });
     };
   }
@@ -309,6 +256,7 @@ export class NavbarComponent implements OnInit {
 
     constructor(
       private addNewUser: UserService,
+      private auth: AuthService
     ) { };
 
     addUser() {
@@ -320,7 +268,12 @@ export class NavbarComponent implements OnInit {
         userName: this.userName
       };
       this.addNewUser.addNewUser(userObj).subscribe(res => {
-        console.log(res);
+          if (res.success) {
+              this.auth.displayMessage(res, 'success', 'top');
+          } else {
+              console.log(res.err);
+              this.auth.displayMessage(res, 'danger', 'top');
+          }
       });
     };
   }
@@ -330,25 +283,57 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'add-check-point-popup.html',
   })
   export class AddCheckPointPopup {
-    userName : String ;
-    locationName : String ;
-    locationType : String ;
-    latitude : String ;
-    longitude : String ;
+    userName: String ;
+    locationName: String ;
+    locationType: String ;
+    latitude: any ;
+    longitude: any ;
+    range: String;
+      lat = 7.2906;
+      lng = 80.6337;
+      userMarkers = [];
+      allUser: any;
     constructor(
-      private addNewCheckPoints:CheckPointService,
-    ) { };
-    addCheckPoint(){
-      const checkPointObj = {
-        userName:this.userName,
-        locationName:this.locationName,
-        locationType:this.locationType,
-        latitude:this.latitude,
-        longitude:this.longitude
+      private addNewCheckPoints: CheckPointService,
+      private getUsers: UserService,
+      private auth: AuthService
+    ) { this.getUsers.getAllUsers().subscribe(result =>
+        this.allUser = result
+    ) };
+
+      onChooseLocation(event) {
+
+          const newMarker = {
+              lat: event.coords.lat,
+              lng: event.coords.lng,
+              draggable: false
+          };
+
+          this.lat = event.coords.lat;
+          this.lng = event.coords.lng;
+          this.longitude = this.lng;
+          this.latitude = this.lat;
+          this.userMarkers[0] = newMarker;
+
       }
-      //console.log(checkPointObj);
-      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res=>{
-        console.log(res);
+
+    addCheckPoint() {
+      const checkPointObj = {
+        userName: this.userName,
+        locationName: this.locationName,
+        locationType: this.locationType,
+        latitude: this.latitude,
+        longitude: this.longitude,
+        range: this.range
+      };
+      console.log(checkPointObj);
+      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res => {
+          if (res.success) {
+              this.auth.displayMessage(res, 'success', 'top');
+          } else {
+              console.log(res.err);
+              this.auth.displayMessage(res, 'danger', 'top');
+          }
       });
     };
   }

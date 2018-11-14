@@ -4,13 +4,13 @@ import { UserService } from '../services/user.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 import {AuthService} from '../services/auth.service';
+import {DataService} from '../services/data.service';
 
 let uId;
 let userfullName;
 let currentUserName;
-var vId;
-var vehi;
-declare var $: any;
+let vehi;
+var activate = false;
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +20,6 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
   interval: any;
   allUsers: any[];
-  menuItems: any[];
   allVehicles: any[];
   vehicleNumber: String;
   imeiNumber: String;
@@ -30,22 +29,24 @@ export class DashboardComponent implements OnInit {
   cardNum: number;
   userVal: number;
   vehicleVal: number;
+  message: false;
   constructor(
     private getUsers: UserService,
     private getVehicles: VehicleServiceService,
     public dialog: MatDialog,
-    private auth: AuthService
+    private auth: AuthService,
+    private data: DataService
   ) { };
 
 
-  startAnimationForLineChart(chart){
+  startAnimationForLineChart(chart) {
       let seq: any, delays: any, durations: any;
       seq = 0;
       delays = 80;
       durations = 500;
 
       chart.on('draw', function(data) {
-        if(data.type === 'line' || data.type === 'area') {
+        if (data.type === 'line' || data.type === 'area') {
           data.element.animate({
             d: {
               begin: 600,
@@ -55,7 +56,7 @@ export class DashboardComponent implements OnInit {
               easing: Chartist.Svg.Easing.easeOutQuint
             }
           });
-        } else if(data.type === 'point') {
+        } else if (data.type === 'point') {
               seq++;
               data.element.animate({
                 opacity: {
@@ -83,14 +84,14 @@ export class DashboardComponent implements OnInit {
             console.log(`Dialog result: ${result}`);
         });
     }
-  startAnimationForBarChart(chart){
+  startAnimationForBarChart(chart) {
       let seq2: any, delays2: any, durations2: any;
 
       seq2 = 0;
       delays2 = 80;
       durations2 = 500;
       chart.on('draw', function(data) {
-        if(data.type === 'bar'){
+        if (data.type === 'bar') {
             seq2++;
             data.element.animate({
               opacity: {
@@ -119,23 +120,17 @@ export class DashboardComponent implements OnInit {
     });
   };
 
-  updateDialog(vehicle){
+  updateDialog(vehicle) {
     vehi = vehicle;
-    const dialogRef = this.dialog.open(UpdateVehiclePopup,{
+    const dialogRef = this.dialog.open(UpdateVehiclePopup, {
       height: '400px',
       width: '600px',
-    },);
-    
-    
+    }, );
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      //console.log(vehi);
     });
-    //console.log(vehi);
-    //this.vehicleDetails=vehi;
-    
-  } 
-
+  }
 
   ngOnInit() {
     this.isAdmin = this.auth.findUser();
@@ -150,14 +145,14 @@ export class DashboardComponent implements OnInit {
       this.allUsers = result;
       this.userVal = result.length;
     });
-    this.getVehicles.getAllVehicles().subscribe(result=>{
+    this.getVehicles.getAllVehicles().subscribe(result => {
       this.allVehicles = result;
       this.vehicleVal = result.length;
     });
-    //for refreshing the user table
+    // for refreshing the user table
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
-        if(result.length != this.userVal){
+        if (result.length !== this.userVal) {
           this.allUsers = result;
           this.userVal = result.length;
         }
@@ -167,16 +162,18 @@ export class DashboardComponent implements OnInit {
 
     this.interval = setInterval(() => {
       this.getVehicles.getAllVehicles().subscribe(result => {
-        if(result.length != this.vehicleVal){
-          this.allVehicles = result;
-          this.vehicleVal = result.length;
+          this.data.currentMessage.subscribe(message => this.message = message);
+        if (result.length !== this.vehicleVal || this.message) {
+            this.allVehicles = result;
+            this.vehicleVal = result.length;
+            this.message = false;
         }
       }
       );
     }, 1000);
- 
- 
-   
+
+
+
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
     //   const dataDailySalesChart: any = {
@@ -257,7 +254,7 @@ export class DashboardComponent implements OnInit {
     //   //start animation for the Emails Subscription Chart
     //   this.startAnimationForBarChart(websiteViewsChart);
   }
-  checkUserIsAdded(result){
+  checkUserIsAdded(result) {
 
   }
 
@@ -279,7 +276,7 @@ export class DeleteUserPopup {
   ) { };
   deleteUser() {
     this.delUser.deleteUser(uId).subscribe(res => {
-        if(res.success) {
+        if (res.success) {
             this.auth.displayMessage(res, 'success', 'top');
         } else {
             this.auth.displayMessage(res, 'danger', 'top');
@@ -309,7 +306,7 @@ export class RestPasswordPopup {
           userName : currentUserName
         };
         this.user.restPassword(userRestPasswordDetails).subscribe(res => {
-            if(res.success) {
+            if (res.success) {
                 this.auth.displayMessage(res, 'success', 'top');
             } else {
                 this.auth.displayMessage(res, 'danger', 'top');
@@ -329,76 +326,26 @@ export class UpdateVehiclePopup {
   userName = vehi.userName;
   vehicleDetails = vehi.vehicleDetails;
   constructor(
-    private updVehicles:VehicleServiceService
+    private updVehicles: VehicleServiceService,
+    private auth: AuthService,
+    private data: DataService
   ) { };
-  updateVehicle(){
-    var vehicleObj = { 
-      vehicleNo:this.vehicleNo,
-	    Imie:this.deviceImei,
-	    userName:this.userName,
-	    details:this.vehicleDetails
-    }
-    console.log(vehi);
-    this.updVehicles.updateVehicle(this.id,vehicleObj).subscribe(res=>{
-      if(res.success){
-        //const type = ['success'];
-        //const color = Math.floor((Math.random() * 4) + 1);
-        $.notify({
-          icon: "done_outline",
-          message: "Vehicle successfully <b> updated</b> "
-
-      },{
-          type: 'success',
-          timer: 4000,
-          placement: {
-              from: "top",
-              align: "center"
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">check_circle</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
-
-      }
-      else{
-        const type = ['success'];
-        //const color = Math.floor((Math.random() * 4) + 1);
-        $.notify({
-          icon: "done_outline",
-          message: "Successfully added<b> new vehicle</b> "
-
-      },{
-          type: 'danger',
-          timer: 4000,
-          placement: {
-              from: "top",
-              align: "center"
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">error</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
-        
-
+  updateVehicle() {
+    const vehicleDetails = {
+      vehicleNo: this.vehicleNo,
+        Imie: this.deviceImei,
+        userName: this.userName,
+        details: this.vehicleDetails
+    };
+    console.log(vehicleDetails);
+    this.updVehicles.updateVehicle(this.id, vehicleDetails).subscribe(res => {
+      if (res.success) {
+          this.data.changeMessage(true);
+          this.auth.displayMessage(res, 'success', 'top');
+      } else {
+          console.log(res.err);
+          this.auth.displayMessage(res, 'danger', 'top');
       }
     });
-    //console.log(this.id);
-    // this.delVehicles.deleteVehicle(vId).subscribe(res=>{
-    //   console.log(res);
-    // });
   }
 }

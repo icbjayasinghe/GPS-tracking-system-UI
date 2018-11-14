@@ -134,10 +134,9 @@ export class DashboardComponent implements OnInit {
     //console.log(vehi);
     //this.vehicleDetails=vehi;
     
-  }
+  } 
 
 
-  
   ngOnInit() {
     this.isAdmin = this.auth.findUser();
     if (this.isAdmin) {

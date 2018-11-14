@@ -8,7 +8,7 @@ export class UserService {
     constructor(private http: Http,
                 private auth: AuthService) {}
 
-    getAllUsers(){
+    getAllUsers() {
         const headers = new Headers();
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
@@ -17,7 +17,7 @@ export class UserService {
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
 
-    addNewUser(userObj){
+    addNewUser(userObj) {
         const headers = new Headers();
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
@@ -26,7 +26,7 @@ export class UserService {
         return this.http.post(url, userObj, { headers: headers}).pipe(map(res => res.json()));
     }
 
-    deleteUser(userId){
+    deleteUser(userId) {
         console.log(userId);
         const headers = new Headers();
         this.auth.fetchToken();

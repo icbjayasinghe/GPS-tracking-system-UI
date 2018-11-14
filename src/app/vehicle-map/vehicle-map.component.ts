@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService} from '../services/map.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-vehicle-map',
@@ -17,44 +18,20 @@ export class VehicleMapComponent implements OnInit {
   oldIndex = -1;
   dataAmount = 0;
   oldDataAmount = 0;
-  userMarkers = [];
-  //allVehiclesResult:any;
-  vehicleId:String;
-
   polylines = [];
 
   constructor(
     public vehicleDetails: MapService,
-    public vehicles: VehicleServiceService
+    public vehicles: VehicleServiceService,
   ) { }
 
   ngOnInit() {
     this.interval = setInterval(() => {
       this.vehicleDetails.getTrackingData().subscribe(result => {
           this.moniterNewData(result);
-          //this.getUserVehicles(result);
       });
   }, 10000);
   }
-//   getUserVehicles(result){
-//     this.allVehiclesResult = result;
-// }
-
-onChooseLocation(event) {
-
-    const newMarker = {
-        lat: event.coords.lat,
-        lng: event.coords.lng,
-        draggable: false
-    };
-
-    this.lat = event.coords.lat;
-    this.lng = event.coords.lng;
-    console.log('Latitudes :' + this.lat);
-    console.log('Longitudes :' + this.lng);
-    this.userMarkers.push(newMarker);
-
-}
 
 private rebuildPolylines(result = []) {
     this.polylines = result;

@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>Add new vehicle</h2>
 <mat-dialog-content class="mat-typography">
-  <form >
+  <form #formcontrol="ngForm">
     <div class="row">
         <div class="col-md-12">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Vehicle Number" name="vehicleNumber" [(ngModel)]="vehicleNumber">
+              <input matInput placeholder="Vehicle Number" name="vehicleNumber" [(ngModel)]="vehicleNumber" required>
             </mat-form-field>
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Device IMEI" name="imeiNumber" [(ngModel)]="imeiNumber">
+          <input matInput placeholder="Device IMEI" name="imeiNumber" [(ngModel)]="imeiNumber" required>
         </mat-form-field>
       </div>
     </div>
@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
-            <mat-select placeholder="User Name" name="userId" [(ngModel)]="userId">
+            <mat-select placeholder="User Name" name="userId" [(ngModel)]="userId" [required]="allUser">
               <mat-option *ngFor="let user of allUser" [value]="user._id">
                 {{user.userName}}
               </mat-option>
@@ -32,14 +32,14 @@
     <div class="row">
       <div class="col-md-12">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Vehicle Details" name="vehicleDetails" [(ngModel)]="vehicleDetails">
+          <input matInput placeholder="Vehicle Details" name="vehicleDetails" [(ngModel)]="vehicleDetails" required>
         </mat-form-field>
       </div>
     </div>
   </form>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addVehicle()">Add</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!formcontrol.form.valid" (click)="addVehicle()">Add</button>
 </mat-dialog-actions>
 
 

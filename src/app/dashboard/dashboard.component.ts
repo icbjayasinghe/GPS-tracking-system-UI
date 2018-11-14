@@ -131,6 +131,7 @@ export class DashboardComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
   ngOnInit() {
     this.isAdmin = this.auth.findUser();
     if (this.isAdmin) {

@@ -136,15 +136,18 @@
                                   <th>Name</th>
                                   <th>User Name</th>
                                   <th>Contact Number</th>
+                                  <th>Status</th>
                                   <th >Edit</th>
                                   <th>Delete</th>
                                   <th>Rest Password</th>
                               </thead>
                               <tbody>
-                                  <tr *ngFor= "let user of allUsers">
+                                  <tr *ngFor= "let user of allUsers" >
                                       <td>{{user.fullName}}</td>
                                       <td>{{user.userName}}</td>
                                       <td >{{user.contactNumber}}</td>
+                                      <!-- <td *ngIf="user.status==='Deleted'">{{user.status}}</td> -->
+                                      <td [ngClass]="user.status == 'Deleted' ? 'deleteUser':'notDelete'">{{user.status}}</td>
                                       <td >
                                         <button mat-raised-button type="button" matTooltip="Edit User" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                           <i class="material-icons">edit</i>
@@ -157,7 +160,7 @@
                                       </td>
                                       <td>
                                           <button mat-raised-button type="button" matTooltip="Rest Password" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon" (click)="restClick(user._id, user.fullName, user.userName)">
-                                              <i class="material-icons">
+                                              <i class="material-icons" >
                                                   settings_backup_restore
                                               </i>
                                           </button>
@@ -422,6 +425,7 @@
                             <th>Vehicle Number</th>
                             <th>Device IMEI</th>
                             <th>Vehicle Details</th>
+                            <th>User Name</th>
                             <th *ngIf="isAdmin">Edit</th>
                             <th *ngIf="isAdmin">Delete</th>
                         </thead>
@@ -430,6 +434,7 @@
                                 <td>{{vehicle.vehicleNumber}}</td>
                                 <td>{{vehicle.imeiNumber}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
+                                <td></td>
                                 <td *ngIf="isAdmin">
                                     <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
                                         <i class="material-icons">edit</i>
@@ -449,3 +454,13 @@
       </div>
   </div>
 </div>
+
+<style>
+
+    .deleteUser {
+        color: rgb(238, 13, 13);
+    }
+    .notDelete{
+        color: blue;
+    }
+</style>

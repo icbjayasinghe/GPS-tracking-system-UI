@@ -41,7 +41,7 @@ export class VehicleServiceService {
     return this.http.delete(url, {headers: headers}).pipe(map(res => res.json()));
   }
 
-  updateVehicle(vehiId,vehiObj){
+  updateVehicle(vehiId, vehiObj) {
     const headers = new Headers();
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);

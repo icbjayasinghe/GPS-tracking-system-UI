@@ -39,7 +39,6 @@ export class MapsComponent implements OnInit {
         this.allVehiclesResult = result;
     }
 
-
     private rebuildPolylines(result: any) {
             this.polylines = result[0].trackingData;
                 if (this.polylines[0].speed > 60) {

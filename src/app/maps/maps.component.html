@@ -39,27 +39,21 @@
     </div>
     <div class="col-md-10 map ">
         <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
-            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
-                <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+            <agm-polyline [strokeColor]="'#00b3fd'" [strokeOpacity]= 'routeVisibility' [strokeWeight]="3">
+                <agm-polyline-point  *ngFor="let t of polylines;" [latitude]="t.latitude" [longitude]="t.longitude">
                 </agm-polyline-point>
             </agm-polyline>
-            <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-                <agm-info-window>Vehicle IMEI : {{m.imei}}
+            <agm-marker *ngIf="markers.truckIcon !== 'false'" [latitude]="markers.lat" [longitude]="markers.lng" [iconUrl]="markers.truckIcon" (markerClick)="setRouteVisible()">
+                <agm-info-window>Vehicle Number : {{markers.num}}
                     <br>
-                    Vehicle Speed : {{m.speed}}
+                    Vehicle Speed : {{markers.speed}}
                     <br>
-                    Vehicle Number : {{m.num}}
+                    Current Position Latitudes: {{markers.lat}}
                     <br>
-                    Current Position Latitudes: {{m.lat}}
+                    Current Position Longitudes: {{markers.lng}}
                     <br>
-                    Current Position Longitudes: {{m.lng}}
-                    <br>
-                    Time : {{m.tim}}
+                    Date : {{markers.date}}
                 </agm-info-window>
-            </agm-marker>
-        
-            <agm-marker *ngFor="let um of userMarkers;" [latitude]="um.lat" [longitude]="um.lng">
-        
             </agm-marker>
         </agm-map>
 

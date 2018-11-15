@@ -50,4 +50,13 @@ export class VehicleServiceService {
     return this.http.put(url, vehiObj, {headers: headers}).pipe(map(res => res.json()));
   }
 
+    getVehicleList() {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/vehicle/getVehicleNumbers';
+        return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
+    }
+
 }

@@ -15,6 +15,7 @@ export class VehicleMapComponent implements OnInit {
   lng = 80.6337;
   markers = [];
   truckIcon: any;
+  dotIcon: any;
   oldIndex = -1;
   dataAmount = 0;
   oldDataAmount = 0;
@@ -40,10 +41,13 @@ private rebuildPolylines(result = []) {
         for (let i = 0; i < this.polylines.length; i++) {
             if (this.polylines[i].trackingData[0].speed > 60) {
                 this.truckIcon = './src/assets/img/red-truck-front.png';
+                this.dotIcon = '../../assets/img/dot red.png';
             } else if (this.polylines[i].trackingData[0].speed > 5) {
                 this.truckIcon = './src/assets/img/green-truck-front.png';
+                this.dotIcon = '.../../assets/img/dot green.png';
             } else {
                 this.truckIcon = './src/assets/img/yellow-truck-front.png';
+                this.dotIcon = '../../assets/img/dot.png';
             }
             this.polylines[i].routeVisibility = 0.0;
             const endMarker = {
@@ -53,7 +57,8 @@ private rebuildPolylines(result = []) {
                 speed: this.polylines[i].trackingData[0].speed,
                 num: this.polylines[i].vehicleNumber,
                 tim: this.polylines[i].trackingData[0].date,
-                truckIcon: this.truckIcon
+                truckIcon: this.truckIcon,
+                dotIcon: this.dotIcon
             };
             this.markers[i] = endMarker;
         }

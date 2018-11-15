@@ -40,11 +40,13 @@ export class MapsComponent implements OnInit {
         this.allVehiclesResult = result;
     }
 
-
+    
     private rebuildPolylines(result = []) {
         this.polylines = result;
         if (this.polylines !== []) {
-            for (let i = 0; i < this.polylines.length; i++) {
+            const len=this.polylines.length;
+            for (let i = 0; i < len; i++) {
+                console.log(i);
                 if (this.polylines[i].trackingData[0].speed > 60) {
                     this.truckIcon = './src/assets/img/red-truck-front.png';
                 } else if (this.polylines[i].trackingData[0].speed > 5) {

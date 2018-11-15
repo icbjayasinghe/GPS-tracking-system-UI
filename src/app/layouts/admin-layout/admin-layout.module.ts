@@ -26,7 +26,9 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatAutocompleteModule,
-  MatSelectModule
+  MatSelectModule,
+  MatListModule,
+  MatIconModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -41,6 +43,8 @@ import {
     MatNativeDateModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatListModule,
+    MatIconModule,
     ReactiveFormsModule,
       AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],

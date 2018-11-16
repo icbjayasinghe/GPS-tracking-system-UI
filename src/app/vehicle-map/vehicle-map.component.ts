@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MapService} from '../services/map.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
 import {DataService} from '../services/data.service';
+import { isEmpty } from 'rxjs/operators';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-vehicle-map',
@@ -20,6 +22,10 @@ export class VehicleMapComponent implements OnInit {
   dataAmount = 0;
   oldDataAmount = 0;
   polylines = [];
+  
+  
+
+  
 
   constructor(
     public vehicleDetails: MapService,
@@ -50,16 +56,25 @@ private rebuildPolylines(result = []) {
                 this.dotIcon = '../../assets/img/dot.png';
             }
             this.polylines[i].routeVisibility = 0.0;
-            const endMarker = {
+            const endMarker= {
                 imei: this.polylines[i].imeiNumber,
                 lat: this.polylines[i].trackingData[0].latitude,
                 lng: this.polylines[i].trackingData[0].longitude,
                 speed: this.polylines[i].trackingData[0].speed,
                 num: this.polylines[i].vehicleNumber,
                 tim: this.polylines[i].trackingData[0].date,
+                fuel: false,
+                temperature: false,
                 truckIcon: this.truckIcon,
                 dotIcon: this.dotIcon
             };
+            if(this.polylines[i].trackingData[0].fuel){
+                endMarker.fuel=this.polylines[i].trackingData[0].fuel;
+            };
+            if(this.polylines[i].trackingData[0].temperature){
+                endMarker.temperature=this.polylines[i].trackingData[0].temperature;
+            }
+
             this.markers[i] = endMarker;
         }
         if (this.oldIndex !== -1) {
@@ -99,3 +114,5 @@ private moniterNewData(result: any) {
 
 
 }
+
+

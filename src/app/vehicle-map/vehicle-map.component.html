@@ -14,7 +14,7 @@
                 
     </div>
   <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" >
+        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map">
                 <ng-template>
                         Vehicle IMEI : {{m.imei}}
                         <br>
@@ -77,7 +77,7 @@ ul{
 }
 
 .map{
-    background-color: antiquewhite;
+    
 }
 
 

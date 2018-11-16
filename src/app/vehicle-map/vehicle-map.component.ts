@@ -83,18 +83,17 @@ setRouteVisible(iemi: any) {
     }
 }
 
-private moniterNewData(result = []) {
+private moniterNewData(result: any) {
     this.oldDataAmount = this.dataAmount;
-    this.dataAmount = 0;
-    for (let i = 0; i < result.length; i++) {
-        this.dataAmount = this.dataAmount + result[i].trackingData.length;
-        if (result[i].trackingData.length === 0) {
-            result.splice(i, 1);
+    this.dataAmount = result.dataAmount;
+    for (let i = 0; i < result.vehicle.length; i++) {
+        if (result.vehicle[i].trackingData.length === 0) {
+            result.vehicle.splice(i, 1);
             i--;
         }
     }
     if (this.dataAmount !== this.oldDataAmount) {
-        this.rebuildPolylines(result);
+        this.rebuildPolylines(result.vehicle);
     }
 }
 

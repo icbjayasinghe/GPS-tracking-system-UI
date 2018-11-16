@@ -146,8 +146,8 @@ export class DashboardComponent implements OnInit {
       this.userVal = result.length;
     });
     this.getVehicles.getAllVehicles().subscribe(result => {
-      this.allVehicles = result;
-      this.vehicleVal = result.length;
+      this.allVehicles = result.vehicle;
+      this.vehicleVal = result.vehicle.length;
     });
     // for refreshing the user table
     this.interval = setInterval(() => {
@@ -163,9 +163,9 @@ export class DashboardComponent implements OnInit {
     this.interval = setInterval(() => {
       this.getVehicles.getAllVehicles().subscribe(result => {
           this.data.currentMessage.subscribe(message => this.message = message);
-        if (result.length !== this.vehicleVal || this.message) {
-            this.allVehicles = result;
-            this.vehicleVal = result.length;
+        if (result.vehicle.length !== this.vehicleVal || this.message) {
+            this.allVehicles = result.vehicle;
+            this.vehicleVal = result.vehicle.length;
             this.message = false;
         }
       }

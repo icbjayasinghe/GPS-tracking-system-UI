@@ -44,14 +44,32 @@
                 </agm-polyline-point>
             </agm-polyline>
             <agm-marker *ngIf="markers.truckIcon !== 'false'" [latitude]="markers.lat" [longitude]="markers.lng" [iconUrl]="markers.truckIcon" (markerClick)="setRouteVisible()">
+                <!-- <agm-snazzy-info-window [maxWidth]="200" [isOpen]="true" [closeWhenOthersOpen]="false">
+                    <ng-template>
+                            Vehicle Number : {{markers.num}}
+                            <br>
+                            Vehicle Speed : {{markers.speed}}
+                            <br>
+                            <a *ngIf="markers.fuel">Fuel : {{markers.fuel}}
+                                <br>
+                            </a>
+                            <a *ngIf="markers.temperature">Temperature : {{markers.temperature}}
+                                <br>
+                            </a>
+                            Time : {{markers.date}}
+                    </ng-template>
+                </agm-snazzy-info-window> -->
+                
                 <agm-info-window>Vehicle Number : {{markers.num}}
                     <br>
                     Vehicle Speed : {{markers.speed}}
                     <br>
-                    Current Position Latitudes: {{markers.lat}}
-                    <br>
-                    Current Position Longitudes: {{markers.lng}}
-                    <br>
+                    <a *ngIf="markers.fuel">Fuel : {{markers.fuel}}
+                        <br>
+                    </a>
+                    <a *ngIf="markers.temperature">Temperature : {{markers.temperature}}
+                        <br>
+                    </a>
                     Date : {{markers.date}}
                 </agm-info-window>
             </agm-marker>

@@ -12,6 +12,7 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 // import { LogComponent} from '../../log/log.component';
 import { VehicleListComponent } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
@@ -46,6 +47,7 @@ import {
     MatListModule,
     MatIconModule,
     ReactiveFormsModule,
+    AgmSnazzyInfoWindowModule,
       AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
   ],
   declarations: [

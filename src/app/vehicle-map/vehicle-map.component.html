@@ -1,47 +1,36 @@
 <div class="overlay col-md-2">
-    <!-- <div class="nav"> -->
-            <!-- <mat-list dense>
-                <mat-list-item *ngFor="let m of markers">
-                      {{m.num}}
-                </mat-list-item>
-            </mat-list> -->
-
-            <mat-nav-list>
-                    <mat-list-item *ngFor="let m of markers">
-                       <a matLine (click)="setRouteVisible(m.imei)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
-                       <!-- <button mat-icon-button (click)="showInfo(link)">
-                          <mat-icon>info</mat-icon>
-                       </button> -->
-                    </mat-list-item>
-                  </mat-nav-list>
-<!-- 
-            <mat-list>
-                    <mat-list-item *ngFor="let m of markers">
-                      <mat-icon matListIcon>folder</mat-icon>
-                      <h3 matLine>  {{m.num}} </h3>
-                      <p matLine>
-                        <span>  {{m.num}} </span>
-                        <span class="demo-2"> --  {{m.num}} </span>
-                      </p>
-                    </mat-list-item>
-                  </mat-list> -->
-<!-- <ul>
-    <li *ngFor="let m of markers" class="listblock" >
-      <a href="#" style="color: white"><img src="../../assets/img/dot.png" alt=""  class="dotImg">{{m.num}}</a> <br>  
-    </li>
-</ul> -->
-<!-- </div> -->
+    <mat-nav-list>
+        <mat-list-item *ngFor="let m of markers">
+            <a matLine (click)="setRouteVisible(m.imei)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
+        </mat-list-item>
+    </mat-nav-list>
 </div>
 <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
     <div>
             <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
-                    <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
-                    </agm-polyline-point>
-                </agm-polyline>
+                <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+                </agm-polyline-point>
+            </agm-polyline>
                 
     </div>
   <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-      <agm-info-window>Vehicle IMEI : {{m.imei}}
+        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map">
+                <ng-template>
+                        Vehicle IMEI : {{m.imei}}
+                        <br>
+                        Vehicle Speed : {{m.speed}}
+                        <br>
+                        Vehicle Number : {{m.num}}
+                        <br>
+                        <!-- Current Position Latitudes: {{m.lat}}
+                        <br>
+                        Current Position Longitudes: {{m.lng}}
+                        <br> -->
+                        Time : {{m.tim}}
+                </ng-template>
+        </agm-snazzy-info-window>
+    
+        <!-- <agm-info-window>Vehicle IMEI : {{m.imei}}
           <br>
           Vehicle Speed : {{m.speed}}
           <br>
@@ -52,7 +41,7 @@
           Current Position Longitudes: {{m.lng}}
           <br>
           Time : {{m.tim}}
-      </agm-info-window>
+      </agm-info-window> -->
   </agm-marker>
 </agm-map>
 
@@ -86,5 +75,10 @@ ul{
     width: 30%;
     height: 30%;
 }
+
+.map{
+    
+}
+
 
 </style>

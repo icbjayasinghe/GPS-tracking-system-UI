@@ -22,6 +22,12 @@
                         <br>
                         Vehicle Number : {{m.num}}
                         <br>
+                        <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                            <br>
+                        </a>
+                        <a *ngIf="m.temperature">Temperature : {{m.temperature}}
+                            <br>
+                        </a>
                         <!-- Current Position Latitudes: {{m.lat}}
                         <br>
                         Current Position Longitudes: {{m.lng}}

@@ -14,13 +14,16 @@
                 
     </div>
   <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
-        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map">
-                <ng-template>
-                        Vehicle IMEI : {{m.imei}}
+        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map" [fontSize]="1"> 
+                <div #outerWrapper>
+                    <div #viewContainer>
+                        <ng-template >
+                    
+                        <h4>{{m.num}}</h4>
+                        <hr>
+                        IMEI : {{m.imei}}
                         <br>
-                        Vehicle Speed : {{m.speed}}
-                        <br>
-                        Vehicle Number : {{m.num}}
+                        Speed : {{m.speed}}
                         <br>
                         <a *ngIf="m.fuel">Fuel : {{m.fuel}}
                             <br>
@@ -28,12 +31,29 @@
                         <a *ngIf="m.temperature">Temperature : {{m.temperature}}
                             <br>
                         </a>
-                        <!-- Current Position Latitudes: {{m.lat}}
-                        <br>
-                        Current Position Longitudes: {{m.lng}}
-                        <br> -->
                         Time : {{m.tim}}
                 </ng-template>
+                    </div></div>
+                <ng-content>
+                     
+                    
+                </ng-content>
+                <!-- <ng-template >
+                    
+                        <h4>{{m.num}}</h4>
+                        <hr>
+                        IMEI : {{m.imei}}
+                        <br>
+                        Speed : {{m.speed}}
+                        <br>
+                        <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                            <br>
+                        </a>
+                        <a *ngIf="m.temperature">Temperature : {{m.temperature}}
+                            <br>
+                        </a>
+                        Time : {{m.tim}}
+                </ng-template> -->
         </agm-snazzy-info-window>
     
         <!-- <agm-info-window>Vehicle IMEI : {{m.imei}}

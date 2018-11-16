@@ -40,6 +40,7 @@ export class MapsComponent implements OnInit {
     }
 
     private rebuildPolylines(result: any) {
+            console.log(result);
             this.polylines = result[0].trackingData;
                 if (this.polylines[0].speed > 60) {
                     this.truckIcon = './src/assets/img/red-truck-front.png';
@@ -55,9 +56,18 @@ export class MapsComponent implements OnInit {
                     speed: this.polylines[0].speed,
                     num: result[0].vehicleNumber,
                     date: this.polylines[0].date,
+                    fuel: false,
+                    temperature: false,
                     truckIcon: this.truckIcon
                 };
-            console.log(result);
+
+            if(this.polylines[0].fuel){
+                this.markers={fuel:this.polylines[0].fuel};
+            };
+            if(this.polylines[0].temperature){
+                this.markers={temperature:this.polylines[0].temperature};
+            }    
+            console.log(this.markers);
     }
 
     setRouteVisible() {

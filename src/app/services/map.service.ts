@@ -13,17 +13,30 @@ export class MapService {
   private loadToken() {
     this.authToken = localStorage.getItem('token');
   }
-  getTrackingData() {
+  getTrackingData(vehicle: any) {
       const headers = new Headers();
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-      let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
+      let url = 'http://localhost:3000/api/vehicle/getTrackingData/' + JSON.parse(localStorage.getItem('user'))._id + '/' + vehicle;
       if (this.auth.findUser()) {
-        url = 'http://localhost:3000/api/vehicle';
+          url = 'http://localhost:3000/api/vehicle/getTrackingData/' + vehicle;
       }
       return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
+
+
+    getVehiclesCurrentLocation() {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
+        if (this.auth.findUser()) {
+            url = 'http://localhost:3000/api/vehicle';
+        }
+        return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
+    }
 
   getVehicleHistory(historyObj: any) {
       const headers = new Headers();

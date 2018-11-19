@@ -18,6 +18,7 @@ var activate = false;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  newMessage:any;
   interval: any;
   allUsers: any[];
   allVehicles: any[];
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
   userVal: number;
   vehicleVal: number;
   message: false;
+  change: any;
   constructor(
     private getUsers: UserService,
     private getVehicles: VehicleServiceService,
@@ -145,11 +147,8 @@ export class DashboardComponent implements OnInit {
       this.allUsers = result;
       this.userVal = result.length;
     });
-    this.getVehicles.getAllVehicles().subscribe(result => {
-      this.allVehicles = result.vehicle;
-      this.vehicleVal = result.vehicle.length;
-    });
-    // for refreshing the user table
+    this.showVehicle();
+
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
         if (result.length !== this.userVal) {
@@ -160,17 +159,36 @@ export class DashboardComponent implements OnInit {
       );
     }, 1000);
 
+    
+    // for refreshing the user table
     this.interval = setInterval(() => {
-      this.getVehicles.getAllVehicles().subscribe(result => {
-          this.data.currentMessage.subscribe(message => this.message = message);
-        if (result.vehicle.length !== this.vehicleVal || this.message) {
-            this.allVehicles = result.vehicle;
-            this.vehicleVal = result.vehicle.length;
-            this.message = false;
-        }
-      }
-      );
+      this.data.currentMessage2.subscribe(message=>this.newMessage=message);
+      if(this.newMessage){
+        this.showVehicle();
+        this.data.changeMessage2(null);
+      };
+      // this.getUsers.getAllUsers().subscribe(result => {
+      //   if (result.length !== this.userVal) {
+      //     this.allUsers = result;
+      //     this.userVal = result.length;
+      //   }
+      // }
+      // );
     }, 1000);
+
+    
+
+    // this.interval = setInterval(() => {
+    //   this.getVehicles.getAllVehicles().subscribe(result => {
+    //       this.data.currentMessage.subscribe(message => this.message = message);
+    //     if (result.vehicle.length !== this.vehicleVal || this.message) {
+    //         this.allVehicles = result.vehicle;
+    //         this.vehicleVal = result.vehicle.length;
+    //         this.message = false;
+    //     }
+    //   }
+    //   );
+    // }, 1000);
 
 
 
@@ -253,6 +271,13 @@ export class DashboardComponent implements OnInit {
 
     //   //start animation for the Emails Subscription Chart
     //   this.startAnimationForBarChart(websiteViewsChart);
+  }
+
+  showVehicle(){
+    this.getVehicles.getAllVehicles().subscribe(result => {
+      this.allVehicles = result.vehicle;
+      this.vehicleVal = result.vehicle.length;
+    });
   }
   checkUserIsAdded(result) {
 

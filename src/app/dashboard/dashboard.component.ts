@@ -147,8 +147,9 @@ export class DashboardComponent implements OnInit {
       this.allUsers = result;
       this.userVal = result.length;
     });
+    
     this.showVehicle();
-
+    
     this.interval = setInterval(() => {
       this.getUsers.getAllUsers().subscribe(result => {
         if (result.length !== this.userVal) {
@@ -174,6 +175,7 @@ export class DashboardComponent implements OnInit {
       //   }
       // }
       // );
+
     }, 1000);
 
     

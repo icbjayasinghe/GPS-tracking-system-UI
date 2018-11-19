@@ -451,8 +451,8 @@
                             <tr *ngFor= "let vehicle of allVehicles ">
                                 <td>{{vehicle.vehicleNumber}}</td>
                                 <td>{{vehicle.imeiNumber}}</td>
-                                <td>-----</td>
-                                <td>-----</td>
+                                <td>{{vehicle.vehicleDetails}}</td>
+                                <td *ngIf="isAdmin">-----</td>
                                 <td *ngIf="isAdmin">
                                     <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
                                         <i class="material-icons">edit</i>

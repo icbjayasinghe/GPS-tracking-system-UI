@@ -1,19 +1,19 @@
 <div class="overlay col-md-2">
     <mat-nav-list>
         <mat-list-item *ngFor="let m of markers">
-            <a matLine (click)="setRouteVisible(m.imei)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
+            <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
         </mat-list-item>
     </mat-nav-list>
 </div>
 <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
     <div>
-            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= 'p.routeVisibility' [strokeWeight]="3">
+            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= "1.0" [strokeWeight]="3">
                 <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
                 </agm-polyline-point>
             </agm-polyline>
                 
     </div>
-  <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="setRouteVisible(m.imei)">
+  <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="requestRoute(m.num)">
         <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map" [fontSize]="1"> 
                 <div #outerWrapper>
                     <div #viewContainer>

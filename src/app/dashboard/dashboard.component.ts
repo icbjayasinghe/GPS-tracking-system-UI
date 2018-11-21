@@ -144,8 +144,27 @@ export class DashboardComponent implements OnInit {
       this.columnNum = 12;
       this.cardNum = 4;
     }
+<<<<<<< HEAD
     this.showUser();
     this.showVehicle();
+=======
+    this.getUsers.getAllUsers().subscribe(result => {
+      this.allUsers = result;
+      this.userVal = result.length;
+    });
+    
+    this.showVehicle();
+    
+    this.interval = setInterval(() => {
+      this.getUsers.getAllUsers().subscribe(result => {
+        if (result.length !== this.userVal) {
+          this.allUsers = result;
+          this.userVal = result.length;
+        }
+      }
+      );
+    }, 1000);
+>>>>>>> c851f0f4711deaa633448b66c399cdbb26a034d1
 
     
     // for refreshing the user table
@@ -156,12 +175,23 @@ export class DashboardComponent implements OnInit {
         this.data.changeMessage2(null);
         console.log("hello")
       };
+<<<<<<< HEAD
       this.data.currentMessage.subscribe(message=>this.userMessage=message);
       if(this.userMessage){
         this.showUser();
         this.data.changeMessage(null);
         console.log("hello2")
       }
+=======
+      // this.getUsers.getAllUsers().subscribe(result => {
+      //   if (result.length !== this.userVal) {
+      //     this.allUsers = result;
+      //     this.userVal = result.length;
+      //   }
+      // }
+      // );
+
+>>>>>>> c851f0f4711deaa633448b66c399cdbb26a034d1
     }, 1000);
 
 

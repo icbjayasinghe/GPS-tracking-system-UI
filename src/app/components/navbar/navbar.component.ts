@@ -265,7 +265,8 @@ export class NavbarComponent implements OnInit {
 
     constructor(
       private addNewUser: UserService,
-      private auth: AuthService
+      private auth: AuthService,
+      private data: DataService,
     ) { };
 
     addUser() {
@@ -283,6 +284,7 @@ export class NavbarComponent implements OnInit {
               console.log(res.err);
               this.auth.displayMessage(res, 'danger', 'top');
           }
+          this.data.changeMessage(userObj);
       });
     };
   }

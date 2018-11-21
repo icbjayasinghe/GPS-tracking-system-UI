@@ -18,7 +18,8 @@ var activate = false;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  newMessage:any;
+  vehicleMessage:any;
+  userMessage:any;
   interval: any;
   allUsers: any[];
   allVehicles: any[];
@@ -143,6 +144,10 @@ export class DashboardComponent implements OnInit {
       this.columnNum = 12;
       this.cardNum = 4;
     }
+<<<<<<< HEAD
+    this.showUser();
+    this.showVehicle();
+=======
     this.getUsers.getAllUsers().subscribe(result => {
       this.allUsers = result;
       this.userVal = result.length;
@@ -159,15 +164,25 @@ export class DashboardComponent implements OnInit {
       }
       );
     }, 1000);
+>>>>>>> c851f0f4711deaa633448b66c399cdbb26a034d1
 
     
     // for refreshing the user table
     this.interval = setInterval(() => {
-      this.data.currentMessage2.subscribe(message=>this.newMessage=message);
-      if(this.newMessage){
+      this.data.currentMessage2.subscribe(message=>this.vehicleMessage=message);
+      if(this.vehicleMessage){
         this.showVehicle();
         this.data.changeMessage2(null);
+        console.log("hello")
       };
+<<<<<<< HEAD
+      this.data.currentMessage.subscribe(message=>this.userMessage=message);
+      if(this.userMessage){
+        this.showUser();
+        this.data.changeMessage(null);
+        console.log("hello2")
+      }
+=======
       // this.getUsers.getAllUsers().subscribe(result => {
       //   if (result.length !== this.userVal) {
       //     this.allUsers = result;
@@ -176,22 +191,8 @@ export class DashboardComponent implements OnInit {
       // }
       // );
 
+>>>>>>> c851f0f4711deaa633448b66c399cdbb26a034d1
     }, 1000);
-
-    
-
-    // this.interval = setInterval(() => {
-    //   this.getVehicles.getAllVehicles().subscribe(result => {
-    //       this.data.currentMessage.subscribe(message => this.message = message);
-    //     if (result.vehicle.length !== this.vehicleVal || this.message) {
-    //         this.allVehicles = result.vehicle;
-    //         this.vehicleVal = result.vehicle.length;
-    //         this.message = false;
-    //     }
-    //   }
-    //   );
-    // }, 1000);
-
 
 
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -281,8 +282,11 @@ export class DashboardComponent implements OnInit {
       this.vehicleVal = result.vehicle.length;
     });
   }
-  checkUserIsAdded(result) {
-
+  showUser() {
+    this.getUsers.getAllUsers().subscribe(result => {
+      this.allUsers = result;
+      this.userVal = result.length;
+    });
   }
 
 }

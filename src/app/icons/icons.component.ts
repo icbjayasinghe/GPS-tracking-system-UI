@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { Chart} from 'chart.js';
+import { MapService} from '../services/map.service';
 
 @Component({
   selector: 'app-icons',
@@ -8,7 +10,12 @@ import * as Chartist from 'chartist';
 })
 export class IconsComponent implements OnInit {
 
-  constructor() { }
+  // chart = [];
+  interval: any;
+
+  constructor(
+    private trackData: MapService
+  ) { }
 
   ngOnInit() {
      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -36,10 +43,30 @@ export class IconsComponent implements OnInit {
 
     //   /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
-      const dataCompletedTasksChart: any = {
-          labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+    let speed =[];
+    this.interval = setInterval(() => {
+      this.trackData.getTrackingData('cp VO 2020').subscribe(result=>{
+        for (let i = 0; i < result.vehicle.length; i++) {
+          if (result.vehicle[i].trackingData.length > 1) {
+            for(let j=0;j<1;j++){
+              speed.push(result.vehicle[i].trackingData[j].speed);
+            }
+            
+              result.vehicle.splice(i, 1);
+              i--;
+          }
+        }
+
+        
+        
+      }
+        
+        );
+        console.log(speed);
+        const dataCompletedTasksChart: any = {
+          // labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
           series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
+              speed
           ]
       };
 
@@ -48,7 +75,7 @@ export class IconsComponent implements OnInit {
               tension: 0
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
       }
 
@@ -57,6 +84,11 @@ export class IconsComponent implements OnInit {
       // start animation for the Completed Tasks Chart - Line Chart
       this.startAnimationForLineChart(completedTasksChart);
 
+
+    },5000);
+      
+
+     
 
 
     //   /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
@@ -90,6 +122,12 @@ export class IconsComponent implements OnInit {
 
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
+
+      
+      // console.log(this.trackData.getTrackingData);
+      
+
+
   }
 
   startAnimationForLineChart(chart) {

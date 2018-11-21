@@ -31,10 +31,12 @@ import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
 import { DeleteUserPopup,UpdateVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
+import { HttpClientModule} from '@angular/common/http'
 
 
 @NgModule({
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     FormsModule,

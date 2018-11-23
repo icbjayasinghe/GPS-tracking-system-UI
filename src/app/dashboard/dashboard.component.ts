@@ -18,6 +18,8 @@ var activate = false;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  vehicleMessage:any;
+  userMessage:any;
   interval: any;
   allUsers: any[];
   allVehicles: any[];
@@ -30,6 +32,7 @@ export class DashboardComponent implements OnInit {
   userVal: number;
   vehicleVal: number;
   message: false;
+  change: any;
   constructor(
     private getUsers: UserService,
     private getVehicles: VehicleServiceService,
@@ -141,37 +144,23 @@ export class DashboardComponent implements OnInit {
       this.columnNum = 12;
       this.cardNum = 4;
     }
-    this.getUsers.getAllUsers().subscribe(result => {
-      this.allUsers = result;
-      this.userVal = result.length;
-    });
-    this.getVehicles.getAllVehicles().subscribe(result => {
-      this.allVehicles = result.vehicle;
-      this.vehicleVal = result.vehicleAmount;
-    });
-    // for refreshing the user table
-    this.interval = setInterval(() => {
-      this.getUsers.getAllUsers().subscribe(result => {
-        if (result.length !== this.userVal) {
-          this.allUsers = result;
-          this.userVal = result.length;
-        }
-      }
-      );
-    }, 1000);
+    this.showUser();
+    this.showVehicle();
 
+    // for refreshing tables
     this.interval = setInterval(() => {
-      this.getVehicles.getAllVehicles().subscribe(result => {
-          this.data.currentMessage.subscribe(message => this.message = message);
-        if (result.vehicleAmount !== this.vehicleVal || this.message) {
-            this.allVehicles = result.vehicle;
-            this.vehicleVal = result.vehicleAmount;
-            this.message = false;
-        }
-      }
-      );
-    }, 1000);
+      this.data.currentMessage2.subscribe(message=>this.vehicleMessage=message);
+      if(this.vehicleMessage){
+        this.showVehicle();
+        this.data.changeMessage2(null);
+      };
 
+      this.data.currentMessage.subscribe(message=>this.userMessage=message);
+      if(this.userMessage){
+        this.showUser();
+        this.data.changeMessage(null);      }
+
+    }, 1000);
 
 
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
@@ -254,8 +243,18 @@ export class DashboardComponent implements OnInit {
     //   //start animation for the Emails Subscription Chart
     //   this.startAnimationForBarChart(websiteViewsChart);
   }
-  checkUserIsAdded(result) {
 
+  showVehicle(){
+    this.getVehicles.getAllVehicles().subscribe(result => {
+      this.allVehicles = result.vehicle;
+      this.vehicleVal = result.vehicle.length;
+    });
+  }
+  showUser() {
+    this.getUsers.getAllUsers().subscribe(result => {
+      this.allUsers = result;
+      this.userVal = result.length;
+    });
   }
 
 }

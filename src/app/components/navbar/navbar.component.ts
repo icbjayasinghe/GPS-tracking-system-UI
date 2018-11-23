@@ -9,6 +9,8 @@ import { NotificationsComponent} from '../../notifications/notifications.compone
 import {AuthService} from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { CheckPointService } from '../../services/check-point.service';
+import { DataService} from '../../services/data.service';
+import { DashboardComponent} from '../../dashboard/dashboard.component';
 
 
 var vId;
@@ -214,11 +216,15 @@ export class NavbarComponent implements OnInit {
     userId: String;
     vehicleDetails: String;
     allUser: any[];
+    newMessage:string;
     constructor(
       private addNewVehicles: VehicleServiceService,
       private getUsers: UserService,
-      private auth: AuthService
+      private auth: AuthService,
+      private data: DataService,
+      //public dash:DashboardComponent
     ) {
+       // this.data.currentMessage2.subscribe(message => this.newMessage = message);
       this.getUsers.getAllUsers().subscribe(result=>
         this.allUser = result
         )
@@ -235,10 +241,13 @@ export class NavbarComponent implements OnInit {
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res => {
         if (res.success) {
             this.auth.displayMessage(res, 'success', 'top');
+            // this.dash.showVehicle();
         } else {
             this.auth.displayMessage(res, 'danger', 'top');
         }
       });
+      this.data.changeMessage2(vehicleObj);
+      
     };
   }
 
@@ -256,7 +265,8 @@ export class NavbarComponent implements OnInit {
 
     constructor(
       private addNewUser: UserService,
-      private auth: AuthService
+      private auth: AuthService,
+      private data: DataService,
     ) { };
 
     addUser() {
@@ -274,6 +284,7 @@ export class NavbarComponent implements OnInit {
               console.log(res.err);
               this.auth.displayMessage(res, 'danger', 'top');
           }
+          this.data.changeMessage(userObj);
       });
     };
   }

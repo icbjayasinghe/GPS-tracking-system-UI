@@ -339,7 +339,8 @@ export class UpdateVehiclePopup {
     console.log(vehicleDetails);
     this.updVehicles.updateVehicle(this.id, vehicleDetails).subscribe(res => {
       if (res.success) {
-          this.data.changeMessage(true);
+          // this.data.changeMessage(true);
+          this.data.changeMessage2(vehicleDetails);
           this.auth.displayMessage(res, 'success', 'top');
       } else {
           console.log(res.err);

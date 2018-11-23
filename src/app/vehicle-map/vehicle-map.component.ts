@@ -29,17 +29,19 @@ export class VehicleMapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+      this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
+          this.rebuildPolylines(result);
+      });
     this.interval = setInterval(() => {
       this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
-          this.moniterNewData(result);
+          this.rebuildPolylines(result);
       });
-  }, 10000);
+  }, 30000);
   }
 
 private rebuildPolylines(result = []) {
     this.polylines = result;
     this.markers.length = 0;
-    if (this.polylines !== []) {
         for (let i = 0; i < this.polylines.length; i++) {
             if (this.polylines[i].trackingData[0].speed > 60) {
                 this.truckIcon = './src/assets/img/red-truck-front.png';
@@ -74,24 +76,17 @@ private rebuildPolylines(result = []) {
             this.markers[i] = endMarker;
         }
         console.log(this.polylines);
-    }
 }
 
     requestRoute(vehicleNumber: any) {
       this.vehicleNumber = vehicleNumber;
         this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
-            for (let i = 0; i < result.vehicle.length; i++) {
-                if (result.vehicle[i].trackingData.length === 0) {
-                    result.vehicle.splice(i, 1);
-                    i--;
-                }
-            }
-            this.rebuildPolylines(result.vehicle);
+            this.rebuildPolylines(result);
         });
 }
 
 
-private moniterNewData(result: any) {
+/*private moniterNewData(result: any) {
     this.oldDataAmount = this.dataAmount;
     this.dataAmount = result.dataAmount;
     for (let i = 0; i < result.vehicle.length; i++) {
@@ -103,7 +98,7 @@ private moniterNewData(result: any) {
     if (this.dataAmount !== this.oldDataAmount) {
         this.rebuildPolylines(result.vehicle);
     }
-}
+}*/
 
 
 }

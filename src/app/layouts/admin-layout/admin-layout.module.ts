@@ -17,7 +17,10 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { VehicleListComponent } from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent } from '../../check-point-list/check-point-list.component';
-import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component'
+import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component';
+
+import { StoreModule } from '@ngrx/store';
+import { reducer } from '../../reducer/vehicle.reducer';
 
 import {
   MatButtonModule,
@@ -48,7 +51,7 @@ import {
     MatIconModule,
     ReactiveFormsModule,
     AgmSnazzyInfoWindowModule,
-      AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
+      AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'}),
   ],
   declarations: [
     DashboardComponent,

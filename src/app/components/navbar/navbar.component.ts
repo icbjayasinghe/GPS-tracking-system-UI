@@ -12,6 +12,11 @@ import { CheckPointService } from '../../services/check-point.service';
 import { DataService} from '../../services/data.service';
 import { DashboardComponent} from '../../dashboard/dashboard.component';
 
+import { Store } from '@ngrx/store';
+import { Vehicle } from '../../models/table.model';
+import { AppState } from '../../app.state';
+import * as VehicleActions from '../../actions/table.actions';
+
 
 var vId;
 var vehi;
@@ -211,10 +216,10 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'add-vehicle-popup.html',
   })
   export class AddVehiclePopup {
-    vehicleNumber: String;
-    imeiNumber: String;
-    userId: String;
-    vehicleDetails: String;
+    vehicleNumber: string;
+    imeiNumber: string;
+    userId: string;
+    vehicleDetails: string;
     allUser: any[];
     newMessage:string;
     constructor(
@@ -222,6 +227,7 @@ export class NavbarComponent implements OnInit {
       private getUsers: UserService,
       private auth: AuthService,
       private data: DataService,
+      private store: Store<AppState>
       //public dash:DashboardComponent
     ) {
        // this.data.currentMessage2.subscribe(message => this.newMessage = message);
@@ -242,6 +248,7 @@ export class NavbarComponent implements OnInit {
         if (res.success) {
             this.auth.displayMessage(res, 'success', 'top');
             // this.dash.showVehicle();
+            this.store.dispatch(new VehicleActions.AddVehicle( {vehicleNumber : vehicleObj.vehicleNumber,imei : vehicleObj.imeiNumber,userName : vehicleObj.userId,vehicleDetails : vehicleObj.details}))
         } else {
             this.auth.displayMessage(res, 'danger', 'top');
         }

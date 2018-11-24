@@ -31,7 +31,10 @@ import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
 import { DeleteUserPopup,UpdateVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './reducer/vehicle.reducer';
 
 
 @NgModule({
@@ -53,7 +56,10 @@ import { HttpClientModule} from '@angular/common/http'
     MatNativeDateModule,
     ReactiveFormsModule,
     MatSelectModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'})
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'}),
+    StoreModule.forRoot({
+      vehicle: reducer
+    })
   ],
   declarations: [
     AppComponent,

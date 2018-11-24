@@ -52,6 +52,7 @@
                   </div>
               </div>
             </a>
+            
           </div>
           <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/notifications']">
@@ -464,12 +465,30 @@
                                     </button>
                                 </td>
                             </tr>
+                            <tr *ngFor="let vehicle of vehiclesNgrx | async">
+                                <td>{{vehicle.vehicleNumber}}</td>
+                                <td>{{vehicle.imei}}</td>
+                                <td>{{vehicle.vehicleDetails}}</td>
+                                <td *ngIf="isAdmin">-----</td>
+                                <td *ngIf="isAdmin">
+                                    <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                                <td *ngIf="isAdmin">
+                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(vehicle._id)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                   </div>
               </div>
           </div>
       </div>
+
+      
   </div>
 </div>
 

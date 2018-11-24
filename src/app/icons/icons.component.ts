@@ -45,11 +45,11 @@ export class IconsComponent implements OnInit {
 
     let speed =[];
     this.interval = setInterval(() => {
-      this.trackData.getTrackingData('cp VO 2020').subscribe(result=>{
+      this.trackData.getTrackingData('cp WP 1214').subscribe(result=>{
         for (let i = 0; i < result.vehicle.length; i++) {
           if (result.vehicle[i].trackingData.length > 1) {
             for(let j=0;j<1;j++){
-              speed.push(result.vehicle[i].trackingData[j].speed);
+              speed.push(result.vehicle[i].trackingData[j].latitude);
             }
             
               result.vehicle.splice(i, 1);

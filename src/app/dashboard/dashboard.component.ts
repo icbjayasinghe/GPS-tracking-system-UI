@@ -5,6 +5,10 @@ import { VehicleServiceService } from '../services/vehicle-service.service';
 import {MatDialog} from '@angular/material';
 import {AuthService} from '../services/auth.service';
 import {DataService} from '../services/data.service';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store'; 
+import { Vehicle } from '../models/table.model';
+import { AppState } from '../app.state';
 
 let uId;
 let userfullName;
@@ -18,6 +22,7 @@ var activate = false;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  vehiclesNgrx: Observable<Vehicle[]>;
   vehicleMessage:any;
   userMessage:any;
   interval: any;
@@ -38,8 +43,12 @@ export class DashboardComponent implements OnInit {
     private getVehicles: VehicleServiceService,
     public dialog: MatDialog,
     private auth: AuthService,
-    private data: DataService
-  ) { };
+    private data: DataService,
+    private store: Store<AppState>
+  ) { 
+
+    this.vehiclesNgrx = store.select('vehicle');
+  };
 
 
   startAnimationForLineChart(chart) {
@@ -149,11 +158,11 @@ export class DashboardComponent implements OnInit {
 
     // for refreshing tables
     this.interval = setInterval(() => {
-      this.data.currentMessage2.subscribe(message=>this.vehicleMessage=message);
-      if(this.vehicleMessage){
-        this.showVehicle();
-        this.data.changeMessage2(null);
-      };
+      // this.data.currentMessage2.subscribe(message=>this.vehicleMessage=message);
+      // if(this.vehicleMessage){
+      //   this.showVehicle();
+      //   this.data.changeMessage2(null);
+      // };
 
       this.data.currentMessage.subscribe(message=>this.userMessage=message);
       if(this.userMessage){

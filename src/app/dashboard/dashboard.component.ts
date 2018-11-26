@@ -9,12 +9,17 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store'; 
 import { Vehicle } from '../models/table.model';
 import { AppState } from '../app.state';
+import * as VehicleActions from '../actions/table.actions';
 
 let uId;
 let userfullName;
 let currentUserName;
 let vehi;
 var activate = false;
+declare var $: any;
+var vNumber;
+var index;
+
 
 @Component({
   selector: 'app-dashboard',
@@ -46,7 +51,6 @@ export class DashboardComponent implements OnInit {
     private data: DataService,
     private store: Store<AppState>
   ) { 
-
     this.vehiclesNgrx = store.select('vehicle');
   };
 
@@ -132,6 +136,19 @@ export class DashboardComponent implements OnInit {
     });
   };
 
+  deleteVehicleConfirmDialog(vehicleNumber,ind){
+    const dialogRef = this.dialog.open(DeleteVehiclePopup,{
+      height: '350px',
+      width: '400px',
+    });
+    vNumber=vehicleNumber;
+    index=ind;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      //console.log( index);
+    });
+  };
+
   updateDialog(vehicle) {
     vehi = vehicle;
     const dialogRef = this.dialog.open(UpdateVehiclePopup, {
@@ -171,86 +188,6 @@ export class DashboardComponent implements OnInit {
 
     }, 1000);
 
-
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-    //   const dataDailySalesChart: any = {
-    //       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    //       series: [
-    //           [12, 17, 7, 17, 23, 18, 38]
-    //       ]
-    //   };
-
-    //  const optionsDailySalesChart: any = {
-    //       lineSmooth: Chartist.Interpolation.cardinal({
-    //           tension: 0
-    //       }),
-    //       low: 0,
-    //       high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-    //       chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-    //   }
-
-    //   var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-    //   this.startAnimationForLineChart(dailySalesChart);
-
-
-    //   /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-    //   const dataCompletedTasksChart: any = {
-    //       labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-    //       series: [
-    //           [230, 750, 450, 300, 280, 240, 200, 190]
-    //       ]
-    //   };
-
-    //  const optionsCompletedTasksChart: any = {
-    //       lineSmooth: Chartist.Interpolation.cardinal({
-    //           tension: 0
-    //       }),
-    //       low: 0,
-    //       high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-    //       chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-    //   }
-
-    //   var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-    //   // start animation for the Completed Tasks Chart - Line Chart
-    //   this.startAnimationForLineChart(completedTasksChart);
-
-
-
-    //   /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
-    //   var datawebsiteViewsChart = {
-    //     labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-    //     series: [
-    //       [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
-    //     ]
-    //   };
-    //   var optionswebsiteViewsChart = {
-    //       axisX: {
-    //           showGrid: false
-    //       },
-    //       low: 0,
-    //       high: 1000,
-    //       chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
-    //   };
-    //   var responsiveOptions: any[] = [
-    //     ['screen and (max-width: 640px)', {
-    //       seriesBarDistance: 5,
-    //       axisX: {
-    //         labelInterpolationFnc: function (value) {
-    //           return value[0];
-    //         }
-    //       }
-    //     }]
-    //   ];
-    //   var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
-
-    //   //start animation for the Emails Subscription Chart
-    //   this.startAnimationForBarChart(websiteViewsChart);
   }
 
   showVehicle(){
@@ -355,6 +292,75 @@ export class UpdateVehiclePopup {
           console.log(res.err);
           this.auth.displayMessage(res, 'danger', 'top');
       }
+    });
+  }
+}
+
+@Component({
+  selector: 'delete-vehicle-popup',
+  templateUrl: 'delete-vehicle-popup.html',
+})
+export class DeleteVehiclePopup {
+  constructor(
+    private delVehicles:VehicleServiceService,
+    private store: Store<AppState>
+  ) { };
+  deleteVehicle(){
+    this.delVehicles.deleteVehicle(vNumber).subscribe(res=>{
+      if(res.success){
+        this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
+        //const type = ['success'];
+        //const color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+          icon: "done_outline",
+          message: "Vehicle <b> deleted</b> "
+
+      },{
+          type: 'danger',
+          timer: 4000,
+          placement: {
+              from: "top",
+              align: "center"
+          },
+          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+            '<i class="material-icons" data-notify="icon">check_circle</i> ' +
+            '<span data-notify="title">{1}</span> ' +
+            '<span data-notify="message">{2}</span>' +
+            '<div class="progress" data-notify="progressbar">' +
+              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            '</div>' +
+            '<a href="{3}" target="{4}" data-notify="url"></a>' +
+          '</div>'
+      });
+      }
+      else{
+        //const type = ['success'];
+        //const color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+          icon: "done_outline",
+          message: "Somthing went <b> wrong</b> "
+
+      },{
+          type: 'danger',
+          timer: 4000,
+          placement: {
+              from: "top",
+              align: "center"
+          },
+          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+            '<i class="material-icons" data-notify="icon">error</i> ' +
+            '<span data-notify="title">{1}</span> ' +
+            '<span data-notify="message">{2}</span>' +
+            '<div class="progress" data-notify="progressbar">' +
+              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+            '</div>' +
+            '<a href="{3}" target="{4}" data-notify="url"></a>' +
+          '</div>'
+      });
+
+      };
     });
   }
 }

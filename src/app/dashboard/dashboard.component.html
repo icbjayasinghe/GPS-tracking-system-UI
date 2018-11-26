@@ -449,7 +449,7 @@
                                     </button>
                                 </td>
                             </tr> -->
-                            <tr *ngFor= "let vehicle of allVehicles ">
+                            <tr *ngFor= "let vehicle of allVehicles; let i = index">
                                 <td>{{vehicle.vehicleNumber}}</td>
                                 <td>{{vehicle.imeiNumber}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
@@ -460,12 +460,12 @@
                                     </button>
                                 </td>
                                 <td *ngIf="isAdmin">
-                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(vehicle._id)">
+                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteVehicleConfirmDialog(vehicle.vehicleNumber)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </td>
                             </tr>
-                            <tr *ngFor="let vehicle of vehiclesNgrx | async">
+                            <tr *ngFor="let vehicle of vehiclesNgrx | async; let i = index">
                                 <td>{{vehicle.vehicleNumber}}</td>
                                 <td>{{vehicle.imei}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
@@ -476,7 +476,7 @@
                                     </button>
                                 </td>
                                 <td *ngIf="isAdmin">
-                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteConfirmDialog(vehicle._id)">
+                                    <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteVehicleConfirmDialog(vehicle.vehicleNumber)">
                                         <i class="material-icons">close</i>
                                     </button>
                                 </td>

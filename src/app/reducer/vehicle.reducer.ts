@@ -13,6 +13,9 @@ export function reducer(state: Vehicle[] =[], action: VehicleAction.Actions){
     switch(action.type){
         case VehicleAction.ADD_VEHICLE:
             return [...state, action.payload];
+        case VehicleAction.REMOVE_VEHICLE:
+            state.splice(action.payload, 1)
+            return state;
         default:
             return state;
     }

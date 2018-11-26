@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store'; 
 import { Vehicle } from '../models/table.model';
 import { AppState } from '../app.state';
+import * as VehicleActions from '../actions/table.actions';
 
 let uId;
 let userfullName;
@@ -17,6 +18,7 @@ let vehi;
 var activate = false;
 declare var $: any;
 var vNumber;
+var index;
 
 
 @Component({
@@ -49,7 +51,6 @@ export class DashboardComponent implements OnInit {
     private data: DataService,
     private store: Store<AppState>
   ) { 
-
     this.vehiclesNgrx = store.select('vehicle');
   };
 
@@ -135,15 +136,16 @@ export class DashboardComponent implements OnInit {
     });
   };
 
-  deleteVehicleConfirmDialog(vehicleNumber){
+  deleteVehicleConfirmDialog(vehicleNumber,ind){
     const dialogRef = this.dialog.open(DeleteVehiclePopup,{
       height: '350px',
       width: '400px',
     });
     vNumber=vehicleNumber;
+    index=ind;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      //console.log( vId);
+      //console.log( index);
     });
   };
 
@@ -301,10 +303,12 @@ export class UpdateVehiclePopup {
 export class DeleteVehiclePopup {
   constructor(
     private delVehicles:VehicleServiceService,
+    private store: Store<AppState>
   ) { };
   deleteVehicle(){
     this.delVehicles.deleteVehicle(vNumber).subscribe(res=>{
       if(res.success){
+        this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
         //const type = ['success'];
         //const color = Math.floor((Math.random() * 4) + 1);
         $.notify({

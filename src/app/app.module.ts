@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LogComponent } from './log/log.component';
-import { DeleteVehiclePopup } from './vehicle-list/vehicle-list.component';
 import { DeleteCheckPointPopup } from './check-point-list/check-point-list.component'
 import { MatButtonModule, MatInputModule, MatRippleModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { VehicleServiceService } from './services/vehicle-service.service';
@@ -28,7 +27,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,MatSelectModule} from '@angular/material';
 import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
-import { DeleteUserPopup,UpdateVehiclePopup } from './dashboard/dashboard.component';
+import { DeleteUserPopup,UpdateVehiclePopup,DeleteVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
 import { HttpClientModule} from '@angular/common/http';

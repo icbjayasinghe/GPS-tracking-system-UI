@@ -55,9 +55,22 @@ export class AuthService {
     }
 
     logout() {
-        this.token = null;
-        this.user = null;
-        localStorage.clear();
+        this.trackLogoutTime().subscribe(result => {
+            console.log(result.message);
+            this.token = null;
+            this.user = null;
+            localStorage.clear();
+        });
+    }
+
+    trackLogoutTime() {
+        const headers = new Headers();
+        this.fetchToken();
+        headers.append('Authorization', this.token);
+        headers.append('Content-Type', 'application/json');
+
+        const url = 'http://localhost:3000/api/user/trackLogoutTime/' + JSON.parse(localStorage.getItem('user'))._id;
+        return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
 
     loggedIn() {

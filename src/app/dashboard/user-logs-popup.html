@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{username}}'s Log Activities</h2>
+
+    <div class="col-lg-12 col-md-12">
+                <table class="table">
+                    <thead class=" text-primary">
+                    <th><div class="text-center">Logging Time</div></th>
+                    <th><div class="text-center">Password Changed Time</div></th>
+                    <th><div class="text-center">Logout Time</div></th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor= "let vehicle of userLogs;">
+                        <td>{{vehicle.loggingTime}}</td>
+                        <td>{{vehicle.passwordChangedTime}}</td>
+                        <td >{{vehicle.logoutTime}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <mat-dialog-actions align="end">
+                    <button mat-button mat-dialog-close>Cancel</button>
+                </mat-dialog-actions>
+            </div>
+
+
+    <!-- Copyright 2018 Google Inc. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->

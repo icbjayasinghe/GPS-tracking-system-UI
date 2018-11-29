@@ -20,8 +20,9 @@ export class MapsComponent implements OnInit {
     vehicleNumber: String;
     dateFrom: String;
     routeVisibility = 0.0;
-
+    isSelectVehicle = false;
     polylines = [];
+    distance: any;
 
     constructor(public vehicleDetails: MapService,
                 public vehicles: VehicleServiceService,
@@ -40,6 +41,7 @@ export class MapsComponent implements OnInit {
     }
 
     private rebuildPolylines(result: any) {
+            this.distance = result[0].distance.toFixed(3);
             console.log(result);
             this.polylines = result[0].trackingData;
                 if (this.polylines[0].speed > 60) {
@@ -61,12 +63,12 @@ export class MapsComponent implements OnInit {
                     truckIcon: this.truckIcon
                 };
 
-            if(this.polylines[0].fuel){
-                this.markers={fuel:this.polylines[0].fuel};
-            };
-            if(this.polylines[0].temperature){
-                this.markers={temperature:this.polylines[0].temperature};
-            }    
+            if (this.polylines[0].fuel) {
+                this.markers = {fuel: this.polylines[0].fuel};
+            }
+            if (this.polylines[0].temperature) {
+                this.markers = {temperature: this.polylines[0].temperature};
+            }
             console.log(this.markers);
     }
 
@@ -80,13 +82,14 @@ export class MapsComponent implements OnInit {
         this.vehicleDetails.getVehicleHistory(historyObj).subscribe(result => {
             if (!result.success) {
                 this.polylines = [];
-                const empty = {};
+                this.isSelectVehicle = false;
                 this.markers = {
                     truckIcon: 'false'
                 };
                 this.auth.displayMessage(result, 'warning', 'top');
             } else {
                 this.rebuildPolylines(result.historyRes);
+                this.isSelectVehicle = true;
             }
         });
     }

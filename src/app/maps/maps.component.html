@@ -35,6 +35,16 @@
                         <button mat-stroked-button cdkFocusInitial [disabled]="(!formcontrol.form.valid)" (click)="requestHistory()">SHOW HISTORY</button>
                 </div>
             </div>
+            <div class="row">
+                <div class="overlay col-md-12">
+                    <mat-nav-list>
+                        <mat-list-item>
+                            <a matLine  style="color: #D0D0D0" *ngIf="isSelectVehicle">
+                                <font size="1px">Total Distance: {{distance}} km</font> </a>
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-md-10 map ">
@@ -44,37 +54,8 @@
                 </agm-polyline-point>
             </agm-polyline>
             <agm-marker *ngIf="markers.truckIcon !== 'false'" [latitude]="markers.lat" [longitude]="markers.lng" [iconUrl]="markers.truckIcon" (markerClick)="setRouteVisible()">
-                <!-- <agm-snazzy-info-window [maxWidth]="200" [isOpen]="true" [closeWhenOthersOpen]="false">
-                    <ng-template>
-                            Vehicle Number : {{markers.num}}
-                            <br>
-                            Vehicle Speed : {{markers.speed}}
-                            <br>
-                            <a *ngIf="markers.fuel">Fuel : {{markers.fuel}}
-                                <br>
-                            </a>
-                            <a *ngIf="markers.temperature">Temperature : {{markers.temperature}}
-                                <br>
-                            </a>
-                            Time : {{markers.date}}
-                    </ng-template>
-                </agm-snazzy-info-window> -->
-                
-                <agm-info-window>Vehicle Number : {{markers.num}}
-                    <br>
-                    Vehicle Speed : {{markers.speed}}
-                    <br>
-                    <a *ngIf="markers.fuel">Fuel : {{markers.fuel}}
-                        <br>
-                    </a>
-                    <a *ngIf="markers.temperature">Temperature : {{markers.temperature}}
-                        <br>
-                    </a>
-                    Date : {{markers.date}}
-                </agm-info-window>
             </agm-marker>
         </agm-map>
-
     </div>
 </div>
 <style>

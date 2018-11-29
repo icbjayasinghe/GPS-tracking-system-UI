@@ -99,6 +99,18 @@ export class DashboardComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
+    };
+    logsClick(userId: any, name: string, userName: string) {
+        const dialogRef = this.dialog.open(UserLogsPopup, {
+            height: '600px',
+            width: '600px',
+        });
+        userfullName = name;
+        uId = userId;
+        currentUserName = userName;
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
     }
   startAnimationForBarChart(chart) {
       let seq2: any, delays2: any, durations2: any;
@@ -145,7 +157,7 @@ export class DashboardComponent implements OnInit {
     index=ind;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      //console.log( index);
+      // console.log( index);
     });
   };
 
@@ -259,6 +271,36 @@ export class RestPasswordPopup {
         });
     }
 }
+
+
+@Component({
+    selector: 'user-logs-popup',
+    templateUrl: 'user-logs-popup.html',
+})
+export class UserLogsPopup {
+    public username: string;
+    private userId: any;
+    private userLogs: any;
+    constructor(
+        private user: UserService,
+        private auth: AuthService
+    ) { };
+    ngOnInit() {
+        this.username = userfullName;
+        this.userId = uId;
+        this.getUserLogs();
+    }
+    getUserLogs() {
+        this.user.getUserLogs(this.userId).subscribe(res => {
+            if (res.success) {
+                this.userLogs = res.logDetails[0].logDetails;
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
+}
+
 
 @Component({
   selector: 'update-vehicle-popup',

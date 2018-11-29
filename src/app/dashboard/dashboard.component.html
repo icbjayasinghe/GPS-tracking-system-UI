@@ -140,7 +140,8 @@
                                   <th>Status</th>
                                   <th >Edit</th>
                                   <th>Delete</th>
-                                  <th>Rest Password</th>
+                                  <th>Reset</th>
+                                  <th>Logs</th>
                               </thead>
                               <tbody>
                                   <tr *ngFor= "let user of allUsers" >
@@ -160,9 +161,16 @@
                                         </button>
                                       </td>
                                       <td>
-                                          <button mat-raised-button type="button" matTooltip="Rest Password" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon" (click)="restClick(user._id, user.fullName, user.userName)">
+                                          <button mat-raised-button type="button" matTooltip="Reset Password" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon" (click)="restClick(user._id, user.fullName, user.userName)">
                                               <i class="material-icons" >
                                                   settings_backup_restore
+                                              </i>
+                                          </button>
+                                      </td>
+                                      <td>
+                                          <button mat-raised-button type="button" matTooltip="User Logs" [matTooltipPosition]="'above'" class="btn btn-default btn-link btn-sm btn-just-icon" (click)="logsClick(user._id, user.fullName, user.userName)">
+                                              <i class="material-icons" >
+                                                  library_books
                                               </i>
                                           </button>
                                       </td>

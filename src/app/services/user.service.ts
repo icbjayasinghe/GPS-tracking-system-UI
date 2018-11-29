@@ -52,4 +52,12 @@ export class UserService {
         const url = 'http://localhost:3000/api/user/restPassword';
         return this.http.post(url, userRestPasswordDetails, { headers: headers}).pipe(map(res => res.json()));
     }
+    getUserLogs(userId) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/getUserLogs/' + userId;
+        return this.http.get(url, { headers: headers}).pipe(map(res => res.json()));
+    }
 }

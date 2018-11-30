@@ -20,7 +20,7 @@ export class VehicleServiceService {
       headers.append('Content-Type', 'application/json');
       let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
       if (this.auth.findUser()) {
-          url = 'http://localhost:3000/api/vehicle/allVehicleDetails';
+          url = 'http://localhost:3000/api/vehicle/vehicleDetailsWithUserName';
       }
     return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }

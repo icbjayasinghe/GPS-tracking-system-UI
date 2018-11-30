@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
     private auth: AuthService,
     private data: DataService,
     private store: Store<AppState>
-  ) { 
+  ) {
     this.vehiclesNgrx = store.select('vehicle');
   };
 

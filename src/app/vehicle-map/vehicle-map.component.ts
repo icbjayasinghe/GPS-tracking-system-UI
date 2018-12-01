@@ -44,13 +44,13 @@ private rebuildPolylines(result = []) {
     this.markers.length = 0;
         for (let i = 0; i < this.polylines.length; i++) {
             if (this.polylines[i].trackingData[0].speed > 60) {
-                this.truckIcon = './src/assets/img/red-truck-front.png';
+                this.truckIcon = '.../../assets/img/red-truck-front.png';
                 this.dotIcon = '../../assets/img/dot red.png';
             } else if (this.polylines[i].trackingData[0].speed > 5) {
-                this.truckIcon = './src/assets/img/green-truck-front.png';
+                this.truckIcon = '.../../assets/img/green-truck-front.png';
                 this.dotIcon = '.../../assets/img/dot green.png';
             } else {
-                this.truckIcon = './src/assets/img/yellow-truck-front.png';
+                this.truckIcon = '.../../assets/img/yellow-truck-front.png';
                 this.dotIcon = '../../assets/img/dot.png';
             }
             this.polylines[i].routeVisibility = 0.0;

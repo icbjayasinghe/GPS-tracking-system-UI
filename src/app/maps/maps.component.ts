@@ -45,11 +45,11 @@ export class MapsComponent implements OnInit {
             console.log(result);
             this.polylines = result[0].trackingData;
                 if (this.polylines[0].speed > 60) {
-                    this.truckIcon = './src/assets/img/red-truck-front.png';
+                    this.truckIcon = '.../../assets/img/red-truck-front.png';
                 } else if (this.polylines[0].speed > 5) {
-                    this.truckIcon = './src/assets/img/green-truck-front.png';
+                    this.truckIcon = '.../../assets/img/green-truck-front.png';
                 } else {
-                    this.truckIcon = './src/assets/img/yellow-truck-front.png';
+                    this.truckIcon = '.../../assets/img/yellow-truck-front.png';
                 }
         this.routeVisibility = 0.0;
             this.markers = {

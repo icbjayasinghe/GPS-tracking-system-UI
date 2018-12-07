@@ -40,8 +40,8 @@ export class VehicleMapComponent implements OnInit {
   }
 
 private rebuildPolylines(result = []) {
-    this.polylines = result;
     this.markers.length = 0;
+    this.polylines = result;
         for (let i = 0; i < this.polylines.length; i++) {
             if (this.polylines[i].trackingData[0].speed > 60) {
                 this.truckIcon = '.../../assets/img/red-truck-front.png';
@@ -81,7 +81,7 @@ private rebuildPolylines(result = []) {
     requestRoute(vehicleNumber: any) {
       this.vehicleNumber = vehicleNumber;
         this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
-            this.rebuildPolylines(result);
+            this.polylines = result;
         });
 }
 

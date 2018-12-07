@@ -246,14 +246,15 @@ export class NavbarComponent implements OnInit {
 
       this.addNewVehicles.addNewVehicle(vehicleObj).subscribe(res => {
         if (res.success) {
+            this.data.changeMessage(true);
             this.auth.displayMessage(res, 'success', 'top');
             // this.dash.showVehicle();
-            this.store.dispatch(new VehicleActions.AddVehicle( {vehicleNumber : vehicleObj.vehicleNumber,imei : vehicleObj.imeiNumber,userName : vehicleObj.userId,vehicleDetails : vehicleObj.details}))
+            // this.store.dispatch(new VehicleActions.AddVehicle( {vehicleNumber : vehicleObj.vehicleNumber,imei : vehicleObj.imeiNumber,userName : vehicleObj.userId,vehicleDetails : vehicleObj.details}))
         } else {
             this.auth.displayMessage(res, 'danger', 'top');
         }
       });
-      this.data.changeMessage2(vehicleObj);
+      // this.data.changeMessage2(vehicleObj);
       
     };
   }
@@ -286,12 +287,13 @@ export class NavbarComponent implements OnInit {
       };
       this.addNewUser.addNewUser(userObj).subscribe(res => {
           if (res.success) {
+              this.data.changeMessage(true);
               this.auth.displayMessage(res, 'success', 'top');
           } else {
               console.log(res.err);
               this.auth.displayMessage(res, 'danger', 'top');
           }
-          this.data.changeMessage(userObj);
+          // this.data.changeMessage(userObj);
       });
     };
   }

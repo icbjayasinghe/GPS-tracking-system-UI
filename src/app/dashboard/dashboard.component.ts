@@ -19,6 +19,7 @@ var activate = false;
 declare var $: any;
 var vNumber;
 var index;
+var userDetails: any;
 
 
 @Component({
@@ -28,8 +29,8 @@ var index;
 })
 export class DashboardComponent implements OnInit {
   vehiclesNgrx: Observable<Vehicle[]>;
-  vehicleMessage:any;
-  userMessage:any;
+  vehicleMessage: any;
+  userMessage: false;
   interval: any;
   allUsers: any[];
   allVehicles: any[];
@@ -96,6 +97,16 @@ export class DashboardComponent implements OnInit {
         userfullName = name;
         uId = userId;
         currentUserName = userName;
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    };
+    editUser(user: any) {
+        const dialogRef = this.dialog.open(EditUserPopup, {
+            height: '400pxpx',
+            width: '600px',
+        });
+        userDetails = user;
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
@@ -193,16 +204,17 @@ export class DashboardComponent implements OnInit {
       //   this.data.changeMessage2(null);
       // };
 
-      this.data.currentMessage.subscribe(message=>this.userMessage=message);
-      if(this.userMessage){
+      this.data.currentMessage.subscribe(message => this.userMessage = message);
+      if (this.userMessage) {
+        this.showVehicle();
         this.showUser();
-        this.data.changeMessage(null);      }
+        this.data.changeMessage(false);      }
 
     }, 1000);
 
   }
 
-  showVehicle(){
+  showVehicle() {
     this.getVehicles.getAllVehicles().subscribe(result => {
       this.allVehicles = result.vehicle;
       this.vehicleVal = result.vehicle.length;
@@ -274,6 +286,58 @@ export class RestPasswordPopup {
 
 
 @Component({
+    selector: 'edit-user-popup',
+    templateUrl: 'edit-user-popup.html',
+})
+export class EditUserPopup {
+    private userDetails: any;
+    protected  fullName: string;
+    protected userName: string;
+    protected role: string;
+    protected address: string;
+    protected email: string;
+    protected status: string;
+    protected contactNumber: string;
+    constructor(
+        private user: UserService,
+        private auth: AuthService,
+        private data: DataService
+    ) { };
+    ngOnInit() {
+        this.userDetails = userDetails;
+        console.log(this.userDetails);
+        this.fullName = this.userDetails.fullName;
+        this.userName = this.userDetails.userName;
+        this.role = this.userDetails.roles;
+        this.email = this.userDetails.emailAddress;
+        this.address = this.userDetails.address;
+        this.contactNumber = this.userDetails.contactNumber;
+        this.status = this.userDetails.status;
+    }
+    updateUser() {
+        const userUpdateDetails = {
+            fullName :  this.fullName,
+            userName : this.userName,
+            roles : this.role,
+            address : this.address,
+            emailAddress : this.email,
+            contactNumber: this.contactNumber,
+            status: this.status,
+            userId: this.userDetails._id
+        };
+        this.user.editUser(userUpdateDetails).subscribe(res => {
+            if (res.success) {
+                this.data.changeMessage(true);
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
+}
+
+
+@Component({
     selector: 'user-logs-popup',
     templateUrl: 'user-logs-popup.html',
 })
@@ -324,11 +388,10 @@ export class UpdateVehiclePopup {
         userName: this.userName,
         details: this.vehicleDetails
     };
-    console.log(vehicleDetails);
     this.updVehicles.updateVehicle(this.id, vehicleDetails).subscribe(res => {
       if (res.success) {
           // this.data.changeMessage(true);
-          this.data.changeMessage2(vehicleDetails);
+          this.data.changeMessage(true);
           this.auth.displayMessage(res, 'success', 'top');
       } else {
           console.log(res.err);

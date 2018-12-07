@@ -60,4 +60,13 @@ export class UserService {
         const url = 'http://localhost:3000/api/getUserLogs/' + userId;
         return this.http.get(url, { headers: headers}).pipe(map(res => res.json()));
     }
+
+    editUser(userDetails: any) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://localhost:3000/api/user/editUser';
+        return this.http.post(url, userDetails, { headers: headers}).pipe(map(res => res.json()));
+    }
 }

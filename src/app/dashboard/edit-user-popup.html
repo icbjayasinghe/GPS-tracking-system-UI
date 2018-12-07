@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>Edit User - {{fullName}}</h2>
+<mat-dialog-content class="mat-typography">
+    <form #formcontrol="ngForm">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Full Name" name="fullName" [(ngModel)]="fullName" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="User Name" name="userName" [(ngModel)]="userName" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Role" name="role" [(ngModel)]="role" [required]>
+                        <mat-option [value]="Admin">Admin</mat-option>
+                        <mat-option [value]="User">User</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Address" name="address" [(ngModel)]="address" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="email" name="emailAddress" [(ngModel)]="email" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Contact Number" name="contactNumber" [(ngModel)]="contactNumber" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Status" name="status" [(ngModel)]="status" [required]>
+                        <mat-option [value]="Active">Active</mat-option>
+                        <mat-option [value]="Deleted">Deleted</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!formcontrol.form.valid" (click)="updateUser()">Update User</button>
+    </mat-dialog-actions>
+
+
+    <!-- Copyright 2018 Google Inc. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->

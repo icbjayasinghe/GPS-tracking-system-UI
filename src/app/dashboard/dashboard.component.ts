@@ -298,6 +298,8 @@ export class EditUserPopup {
     protected email: string;
     protected status: string;
     protected contactNumber: string;
+    protected userRoles = ['Admin', 'User'];
+    protected userStatus = ['Active', 'Deleted'];
     constructor(
         private user: UserService,
         private auth: AuthService,

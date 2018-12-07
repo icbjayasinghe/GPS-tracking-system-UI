@@ -9,13 +9,11 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store'; 
 import { Vehicle } from '../models/table.model';
 import { AppState } from '../app.state';
-import * as VehicleActions from '../actions/table.actions';
 
 let uId;
 let userfullName;
 let currentUserName;
 let vehi;
-var activate = false;
 declare var $: any;
 var vNumber;
 var index;
@@ -29,7 +27,6 @@ var userDetails: any;
 })
 export class DashboardComponent implements OnInit {
   vehiclesNgrx: Observable<Vehicle[]>;
-  vehicleMessage: any;
   userMessage: false;
   interval: any;
   allUsers: any[];
@@ -42,7 +39,6 @@ export class DashboardComponent implements OnInit {
   cardNum: number;
   userVal: number;
   vehicleVal: number;
-  message: false;
   change: any;
   constructor(
     private getUsers: UserService,
@@ -159,13 +155,13 @@ export class DashboardComponent implements OnInit {
     });
   };
 
-  deleteVehicleConfirmDialog(vehicleNumber,ind){
-    const dialogRef = this.dialog.open(DeleteVehiclePopup,{
+  deleteVehicleConfirmDialog(vehicleNumber, ind) {
+    const dialogRef = this.dialog.open(DeleteVehiclePopup, {
       height: '350px',
       width: '400px',
     });
-    vNumber=vehicleNumber;
-    index=ind;
+    vNumber = vehicleNumber;
+    index = ind;
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       // console.log( index);
@@ -241,11 +237,13 @@ export class DeleteUserPopup {
     }
   constructor(
     private delUser: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private data: DataService
   ) { };
   deleteUser() {
     this.delUser.deleteUser(uId).subscribe(res => {
         if (res.success) {
+            this.data.changeMessage(true);
             this.auth.displayMessage(res, 'success', 'top');
         } else {
             this.auth.displayMessage(res, 'danger', 'top');
@@ -260,7 +258,6 @@ export class DeleteUserPopup {
     templateUrl: 'rest-password-popup.html',
 })
 export class RestPasswordPopup {
-    restUser: string;
     public username: string;
     constructor(
         private user: UserService,
@@ -409,65 +406,20 @@ export class UpdateVehiclePopup {
 })
 export class DeleteVehiclePopup {
   constructor(
-    private delVehicles:VehicleServiceService,
-    private store: Store<AppState>
+    private delVehicles: VehicleServiceService,
+    private data: DataService,
+    private auth: AuthService
+    // private store: Store<AppState>
   ) { };
-  deleteVehicle(){
-    this.delVehicles.deleteVehicle(vNumber).subscribe(res=>{
-      if(res.success){
-        this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
-        //const type = ['success'];
-        //const color = Math.floor((Math.random() * 4) + 1);
-        $.notify({
-          icon: "done_outline",
-          message: "Vehicle <b> deleted</b> "
-
-      },{
-          type: 'danger',
-          timer: 4000,
-          placement: {
-              from: "top",
-              align: "center"
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">check_circle</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
+  deleteVehicle() {
+    this.delVehicles.deleteVehicle(vNumber).subscribe(res => {
+      if (res.success) {
+        // this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
+          this.data.changeMessage(true);
+          this.auth.displayMessage(res, 'success', 'top');
+      } else {
+          this.auth.displayMessage(res, 'danger', 'top');
       }
-      else{
-        //const type = ['success'];
-        //const color = Math.floor((Math.random() * 4) + 1);
-        $.notify({
-          icon: "done_outline",
-          message: "Somthing went <b> wrong</b> "
-
-      },{
-          type: 'danger',
-          timer: 4000,
-          placement: {
-              from: "top",
-              align: "center"
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">error</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
-
-      };
     });
   }
 }

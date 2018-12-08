@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MapService} from '../services/map.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
 import {AuthService} from '../services/auth.service';
+import * as Chartist from 'chartist';
 
 
 
@@ -35,6 +36,41 @@ export class MapsComponent implements OnInit {
                 this.getUserVehicles(result);
             });
     }
+
+    startAnimationForLineChart(chart) {
+        let seq: any, delays: any, durations: any;
+        seq = 0;
+        delays = 80;
+        durations = 500;
+    
+        chart.on('draw', function(data) {
+          if (data.type === 'line' || data.type === 'area') {
+            data.element.animate({
+              d: {
+                begin: 600,
+                dur: 700,
+                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                to: data.path.clone().stringify(),
+                easing: Chartist.Svg.Easing.easeOutQuint
+              }
+            });
+          } else if (data.type === 'point') {
+                seq++;
+                data.element.animate({
+                  opacity: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: 0,
+                    to: 1,
+                    easing: 'ease'
+                  }
+                });
+            }
+        });
+    
+        seq = 0;
+    };
+      
 
     getUserVehicles(result) {
         this.allVehiclesResult = result;
@@ -90,6 +126,37 @@ export class MapsComponent implements OnInit {
             } else {
                 this.rebuildPolylines(result.historyRes);
                 this.isSelectVehicle = true;
+
+                let speed =[];
+                let trackingDataLen = result.historyRes[0].trackingData.length
+                for(var i=0; i<trackingDataLen; i++){
+                    speed[i]=result.historyRes[0].trackingData[i].speed;
+                }
+                const dataCompletedTasksChart: any = {
+                    // labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+                    series: [speed]
+                    
+                };
+
+                const optionsCompletedTasksChart: any = {
+                    axisX: {
+                        showGrid: true
+                    },
+                    low: 0,
+                    showPoint: false,
+                    fullHight:true,
+                    fullWidth:true,
+                    lineSmooth:true,
+                    ticks:[5,45],
+                    chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+                }
+          
+                var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+          
+                // start animation for the Completed Tasks Chart - Line Chart
+                this.startAnimationForLineChart(completedTasksChart);
+
+                
             }
         });
     }

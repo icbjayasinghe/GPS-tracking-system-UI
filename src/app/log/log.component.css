@@ -1,0 +1,7 @@
+.masthead{
+    height:auto;
+    min-height:100vh;
+    background-image:url('/src/assets/img/nikini.jpeg');
+    background-size:cover;
+    background-position:center;
+}

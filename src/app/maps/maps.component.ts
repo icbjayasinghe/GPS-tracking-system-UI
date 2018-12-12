@@ -137,18 +137,27 @@ export class MapsComponent implements OnInit {
                     series: [speed]
                     
                 };
+                
+                const otherCh: any = {
+                    grid: "++",
+                    point:"#",
+                    
+                }
 
                 const optionsCompletedTasksChart: any = {
                     axisX: {
-                        showGrid: true
+                        showGrid: false
                     },
                     low: 0,
                     showPoint: false,
+                    showLine:true,
                     fullHight:true,
                     fullWidth:true,
                     lineSmooth:true,
                     ticks:[5,45],
-                    chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+                    chartPadding: { top: 5, right: 0, bottom: 0, left: 0},
+                    //classNames:otherCh
+                    
                 }
           
                 var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);

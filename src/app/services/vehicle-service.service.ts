@@ -18,9 +18,9 @@ export class VehicleServiceService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-      let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
+      let url = 'http://10.10.1.191:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
       if (this.auth.findUser()) {
-          url = 'http://localhost:3000/api/vehicle/vehicleDetailsWithUserName';
+          url = 'http://10.10.1.191:3000/api/vehicle/vehicleDetailsWithUserName';
       }
     return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
@@ -30,7 +30,7 @@ export class VehicleServiceService {
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);
     headers.append('Content-Type', 'application/json');
-    const url = 'http://localhost:3000/api/vehicle';
+    const url = 'http://10.10.1.191:3000/api/vehicle';
     return this.http.post(url, vehiObj, {headers: headers}).pipe(map(res => res.json()));
   }
 
@@ -39,7 +39,7 @@ export class VehicleServiceService {
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);
     headers.append('Content-Type', 'application/json');
-    const url = 'http://localhost:3000/api/vehicle/' + vehiId;
+    const url = 'http://10.10.1.191:3000/api/vehicle/' + vehiId;
     return this.http.delete(url, {headers: headers}).pipe(map(res => res.json()));
   }
 
@@ -48,7 +48,7 @@ export class VehicleServiceService {
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);
     headers.append('Content-Type', 'application/json');
-    const url = 'http://localhost:3000/api/vehicle/' + vehiId;
+    const url = 'http://10.10.1.191:3000/api/vehicle/' + vehiId;
     return this.http.put(url, vehiObj, {headers: headers}).pipe(map(res => res.json()));
   }
 
@@ -58,9 +58,9 @@ export class VehicleServiceService {
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
 
-        let url = 'http://localhost:3000/api/vehicle/vehicleNumberByUser/' + JSON.parse(localStorage.getItem('user'))._id;
+        let url = 'http://10.10.1.191:3000/api/vehicle/vehicleNumberByUser/' + JSON.parse(localStorage.getItem('user'))._id;
         if (this.auth.findUser()) {
-            url = 'http://localhost:3000/api/vehicle/getVehicleNumbers';
+            url = 'http://10.10.1.191:3000/api/vehicle/getVehicleNumbers';
         }
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }

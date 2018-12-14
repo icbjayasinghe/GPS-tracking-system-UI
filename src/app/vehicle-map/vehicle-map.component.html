@@ -1,75 +1,80 @@
-<div class="overlay col-md-2">
-    <mat-nav-list>
-        <mat-list-item *ngFor="let m of markers">
-            <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
-        </mat-list-item>
-    </mat-nav-list>
-</div>
-<agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
-    <div>
-            <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= "1.0" [strokeWeight]="3">
-                <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
-                </agm-polyline-point>
-            </agm-polyline>
+<div class="no-gutter">
+        <div class="overlay col-md-2">
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let m of markers">
+                        <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
+                    </mat-list-item>
+                </mat-nav-list>
+            </div>
+            <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
+                <div>
+                        <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= "1.0" [strokeWeight]="3">
+                            <agm-polyline-point  *ngFor="let t of p.trackingData;" [latitude]="t.latitude" [longitude]="t.longitude">
+                            </agm-polyline-point>
+                        </agm-polyline>
+                            
+                </div>
+              <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="requestRoute(m.num)">
+                    <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map" [fontSize]="1"> 
+                            <div #outerWrapper>
+                                <div #viewContainer>
+                                    <ng-template >
+                                
+                                    <h4>{{m.num}}</h4>
+                                    <hr>
+                                    IMEI : {{m.imei}}
+                                    <br>
+                                    Speed : {{m.speed}}
+                                    <br>
+                                    <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                                        <br>
+                                    </a>
+                                    <a *ngIf="m.temperature">Temperature : {{m.temperature}}
+                                        <br>
+                                    </a>
+                                    Time : {{m.tim}}
+                            </ng-template>
+                                </div></div>
+                            <ng-content>
+                                 
+                                
+                            </ng-content>
+                            <!-- <ng-template >
+                                
+                                    <h4>{{m.num}}</h4>
+                                    <hr>
+                                    IMEI : {{m.imei}}
+                                    <br>
+                                    Speed : {{m.speed}}
+                                    <br>
+                                    <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                                        <br>
+                                    </a>
+                                    <a *ngIf="m.temperature">Temperature : {{m.temperature}}
+                                        <br>
+                                    </a>
+                                    Time : {{m.tim}}
+                            </ng-template> -->
+                    </agm-snazzy-info-window>
                 
-    </div>
-  <agm-marker *ngFor="let m of markers;"  [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.truckIcon" (markerClick)="requestRoute(m.num)">
-        <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map" [fontSize]="1"> 
-                <div #outerWrapper>
-                    <div #viewContainer>
-                        <ng-template >
-                    
-                        <h4>{{m.num}}</h4>
-                        <hr>
-                        IMEI : {{m.imei}}
-                        <br>
-                        Speed : {{m.speed}}
-                        <br>
-                        <a *ngIf="m.fuel">Fuel : {{m.fuel}}
-                            <br>
-                        </a>
-                        <a *ngIf="m.temperature">Temperature : {{m.temperature}}
-                            <br>
-                        </a>
-                        Time : {{m.tim}}
-                </ng-template>
-                    </div></div>
-                <ng-content>
-                     
-                    
-                </ng-content>
-                <!-- <ng-template >
-                    
-                        <h4>{{m.num}}</h4>
-                        <hr>
-                        IMEI : {{m.imei}}
-                        <br>
-                        Speed : {{m.speed}}
-                        <br>
-                        <a *ngIf="m.fuel">Fuel : {{m.fuel}}
-                            <br>
-                        </a>
-                        <a *ngIf="m.temperature">Temperature : {{m.temperature}}
-                            <br>
-                        </a>
-                        Time : {{m.tim}}
-                </ng-template> -->
-        </agm-snazzy-info-window>
-    
-        <!-- <agm-info-window>Vehicle IMEI : {{m.imei}}
-          <br>
-          Vehicle Speed : {{m.speed}}
-          <br>
-          Vehicle Number : {{m.num}}
-          <br>
-          Current Position Latitudes: {{m.lat}}
-          <br>
-          Current Position Longitudes: {{m.lng}}
-          <br>
-          Time : {{m.tim}}
-      </agm-info-window> -->
-  </agm-marker>
-</agm-map>
+                    <!-- <agm-info-window>Vehicle IMEI : {{m.imei}}
+                      <br>
+                      Vehicle Speed : {{m.speed}}
+                      <br>
+                      Vehicle Number : {{m.num}}
+                      <br>
+                      Current Position Latitudes: {{m.lat}}
+                      <br>
+                      Current Position Longitudes: {{m.lng}}
+                      <br>
+                      Time : {{m.tim}}
+                  </agm-info-window> -->
+              </agm-marker>
+            </agm-map>
+
+
+</div>
+
 
 <style>
     .overlay {
@@ -105,6 +110,22 @@ ul{
 .map{
     
 }
+
+.no-gutter {
+        margin-left: 0;
+        margin-right: 0;
+        height:100%; 
+        width: 100%;
+        overflow: hidden;
+        padding: 0%
+}
+
+
+
+
+/* html, body{
+    overflow-y: hidden;
+} */
 
 
 </style>

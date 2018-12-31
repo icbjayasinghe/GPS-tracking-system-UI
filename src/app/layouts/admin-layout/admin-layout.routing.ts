@@ -12,6 +12,7 @@ import { VehicleListComponent} from '../../vehicle-list/vehicle-list.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { CheckPointListComponent} from '../../check-point-list/check-point-list.component';
 import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component';
+import { ReportComponent } from '../../report/report.component';
 import {AuthGuard} from '../../auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
@@ -68,5 +69,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'vehicle-list',   component: VehicleListComponent, canActivate: [ AuthGuard ]  },
     { path: 'user-list',      component: UserListComponent, canActivate: [ AuthGuard ]  },
     { path: 'check-point-list', component: CheckPointListComponent, canActivate: [ AuthGuard ] },
-    { path: 'vehicleMap', component: VehicleMapComponent, canActivate: [ AuthGuard ] }
+    { path: 'vehicleMap', component: VehicleMapComponent, canActivate: [ AuthGuard ] },
+    { path: 'reports', component: ReportComponent, canActivate: [AuthGuard]}
 ];

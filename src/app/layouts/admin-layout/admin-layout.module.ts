@@ -10,6 +10,7 @@ import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { ReportComponent } from '../../report/report.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -34,6 +35,7 @@ import {
   MatListModule,
   MatIconModule
 } from '@angular/material';
+import { from } from 'rxjs';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import {
     VehicleListComponent,
     UserListComponent,
     CheckPointListComponent,
-    VehicleMapComponent
+    VehicleMapComponent,
+    ReportComponent
     // LogComponent,
   ]
 })

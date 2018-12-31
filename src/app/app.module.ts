@@ -34,6 +34,7 @@ import { HttpClientModule} from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './reducer/vehicle.reducer';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({

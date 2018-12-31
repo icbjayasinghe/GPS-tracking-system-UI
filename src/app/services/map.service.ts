@@ -19,9 +19,9 @@ export class MapService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-      let url = 'http://10.10.1.191:3000/api/vehicle/getTrackingData/' + JSON.parse(localStorage.getItem('user'))._id + '/' + vehicle;
+      let url = 'http://localhost:3000/api/vehicle/getTrackingData/' + JSON.parse(localStorage.getItem('user'))._id + '/' + vehicle;
       if (this.auth.findUser()) {
-          url = 'http://10.10.1.191:3000/api/vehicle/getTrackingData/' + vehicle;
+          url = 'http://localhost:3000/api/vehicle/getTrackingData/' + vehicle;
       }
       return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
@@ -32,9 +32,9 @@ export class MapService {
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
-        let url = 'http://10.10.1.191:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
+        let url = 'http://localhost:3000/api/vehicle/' + JSON.parse(localStorage.getItem('user'))._id;
         if (this.auth.findUser()) {
-            url = 'http://10.10.1.191:3000/api/vehicle';
+            url = 'http://localhost:3000/api/vehicle';
         }
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
@@ -44,7 +44,7 @@ export class MapService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-      const url = 'http://10.10.1.191:3000/api/searchHistory';
+      const url = 'http://localhost:3000/api/searchHistory';
       return this.http.post(url, historyObj, {headers: headers}).pipe(map(res => res.json()));
   }
 }

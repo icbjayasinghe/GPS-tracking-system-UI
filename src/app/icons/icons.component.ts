@@ -51,16 +51,16 @@ export class IconsComponent implements OnInit {
             for(let j=0;j<1;j++){
               speed.push(result.vehicle[i].trackingData[j].latitude);
             }
-            
+
               result.vehicle.splice(i, 1);
               i--;
           }
         }
 
-        
-        
+
+
       }
-        
+
         );
         console.log(speed);
         const dataCompletedTasksChart: any = {

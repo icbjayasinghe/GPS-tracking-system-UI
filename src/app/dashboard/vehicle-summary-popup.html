@@ -1,0 +1,24 @@
+<h3>Request Vehicle Summary</h3>
+<div class="card-body table-responsive">
+    <form #formcontrol="ngForm">
+        <div class="row ">
+            <!-- <div class="col-md-2"></div> -->
+
+            <div class="col-md-12" style="text-align: center">
+                <hr>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="dp" placeholder="Month and Year" [(ngModel)]="selectDate" name="selectDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp
+                                    startView="multi-year"
+                                    (yearSelected)="chosenYearHandler($event)"
+                                    (monthSelected)="chosenMonthHandler($event, dp)"
+                                    panelClass="example-month-picker">
+                    </mat-datepicker>
+                </mat-form-field>
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-stroked-button cdkFocusInitial [disabled]="(!formcontrol.form.valid)" (click)="requestSummary()">SEARCH>></button>
+            </div>
+        </div>
+    </form>
+</div>

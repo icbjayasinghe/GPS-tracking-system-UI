@@ -1,0 +1,26 @@
+<h3>Request Vehicle Report</h3>
+<div class="card-body table-responsive">
+    <form #form2control="ngForm">
+        <div class="row ">
+            <!-- <div class="col-md-2"></div> -->
+
+            <div class="col-md-12" style="text-align: center">
+                <hr>
+                <mat-form-field >
+                    <mat-select style="color: rgb(255, 255, 255)" placeholder="Select Vehicle" [(ngModel)]="vehicleNumber" name="vehicleId" [required]="true" >
+                        <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle.vehicleNumber">
+                            {{vehicle.vehicleNumber}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" >
+                    <input matInput [matDatepicker]="picker1" placeholder="Select Date" [(ngModel)]="selectDate" name="selectDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-stroked-button cdkFocusInitial [disabled]="(!form2control.form.valid)" (click)="requestSummary()">SEARCH>></button>
+            </div>
+        </div>
+    </form>
+</div>

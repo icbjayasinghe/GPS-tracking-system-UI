@@ -17,7 +17,14 @@ import { CheckPointService } from './services/check-point.service';
 import { MapService} from './services/map.service';
 import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup, ChangePasswordPopup} from './components/navbar/navbar.component';
 import { AuthService} from './services/auth.service'
-import {DashboardComponent, EditUserPopup, RestPasswordPopup, UserLogsPopup} from './dashboard/dashboard.component';
+import {
+    DashboardComponent,
+    EditUserPopup,
+    RestPasswordPopup,
+    UserLogsPopup,
+    VehicleReportPopup,
+    VehicleSummaryPopup
+} from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -25,9 +32,9 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import {MatDialog,MatDatepickerModule,MatAutocompleteModule,MatNativeDateModule,MatSelectModule} from '@angular/material';
+import {MatDialog, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
-import { DeleteUserPopup,UpdateVehiclePopup,DeleteVehiclePopup } from './dashboard/dashboard.component';
+import { DeleteUserPopup, UpdateVehiclePopup, DeleteVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
 import { HttpClientModule} from '@angular/common/http';
@@ -75,7 +82,9 @@ import { ReportComponent } from './report/report.component';
     ChangePasswordPopup,
     RestPasswordPopup,
     UserLogsPopup,
-    EditUserPopup
+    EditUserPopup,
+    VehicleSummaryPopup,
+    VehicleReportPopup
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -88,7 +97,9 @@ import { ReportComponent } from './report/report.component';
     ChangePasswordPopup,
     RestPasswordPopup,
     UserLogsPopup,
-    EditUserPopup
+    EditUserPopup,
+    VehicleSummaryPopup,
+    VehicleReportPopup
   ],
   providers: [
       VehicleServiceService,

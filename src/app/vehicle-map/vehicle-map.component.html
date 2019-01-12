@@ -1,10 +1,17 @@
 <div class="no-gutter">
-        <div class="overlay col-md-2">
-                <mat-nav-list>
+        <div class="overlay col-md-2" style="width: 165px; align-self: flex-start">
+            <form class="navbar-form">
+                <div class="input-group no-border">
+                    <input type="text" class="form-control"  name="selectVehicle" placeholder="Search..." style="color: white" [(ngModel)]="selectVehicle" (input)="search()">
+                </div>
+            </form>
+
                     <mat-list-item *ngFor="let m of markers">
-                        <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; size: 12px"><img src="{{m.dotIcon}}" alt=""  class="dotImg">{{m.num}}</a>
+                        <div class="container" style="display: inline-block">
+                        <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; font-size: 13px; display: inline-block"><img src="{{m.dotIcon}}"  width="25px" height="25px">{{m.num}}</a>
+                        </div>
                     </mat-list-item>
-                </mat-nav-list>
+
             </div>
             <agm-map [latitude]="lat" [longitude]="lng" style="height: 1000px">
                 <div>

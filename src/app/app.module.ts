@@ -22,9 +22,13 @@ import {
     EditUserPopup,
     RestPasswordPopup,
     UserLogsPopup,
-    VehicleReportPopup,
-    VehicleSummaryPopup
+    VehicleSummaryPopup, VehicleTechnicalPopup
 } from './dashboard/dashboard.component';
+
+import { VehicleReportPopupComponent } from './report/report.component';
+
+
+
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -84,7 +88,8 @@ import { ReportComponent } from './report/report.component';
     UserLogsPopup,
     EditUserPopup,
     VehicleSummaryPopup,
-    VehicleReportPopup
+    VehicleReportPopupComponent,
+    VehicleTechnicalPopup
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -99,7 +104,8 @@ import { ReportComponent } from './report/report.component';
     UserLogsPopup,
     EditUserPopup,
     VehicleSummaryPopup,
-    VehicleReportPopup
+    VehicleReportPopupComponent,
+    VehicleTechnicalPopup
   ],
   providers: [
       VehicleServiceService,

@@ -17,7 +17,7 @@
                                 <!-- </div> -->
                             <!-- </div> -->
                     <mat-form-field >
-                        <mat-select style="color: rgb(255, 255, 255)" placeholder="Select Vehicle" [(ngModel)]="vehicleNumber" name="vehicleId" [required]="true" >
+                        <mat-select  placeholder="Select Vehicle" [(ngModel)]="vehicleNumber" name="vehicleId" [required]="true" >
                           <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle.vehicleNumber">
                             {{vehicle.vehicleNumber}}
                           </mat-option>

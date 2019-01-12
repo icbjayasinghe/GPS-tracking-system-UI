@@ -1,4 +1,4 @@
-<h3>Request Vehicle Battery/Temperature</h3>
+<h3>Request Vehicle Report</h3>
 <div class="card-body table-responsive">
     <form #form2control="ngForm">
         <div class="row ">
@@ -7,7 +7,7 @@
             <div class="col-md-12" style="text-align: center">
                 <hr>
                 <mat-form-field >
-                    <mat-select style="color: rgb(255, 255, 255)" placeholder="Select Vehicle" [(ngModel)]="vehicleNumber" name="vehicleId" [required]="true" >
+                    <mat-select style="color: rgb(255, 255, 255)" placeholder="Select Vehicle" [(ngModel)]="vehicleNumber" name="vehicleNumber" [required]="true" >
                         <mat-option *ngFor="let vehicle of allVehiclesResult" [value]="vehicle.vehicleNumber">
                             {{vehicle.vehicleNumber}}
                         </mat-option>
@@ -19,7 +19,7 @@
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
                 <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-stroked-button cdkFocusInitial [disabled]="(!form2control.form.valid)" (click)="requestSummary()">SEARCH>></button>
+                <button mat-stroked-button cdkFocusInitial [disabled]="(!form2control.form.valid)" (click)="requestReport()">SEARCH>></button>
             </div>
         </div>
     </form>

@@ -16,9 +16,9 @@ export const ROUTES: RouteInfo[] = [
     //{ path: '/table-list', title: 'Vehicles',  icon:'content_paste', class: '' },
     { path: '/vehicleMap', title: 'VehicleMap',  icon:'local_shipping', class: '' },
     { path: '/maps', title: 'Maps',  icon:'history', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'equalizer', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/reports', title: 'Reports',  icon:'chrome_reader_mode', class: '' }
+    // { path: '/icons', title: 'Icons',  icon:'equalizer', class: '' },
+    { path: '/reports', title: 'Reports',  icon:'chrome_reader_mode', class: '' },
+    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' }
     //{ path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
 ];
 

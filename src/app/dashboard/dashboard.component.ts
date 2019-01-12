@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material';
 import {AuthService} from '../services/auth.service';
 import {DataService} from '../services/data.service';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store'; 
+import { Store } from '@ngrx/store';
 import { Vehicle } from '../models/table.model';
 import { AppState } from '../app.state';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -18,9 +18,9 @@ let userfullName;
 let currentUserName;
 let vehi;
 declare var $: any;
-var vNumber;
-var index;
-var userDetails: any;
+let vNumber;
+let index;
+let userDetails: any;
 
 import * as _moment from 'moment';
 
@@ -205,7 +205,7 @@ export class DashboardComponent implements OnInit {
         const dialogRef = this.dialog.open(UpdateVehiclePopup, {
             height: '400px',
             width: '600px',
-        },);
+        }, );
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -216,7 +216,7 @@ export class DashboardComponent implements OnInit {
         const dialogRef = this.dialog.open(VehicleSummaryPopup, {
             height: '400px',
             width: '600px',
-        },);
+        }, );
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -225,10 +225,10 @@ export class DashboardComponent implements OnInit {
 
 
     requestReport() {
-        const dialogRef = this.dialog.open(VehicleReportPopup, {
+        const dialogRef = this.dialog.open(VehicleTechnicalPopup, {
             height: '400px',
             width: '600px',
-        },);
+        }, );
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -247,6 +247,19 @@ export class DashboardComponent implements OnInit {
         }
         this.showUser();
         this.showVehicle();
+        const today = new Date();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        const date = year + '-' + month + 1;
+        console.log(date);
+        this.getVehicles.requestSummary(date).subscribe(res => {
+            if (res.success) {
+                this.data.changeMessage2(res);
+                this.data.currentMessage2.source.subscribe(translatedValue => {
+                    this.summaryVehicle = translatedValue.userRes;
+                });
+            }
+        });
 
         // for refreshing tables
         this.interval = setInterval(() => {
@@ -261,6 +274,7 @@ export class DashboardComponent implements OnInit {
                 });
 
             }
+
             this.data.currentMessage.subscribe(message => this.userMessage = message);
             if (this.userMessage) {
                 this.showVehicle();
@@ -420,7 +434,7 @@ export class VehicleSummaryPopup {
     selector: 'vehicle-report-popup',
     templateUrl: 'vehicle-report-popup.html'
 })
-export class VehicleReportPopup {
+export class VehicleTechnicalPopup {
 
     protected allVehiclesResult: any;
     protected vehicleNumber: string;

@@ -22,6 +22,7 @@ export class VehicleMapComponent implements OnInit {
   oldDataAmount = 0;
   polylines = [];
   vehicleNumber: 'false';
+  selectVehicle: string;
 
 
   constructor(
@@ -83,6 +84,12 @@ private rebuildPolylines(result = []) {
         this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
             this.polylines = result;
         });
+}
+
+search() {
+this.markers = this.markers.filter(res => {
+    return res.num.toLocaleLowerCase().match(this.selectVehicle.toLocaleLowerCase());
+});
 }
 
 

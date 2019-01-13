@@ -25,7 +25,7 @@ import {
     VehicleSummaryPopup, VehicleTechnicalPopup
 } from './dashboard/dashboard.component';
 
-import { VehicleReportPopupComponent } from './report/report.component';
+import { VehicleReportPopupComponent, StoppedLocationPopupComponent } from './report/report.component';
 
 
 
@@ -89,7 +89,8 @@ import { ReportComponent } from './report/report.component';
     EditUserPopup,
     VehicleSummaryPopup,
     VehicleReportPopupComponent,
-    VehicleTechnicalPopup
+    VehicleTechnicalPopup,
+    StoppedLocationPopupComponent
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -105,7 +106,8 @@ import { ReportComponent } from './report/report.component';
     EditUserPopup,
     VehicleSummaryPopup,
     VehicleReportPopupComponent,
-    VehicleTechnicalPopup
+    VehicleTechnicalPopup,
+    StoppedLocationPopupComponent
   ],
   providers: [
       VehicleServiceService,

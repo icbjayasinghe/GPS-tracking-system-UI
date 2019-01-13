@@ -6,7 +6,7 @@
             <!-- {{newMessage}} -->
             <div class="col-lg-12 col-md-12">
                     <div class="card-header card-header-warning" style="height: 50px">
-                        <h4 class="card-title">REPORTS
+                        <h4 class="card-title">REPORTS <b *ngIf="confirmDisplayData !== 'false'">- Vehicle Number | {{confirmVehicleNumber}}</b>
                             <a style="float: right;" (click)="requestReport()"><i class="material-icons">
                                 filter_list
                             </i> FILTER</a>
@@ -15,6 +15,7 @@
                     <br>
                     <div class="container">
                         <div class="card-body table-responsive">
+                            <div class="text-center">
                     <table class="table">
                         <thead class="thead-light">
                         <tr style="color: black; font-family: bold,serif">
@@ -22,19 +23,20 @@
                             <th scope="col">First start time</th>
                             <th scope="col">Last stop time</th>
                             <th scope="col">Total mileage</th>
-                            <th scope="col">Highest Speed</th>
+                            <th scope="col">Average Speed</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Otto</td>
+                        <tr *ngIf="confirmDisplayData !== 'false'">
+                            <th scope="row">{{confirmDateToDisplay}}</th>
+                            <td>{{reports.startTime}}</td>
+                            <td>{{reports.stopTime}}</td>
+                            <td>{{reports.distance.toFixed(3)}}</td>
+                            <td>{{reports.avarageSpeed.toFixed(3)}}</td>
                         </tr>
                         </tbody>
                     </table>
+                            </div>
                     </div>
             </div>
         </div>
@@ -51,6 +53,7 @@
                     <br>
                     <div class="container">
                         <div class="card-body table-responsive">
+                            <div class="text-center">
                         <table class="table">
                             <thead class="thead-light">
                             <tr style="color: black; font-family: bold,serif">
@@ -62,15 +65,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Otto</td>
+                            <tr *ngIf="confirmDisplayData !== 'false'">
+                                <th scope="row">{{confirmDateToDisplay}}</th>
+                                <td>{{confirmSpeedLimit}}</td>
+                                <td>{{overSpeedData.speedingTime}}</td>
+                                <td>{{overSpeedData.overSpeedAvg.toFixed(3)}}</td>
+                                <td>{{overSpeedData.highestSpeed.toFixed(3)}}</td>
                             </tr>
                             </tbody>
                         </table>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -87,6 +91,7 @@
                     <br>
                     <div class="container">
                         <div class="card-body table-responsive">
+                            <div class="text-center">
                         <table class="table">
                             <thead class="thead-light">
                             <tr style="color: black; font-family: bold,serif">
@@ -96,27 +101,16 @@
                                 <th scope="col">At location</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                            <tbody *ngIf="confirmDisplayData !== 'false'">
+                            <tr  *ngFor="let t of stopDetails;">
+                                <th scope="row">{{confirmDateToDisplay}}</th>
+                                <td>{{t.stopedTime}}</td>
+                                <td>{{t.startedTime}}</td>
+                                <td><a (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)">Click to show</a></td>
                             </tr>
                             </tbody>
                         </table>
+                            </div>
                         </div>
                     </div>
             </div>

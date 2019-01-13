@@ -71,10 +71,21 @@ export class VehicleServiceService {
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
 
-        let url = 'http://10.10.1.191:3000/api/summaryByUser/' + JSON.parse(localStorage.getItem('user'))._id + '/' + date;
+        let url = 'http://localhost:3000/api/summaryByUser/' + JSON.parse(localStorage.getItem('user'))._id + '/' + date;
         if (this.auth.findUser()) {
             url = 'http://localhost:3000/api/summary/' + date;
         }
+        return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
+    }
+
+    requestReport(vehicleNumber, date) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+
+        let url = 'http://localhost:3000/api/historyReports/' + vehicleNumber + '/' + date;
+        url = encodeURI(url);
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
 

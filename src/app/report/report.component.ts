@@ -7,6 +7,13 @@ import {AuthService} from '../services/auth.service';
 import {DataService} from '../services/data.service';
 import {m} from '@angular/core/src/render3';
 
+let dateToDisplay: any;
+const speedLimit = 60.000;
+let displayData = 'false';
+let vehicleNum: any;
+let selectLatitude: any;
+let selelctLongitude: any;
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -14,15 +21,60 @@ import {m} from '@angular/core/src/render3';
 })
 export class ReportComponent implements OnInit {
     protected vehicleNumber: String;
+    protected interval: any;
+    protected vehicleReport: any;
+    protected overSpeedData: any;
+    protected reports: any;
+    protected stopDetails = [];
+    protected confirmDisplayData: any;
+    protected confirmDateToDisplay: any;
+    protected confirmSpeedLimit: Number;
+    protected confirmVehicleNumber: any;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              protected data: DataService) { }
 
   ngOnInit() {
+
+      this.confirmDisplayData = displayData;
+
+      this.interval = setInterval(() => {
+
+          if (displayData !== 'false') {
+              this.confirmDisplayData = displayData;
+              this.confirmDateToDisplay = dateToDisplay;
+              this.confirmSpeedLimit = speedLimit;
+              this.confirmVehicleNumber = vehicleNum;
+
+
+              this.data.currentMessage3.source.subscribe(translatedValue => {
+                  this.vehicleReport = translatedValue.history;
+                  this.overSpeedData = this.vehicleReport.overSpeedData;
+                  this.reports = this.vehicleReport.reports;
+                  this.stopDetails =  this.vehicleReport.stopDetails;
+              });
+          }
+
+      }, 1000);
   }
 
 
     requestReport() {
         const dialogRef = this.dialog.open(VehicleReportPopupComponent, {
+            height: '400px',
+            width: '600px',
+        }, );
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    }
+
+    requestStoppedLocation(longitude, latitude) {
+      selelctLongitude = longitude;
+      selectLatitude = latitude;
+
+        const dialogRef = this.dialog.open(StoppedLocationPopupComponent, {
             height: '400px',
             width: '600px',
         }, );
@@ -39,7 +91,7 @@ export class ReportComponent implements OnInit {
     selector: 'vehicle-report-popup',
     templateUrl: 'vehicle-report-popup.html'
 })
-export class VehicleReportPopupComponent implements OnInit{
+export class VehicleReportPopupComponent implements OnInit {
 
     protected allVehiclesResult: any;
     protected vehicleNumber: string;
@@ -64,10 +116,49 @@ export class VehicleReportPopupComponent implements OnInit{
 
     requestReport() {
         const date = new Date(this.selectDate);
-        const month = date.getMonth() + 1;
+        let month: any;
+        if (date.getMonth() + 1 < 10) {
+          month = '0' + (date.getMonth() + 1);
+        } else {
+            month = date.getMonth() + 1;
+        }
         const year = date.getFullYear();
         const day = date.getDate();
         this.selectDate = year + '-' + month + '-' + day;
-        console.log(this.selectDate);
+        dateToDisplay = this.selectDate;
+        vehicleNum = this.vehicleNumber;
+
+        this.vehicles.requestReport(this.vehicleNumber, this.selectDate).subscribe(res => {
+
+            if (res.success) {
+                displayData = 'OK';
+                this.auth.displayMessage(res, 'success', 'top');
+                this.data.changeMessage3(res);
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
+}
+
+
+
+@Component({
+    selector: 'stopped-location-popup',
+    templateUrl: 'stopped-location-popup.html'
+})
+export class StoppedLocationPopupComponent implements OnInit {
+
+    protected longitude: any;
+    protected latitude: any;
+
+
+    constructor() { };
+
+
+    ngOnInit() {
+        this.longitude = selelctLongitude;
+        this.latitude = selectLatitude;
+
     }
 }

@@ -29,8 +29,8 @@
                         <tbody>
                         <tr *ngIf="confirmDisplayData !== 'false'">
                             <th scope="row">{{confirmDateToDisplay}}</th>
-                            <td>{{reports.startTime}}</td>
-                            <td>{{reports.stopTime}}</td>
+                            <td>{{reports.startTime.substring(11,16)}}</td>
+                            <td>{{reports.stopTime.substring(11,16)}}</td>
                             <td>{{reports.distance.toFixed(3)}}</td>
                             <td>{{reports.avarageSpeed.toFixed(3)}}</td>
                         </tr>
@@ -67,7 +67,7 @@
                             <tbody>
                             <tr *ngIf="confirmDisplayData !== 'false'">
                                 <th scope="row">{{confirmDateToDisplay}}</th>
-                                <td>{{confirmSpeedLimit}}</td>
+                                <td>{{confirmSpeedLimit.toFixed(3)}}</td>
                                 <td>{{overSpeedData.speedingTime}}</td>
                                 <td>{{overSpeedData.overSpeedAvg.toFixed(3)}}</td>
                                 <td>{{overSpeedData.highestSpeed.toFixed(3)}}</td>
@@ -104,8 +104,8 @@
                             <tbody *ngIf="confirmDisplayData !== 'false'">
                             <tr  *ngFor="let t of stopDetails;">
                                 <th scope="row">{{confirmDateToDisplay}}</th>
-                                <td>{{t.stopedTime}}</td>
-                                <td>{{t.startedTime}}</td>
+                                <td>{{t.stopedTime.substring(11,16)}}</td>
+                                <td>{{t.startedTime.substring(11,16)}}</td>
                                 <td><a (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)">Click to show</a></td>
                             </tr>
                             </tbody>

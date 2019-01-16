@@ -40,6 +40,8 @@ export class ReportComponent implements OnInit {
 
       this.interval = setInterval(() => {
 
+          this.confirmDisplayData = displayData;
+
           if (displayData !== 'false') {
               this.confirmDisplayData = displayData;
               this.confirmDateToDisplay = dateToDisplay;
@@ -135,6 +137,7 @@ export class VehicleReportPopupComponent implements OnInit {
                 this.auth.displayMessage(res, 'success', 'top');
                 this.data.changeMessage3(res);
             } else {
+                displayData = 'false';
                 this.auth.displayMessage(res, 'danger', 'top');
             }
         });

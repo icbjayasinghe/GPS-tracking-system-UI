@@ -20,7 +20,7 @@ export class AuthService {
         this.user = user;
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        const url = 'http://10.10.1.191:3000/login';
+        const url = 'http://10.10.1.8:3000/login';
         return this.http.post(url, this.user, {headers: headers}).pipe(map(res => res.json()));
     }
 
@@ -69,7 +69,7 @@ export class AuthService {
         headers.append('Authorization', this.token);
         headers.append('Content-Type', 'application/json');
 
-        const url = 'http://10.10.1.191:3000/api/user/trackLogoutTime/' + JSON.parse(localStorage.getItem('user'))._id;
+        const url = 'http://10.10.1.8:3000/api/user/trackLogoutTime/' + JSON.parse(localStorage.getItem('user'))._id;
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
 

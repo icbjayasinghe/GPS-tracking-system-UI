@@ -4,14 +4,19 @@
           <div *ngIf="isAdmin" class="col-lg-3 col-md-6 col-sm-6" >
               <a [routerLink]="['/user-list']"><div class="card card-stats" [style.background-color]="'#2f2e33'" [style.color]="'#ebeef1'">
                   <div>
+                      <div class="row">
+                          <div class="col-lg-4 col-md-12">
+                              <br>
+                          <div class="text-center">  &nbsp;&nbsp;<i class="material-icons md-64">supervisor_account</i>
+                          </div>
+                      </div>
+                          <div class="col-lg-8 col-md-12">
                           <div class="text-center">
                               <br>
                               <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">TOTAL NUMBER OF <br>
-                                      <i class="material-icons md-48">supervisor_account</i>
                                   COMPANIES <br>
                                   {{userVal}}</h1>
                           </div>
-                  </div>
                   <div class="card-footer">
                         <div class="stats" [style.color]="'#ebeef1'">
                             <i class="material-icons">
@@ -19,20 +24,28 @@
                             </i> update: 05.30am
                             </div>
                         </div>
-              </div></a>
+                          </div>
+                  </div>
+                  </div></div></a>
           </div>
           <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/vehicle-list']">
               <div class="card card-stats" [style.background-color]="'#2f2e33'" [style.color]="'#ebeef1'">
                   <div>
+                      <div class="row">
+                          <div class="col-lg-4 col-md-12">
+                              <br>
+                              <div class="text-center">
+                                  <i class="material-icons md-64">local_shipping</i>
+                              </div>
+                          </div>
+                          <div class="col-lg-8 col-md-12">
                       <div class="text-center">
                           <br>
                           <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">TOTAL NUMBER OF <br>
-                              <i class="material-icons md-48">local_shipping</i>
                               ACTIVE VEHICLES <br>
                               {{vehicleVal}}</h1>
                       </div>
-                  </div>
                   <div class="card-footer">
                       <div class="stats" [style.color]="'#ebeef1'">
                           <i class="material-icons">
@@ -40,48 +53,67 @@
                           </i> update: 05.15am
                       </div>
                   </div>
-              </div>
+                      </div>
+                      </div>
+                  </div></div>
             </a>
           </div>
           <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
             <a [routerLink]="['/vehicleMap']">
               <div class="card card-stats" [style.background-color]="'#2f2e33'" [style.color]="'#ebeef1'">
                   <div>
+                      <div class="row">
+                          <div class="col-lg-4 col-md-12">
+                              <br>
+                              <div class="text-center">
+                                  <i class="material-icons md-64">departure_board</i>
+                              </div>
+                          </div>
+                          <div class="col-lg-8 col-md-12">
                       <div class="text-center">
                           <br>
-                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">VEHICLES LOCATION<br>
-                              <i class="material-icons md-48">location_on</i>
-                               <br> IN REAL TIME </h1>
+                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">VEHICLES
+                              LOCATION<br>
+                               IN REAL TIME <br> {{vehicleVal}}</h1>
                       </div>
-                  </div>
                   <div class="card-footer">
                       <div class="stats" [style.color]="'#ebeef1'">
                           <i class="material-icons">
                               alarm
                           </i> update: 05.00am
                       </div>
+                  </div></div>
+              </div>
                   </div>
               </div>
             </a>
-
           </div>
           <div class="col-lg-{{cardNum}} col-md-6 col-sm-6">
-            <a [routerLink]="['/notifications']">
+            <a [routerLink]="['/reports']">
               <div class="card card-stats" [style.background-color]="'#2f2e33'" [style.color]="'#ebeef1'">
                   <div>
+                      <div class="row">
+                          <div class="col-lg-4 col-md-12">
+                              <br>
+                              <div class="text-center">
+                                  <i class="material-icons md-64">rate_review</i>
+                              </div>
+                          </div>
+                              <div class="col-lg-8 col-md-12">
                       <div class="text-center">
                           <br>
-                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">VEHICLES <br>
-                              <i class="material-icons md-48">notifications</i>
-                              <br> NOTIFICATIONS</h1>
+                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">REVIEW VEHICLES <br>
+                              REPORTS <br> IN DAILY</h1>
                       </div>
                       <h1 class="mat-card-title" align="center"></h1>
-                  </div>
                   <div class="card-footer">
                       <div class="stats" [style.color]="'#ebeef1'">
                           <i class="material-icons">
                               alarm
                           </i> update: 07.30am
+                      </div>
+                  </div>
+                      </div>
                       </div>
                   </div>
               </div>

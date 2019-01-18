@@ -295,7 +295,7 @@
                           <tbody>
                           <tr *ngFor= "let vehicle of summaryVehicle; let i = index">
                               <td>{{vehicle.vehicleNumber}}</td>
-                              <td>{{vehicle.distance}}</td>
+                              <td>{{vehicle.distance.toFixed(3)}}</td>
                               <td>{{vehicle.trips}}</td>
                           </tr>
                           </tbody>

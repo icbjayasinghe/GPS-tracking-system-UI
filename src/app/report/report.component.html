@@ -107,7 +107,7 @@
                                 <th scope="row">{{confirmDateToDisplay}}</th>
                                 <td>{{t.stopedTime.substring(11,16)}}</td>
                                 <td>{{t.startedTime.substring(11,16)}}</td>
-                                <td><a (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)">Click to show</a></td>
+                                <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)" style="color:black">Click to show</a></td>
                             </tr>
                             </tbody>
                         </table>

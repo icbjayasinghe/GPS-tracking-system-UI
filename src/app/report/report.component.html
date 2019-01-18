@@ -7,7 +7,8 @@
             <div class="col-lg-12 col-md-12">
                     <div class="card-header card-header-warning" style="height: 50px">
                         <h4 class="card-title">REPORTS <b *ngIf="confirmDisplayData !== 'false'">- Vehicle Number | {{confirmVehicleNumber}}</b>
-                            <a style="float: right;" (click)="requestReport()"><i class="material-icons">
+                            <a [routerLink]="['/reports']" style="float: right;" (click)="requestReport()"><i class="material-icons">
+                                    <!-- <a class="btn btn-primary btn-link btn-lg" style="float:right;background-color:transparent;color: white;border: none" (click)="requestReport()"><i class="material-icons"> -->
                                 filter_list
                             </i> FILTER</a>
                         </h4>

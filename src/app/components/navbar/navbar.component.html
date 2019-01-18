@@ -55,9 +55,9 @@
                             <div class="col s12 m6">
                                     <div class="card card-profile">
                                             <div class="card-avatar">
-                                                <a href="#pablo">
+                                            
                                                     <img class="img" src="../assets/img/faces/profile.png" />
-                                                </a>
+                                                
                                             </div>
                                             <div class="card-body">
                                                 <h6 class="card-category text-gray">{{profile.role}}</h6>
@@ -67,7 +67,7 @@
                                                 </p> -->
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                <a class="card-category text-black-50" (click)="changePasswordDialog()">Change Password</a>
+                                                <a [routerLink]="['/dashboard']" class="card-category text-black-50" (click)="changePasswordDialog()">Change Password</a>
                                                     </div>
                                                     <hr>
                                                 </div>

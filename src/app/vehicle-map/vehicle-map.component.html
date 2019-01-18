@@ -8,7 +8,7 @@
 
                     <mat-list-item *ngFor="let m of markers">
                         <div class="container" style="display: inline-block">
-                        <a matLine (click)="requestRoute(m.num)" style="color: #D0D0D0; font-size: 13px; display: inline-block"><img src="{{m.dotIcon}}"  width="25px" height="25px">{{m.num}}</a>
+                        <a matLine [routerLink]="['/vehicleMap']" (click)="requestRoute(m.num)" style="color: #D0D0D0; font-size: 13px; display: inline-block"><img src="{{m.dotIcon}}"  width="25px" height="25px">{{m.num}}</a>
                         </div>
                     </mat-list-item>
 

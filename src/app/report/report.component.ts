@@ -52,6 +52,7 @@ export class ReportComponent implements OnInit {
               this.data.currentMessage3.source.subscribe(translatedValue => {
                   this.vehicleReport = translatedValue.history;
                   this.overSpeedData = this.vehicleReport.overSpeedData;
+                  console.log(this.vehicleReport);
                   this.reports = this.vehicleReport.reports;
                   this.stopDetails =  this.vehicleReport.stopDetails;
               });

@@ -16,7 +16,7 @@ export class CheckPointService {
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);
     headers.append('Content-Type', 'application/json');
-    const url = 'http://10.10.1.8:80/api/user/location/' + userName;
+    const url = 'http://123.231.52.227/api/user/location/' + userName;
     return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
   }
 
@@ -25,7 +25,7 @@ export class CheckPointService {
       this.auth.fetchToken();
       headers.append('Authorization', this.auth.token);
       headers.append('Content-Type', 'application/json');
-    const url = 'http://10.10.1.8:80/api/user/location/' + userName;
+    const url = 'http://123.231.52.227/api/user/location/' + userName;
     return this.http.put(url, checkPointObj, {headers: headers}).pipe(map(res => res.json()));
   }
 
@@ -34,7 +34,7 @@ export class CheckPointService {
     this.auth.fetchToken();
     headers.append('Authorization', this.auth.token);
     headers.append('Content-Type', 'application/json');
-    const url = 'http://10.10.1.8:80/api/user/removeLocation/' + cpId;
+    const url = 'http://123.231.52.227/api/user/removeLocation/' + cpId;
     return this.http.delete(url, {headers: headers}).pipe(map(res => res.json()));
   }
 }

@@ -52,7 +52,14 @@ export class ReportComponent implements OnInit {
               this.data.currentMessage3.source.subscribe(translatedValue => {
                   this.vehicleReport = translatedValue.history;
                   this.overSpeedData = this.vehicleReport.overSpeedData;
-                  console.log(this.vehicleReport);
+                  console.log(this.vehicleReport.reports);
+                  if (!this.vehicleReport.reports.startTime) {
+                      this.vehicleReport.reports.startTime = '----';
+                      this.vehicleReport.reports.stopTime = '----';
+                  } else {
+                      this.vehicleReport.reports.startTime = this.vehicleReport.reports.startTime.substring(11, 16);
+                      this.vehicleReport.reports.stopTime = this.vehicleReport.reports.stopTime.substring(11, 16);
+                  }
                   this.reports = this.vehicleReport.reports;
                   this.stopDetails =  this.vehicleReport.stopDetails;
               });

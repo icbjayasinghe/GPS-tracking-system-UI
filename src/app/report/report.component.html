@@ -30,8 +30,8 @@
                         <tbody>
                         <tr *ngIf="confirmDisplayData !== 'false'">
                             <th scope="row">{{confirmDateToDisplay}}</th>
-                            <td>{{reports.startTime.substring(11,16)}}</td>
-                            <td>{{reports.stopTime.substring(11,16)}}</td>
+                            <td>{{reports.startTime}}</td>
+                            <td>{{reports.stopTime}}</td>
                             <td>{{reports.distance.toFixed(3)}}</td>
                             <td>{{reports.avarageSpeed.toFixed(3)}}</td>
                         </tr>

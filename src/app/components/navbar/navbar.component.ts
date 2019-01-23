@@ -182,8 +182,8 @@ export class NavbarComponent implements OnInit {
 
     changePasswordDialog() {
         const dialogRef = this.dialog.open(ChangePasswordPopup, {
-            height: '450px',
-            width: '600px',
+            height: '350px',
+            width: '500px',
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -386,6 +386,7 @@ export class NavbarComponent implements OnInit {
               window.location.reload();
               return false;
           } else {
+              this.auth.displayMessage(result, 'success', 'top');
               this.router.navigate(['/dashboard']);
 
           }

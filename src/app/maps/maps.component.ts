@@ -3,6 +3,7 @@ import { MapService} from '../services/map.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
 import {AuthService} from '../services/auth.service';
 import * as Chartist from 'chartist';
+import {CheckPointService} from '../services/check-point.service';
 
 
 
@@ -23,11 +24,14 @@ export class MapsComponent implements OnInit {
     routeVisibility = 0.0;
     isSelectVehicle = false;
     polylines = [];
+    officeIcon: any;
+    checkPoints = [];
     distance: any;
 
     constructor(public vehicleDetails: MapService,
                 public vehicles: VehicleServiceService,
-                private auth: AuthService) {
+                private auth: AuthService,
+                private checkPointDetails: CheckPointService) {
     }
 
 
@@ -35,6 +39,14 @@ export class MapsComponent implements OnInit {
             this.vehicles.getVehicleList().subscribe(result => {
                 this.getUserVehicles(result);
             });
+        this.checkPointDetails.getAllCheckPoints(JSON.parse(localStorage.getItem('user')).userName).subscribe(result => {
+            this.getCheckPoints(result.location);
+        });
+    }
+
+    private getCheckPoints(result = []) {
+        this.officeIcon = '.../../assets/img/office.png';
+        this.checkPoints = result;
     }
 
     startAnimationForLineChart(chart) {

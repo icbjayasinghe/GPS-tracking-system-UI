@@ -4,6 +4,7 @@ import { VehicleServiceService } from '../services/vehicle-service.service';
 import {DataService} from '../services/data.service';
 import { isEmpty } from 'rxjs/operators';
 import { isUndefined } from 'util';
+import {CheckPointService} from '../services/check-point.service';
 
 @Component({
   selector: 'app-vehicle-map',
@@ -18,8 +19,8 @@ export class VehicleMapComponent implements OnInit {
   markers = [];
   truckIcon: any;
   dotIcon: any;
-  dataAmount = 0;
-  oldDataAmount = 0;
+  officeIcon: any;
+  checkPoints = [];
   polylines = [];
   vehicleNumber: 'false';
   selectVehicle: string;
@@ -27,11 +28,15 @@ export class VehicleMapComponent implements OnInit {
 
   constructor(
     private vehicleDetails: MapService,
+    private checkPointDetails: CheckPointService
   ) { }
 
   ngOnInit() {
       this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
           this.rebuildPolylines(result);
+      });
+      this.checkPointDetails.getAllCheckPoints(JSON.parse(localStorage.getItem('user')).userName).subscribe(result => {
+          this.getCheckPoints(result.location);
       });
     this.interval = setInterval(() => {
       this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
@@ -39,7 +44,10 @@ export class VehicleMapComponent implements OnInit {
       });
   }, 30000);
   }
-
+private getCheckPoints(result = []) {
+      this.officeIcon = '.../../assets/img/office.png';
+      this.checkPoints = result;
+}
 private rebuildPolylines(result = []) {
     this.markers.length = 0;
     this.polylines = result;

@@ -29,8 +29,6 @@
                                 
                                     <h4>{{m.num}}</h4>
                                     <hr>
-                                    IMEI : {{m.imei}}
-                                    <br>
                                     Speed : {{m.speed}}
                                     <br>
                                     <a *ngIf="m.fuel">Fuel : {{m.fuel}}
@@ -39,7 +37,9 @@
                                     <a *ngIf="m.temperature">Temperature : {{m.temperature}}
                                         <br>
                                     </a>
-                                    Time : {{m.tim}}
+                                        Date : {{m.tim.substring(0,10)}}
+                                        <br>
+                                    Time : {{m.tim.substring(11,16)}}
                             </ng-template>
                                 </div></div>
                             <ng-content>
@@ -77,6 +77,23 @@
                       Time : {{m.tim}}
                   </agm-info-window> -->
               </agm-marker>
+
+                <agm-marker *ngFor="let c of checkPoints;"  [latitude]="c.latitude" [longitude]="c.longitude" [iconUrl]= "officeIcon">
+                    <agm-snazzy-info-window [maxWidth]="auto" [isOpen]="false" [closeWhenOthersOpen]="true" class="map" [fontSize]="1">
+                        <div #outerWrapper>
+                            <div #viewContainer>
+                                <ng-template >
+
+                                    <div class="text-center"><h4>{{c.name}}</h4></div>
+                                    <hr>
+                                    <div class="text-center">Type : {{c.type}}</div>
+                                    <br>
+                                    <div class="text-center"><a [routerLink]="['/vehicleMap']">Remove?</a></div>
+
+                                </ng-template>
+                            </div></div>
+                    </agm-snazzy-info-window>
+                </agm-marker>
             </agm-map>
 
 

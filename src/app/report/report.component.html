@@ -2,52 +2,53 @@
     <div class="container-fluid">
         <div class="card">
             <div class="row">
-  
-            <!-- {{newMessage}} -->
-            <div class="col-lg-12 col-md-12">
+
+                <!-- {{newMessage}} -->
+                <div class="col-lg-12 col-md-12">
                     <div class="card-header card-header-warning" style="height: 50px">
-                        <h4 class="card-title">REPORTS <b *ngIf="confirmDisplayData !== 'false'">- Vehicle Number | {{confirmVehicleNumber}}</b>
+                        <h4 class="card-title">REPORTS <b *ngIf="confirmDisplayData !== 'false'">- Vehicle Number |
+                                {{confirmVehicleNumber}}</b>
                             <a [routerLink]="['/reports']" style="float: right;" (click)="requestReport()"><i class="material-icons">
                                     <!-- <a class="btn btn-primary btn-link btn-lg" style="float:right;background-color:transparent;color: white;border: none" (click)="requestReport()"><i class="material-icons"> -->
-                                filter_list
-                            </i> FILTER</a>
+                                    filter_list
+                                </i> FILTER</a>
                         </h4>
                     </div>
                     <br>
                     <div class="container">
                         <div class="card-body table-responsive">
                             <div class="text-center">
-                    <table class="table">
-                        <thead class="thead-light">
-                        <tr style="color: black; font-family: bold,serif">
-                            <th scope="col">Date</th>
-                            <th scope="col">First start time</th>
-                            <th scope="col">Last stop time</th>
-                            <th scope="col">Total mileage</th>
-                            <th scope="col">Average Speed</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngIf="confirmDisplayData !== 'false'">
-                            <th scope="row">{{confirmDateToDisplay}}</th>
-                            <td>{{reports.startTime.substring(11,16)}}</td>
-                            <td>{{reports.stopTime.substring(11,16)}}</td>
-                            <td>{{reports.distance.toFixed(3)}}</td>
-                            <td>{{reports.avarageSpeed.toFixed(3)}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                <table class="table">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                        <!-- <tr style="color: black"> -->
+                                        <th scope="col">Date</th>
+                                        <th scope="col">First start time</th>
+                                        <th scope="col">Last stop time</th>
+                                        <th scope="col">Total mileage (km)</th>
+                                        <th scope="col">Average Speed (kmh<sup class="sup">-1</sup>)</th>
+                                        <!-- </tr> -->
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="confirmDisplayData !== 'false'">
+                                            <th scope="row">{{confirmDateToDisplay}}</th>
+                                            <td>{{reports.startTime.substring(11,16)}}</td>
+                                            <td>{{reports.stopTime.substring(11,16)}}</td>
+                                            <td>{{reports.distance.toFixed(3)}}</td>
+                                            <td>{{reports.avarageSpeed.toFixed(3)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
                     </div>
+                </div>
             </div>
-        </div>
-            </div>
 
 
-        <div class="row">
+            <div class="row">
 
-            <!-- {{newMessage}} -->
-            <div class="col-lg-12 col-md-12">
+                <!-- {{newMessage}} -->
+                <div class="col-lg-12 col-md-12" *ngIf="confirmDisplayData !== 'false'">
                     <div class="card-header card-header-warning" style="height: 50px">
                         <h4 class="card-title">SPEEDING RECORDS</h4>
                     </div>
@@ -55,37 +56,37 @@
                     <div class="container">
                         <div class="card-body table-responsive">
                             <div class="text-center">
-                        <table class="table">
-                            <thead class="thead-light">
-                            <tr style="color: black; font-family: bold,serif">
-                                <th scope="col">Date</th>
-                                <th scope="col">Speeding limits</th>
-                                <th scope="col">Speeding times</th>
-                                <!--<th scope="col">Over Speeding Average</th>-->
-                                <th scope="col">Highest Speed</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr *ngIf="confirmDisplayData !== 'false'">
-                                <th scope="row">{{confirmDateToDisplay}}</th>
-                                <td>{{confirmSpeedLimit.toFixed(3)}}</td>
-                                <td>{{overSpeedData.speedingTime}}</td>
-                                <!--<td>{{overSpeedData.overSpeedAvg.toFixed(3)}}</td>-->
-                                <td>{{overSpeedData.highestSpeed.toFixed(3)}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                <table class="table">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                        <!-- <tr style="color: black; font-family: bold,serif"> -->
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Speeding limits (kmh<sup class="sup">-1</sup>)</th>
+                                        <th scope="col">Speeding times</th>
+                                        <!--<th scope="col">Over Speeding Average</th>-->
+                                        <th scope="col">Highest Speed (kmh<sup class="sup">-1</sup>)</th>
+                                        <!-- </tr> -->
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="confirmDisplayData !== 'false'">
+                                            <th scope="row">{{confirmDateToDisplay}}</th>
+                                            <td>{{confirmSpeedLimit.toFixed(3)}}</td>
+                                            <td>{{overSpeedData.speedingTime}}</td>
+                                            <!--<td>{{overSpeedData.overSpeedAvg.toFixed(3)}}</td>-->
+                                            <td>{{overSpeedData.highestSpeed.toFixed(3)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
 
 
-        <div class="row">
+            <div class="row">
 
-            <!-- {{newMessage}} -->
-            <div class="col-lg-12 col-md-12">
+                <!-- {{newMessage}} -->
+                <div class="col-lg-12 col-md-12" *ngIf="confirmDisplayData !== 'false'">
                     <div class="card-header card-header-warning" style="height: 50px">
                         <h4 class="card-title">STOP DETAILS</h4>
                     </div>
@@ -93,33 +94,36 @@
                     <div class="container">
                         <div class="card-body table-responsive">
                             <div class="text-center">
-                        <table class="table">
-                            <thead class="thead-light">
-                            <tr style="color: black; font-family: bold,serif">
-                                <th scope="col">Date</th>
-                                <th scope="col">Start time</th>
-                                <th scope="col">End time</th>
-                                <th scope="col">At location</th>
-                            </tr>
-                            </thead>
-                            <tbody *ngIf="confirmDisplayData !== 'false'">
-                            <tr  *ngFor="let t of stopDetails;">
-                                <th scope="row">{{confirmDateToDisplay}}</th>
-                                <td>{{t.stopedTime.substring(11,16)}}</td>
-                                <td>{{t.startedTime.substring(11,16)}}</td>
-                                <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)" style="color:black">Click to show</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                <table class="table">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                        <!-- <tr style="color: black; font-family: bold,serif"> -->
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Start time</th>
+                                            <th scope="col">End time</th>
+                                            <th scope="col">At location</th>
+                                        <!-- </tr> -->
+                                    </thead>
+                                    <tbody *ngIf="confirmDisplayData !== 'false'">
+                                        <tr *ngFor="let t of stopDetails;">
+                                            <th scope="row">{{confirmDateToDisplay}}</th>
+                                            <td>{{t.stopedTime.substring(11,16)}}</td>
+                                            <td>{{t.startedTime.substring(11,16)}}</td>
+                                            <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)"
+                                                    style="color:black">Click to show</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
 
-        
+
+        </div>
     </div>
-  </div>
 </div>
-  
-  
+
+<ng-template #noData>
+    Click filter to search
+</ng-template>

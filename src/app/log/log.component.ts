@@ -40,9 +40,9 @@ export class LogComponent implements OnInit {
         }
         });
     }
-    deleteVehicleConfirmDialog() {
+    forgotPassword() {
         const dialogRef = this.dialog.open(ForgotPasswordPopup, {
-            height: '350px',
+            height: '360px',
             width: '400px',
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -50,6 +50,16 @@ export class LogComponent implements OnInit {
             // console.log( index);
         });
     };
+    helpSupport(){
+        const dialogRef = this.dialog.open(HelpSupportPopup, {
+            height: '360px',
+            width: '400px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            // console.log( index);
+        });
+    }
 }
 
 @Component({
@@ -57,6 +67,14 @@ export class LogComponent implements OnInit {
     templateUrl: 'forgot-password-popup.html'
 })
 export class ForgotPasswordPopup{
+    
+}
+
+@Component({
+    selector: 'help-support-popup',
+    templateUrl: 'help-support-popup.html'
+})
+export class HelpSupportPopup{
     
 }
 

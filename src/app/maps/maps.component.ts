@@ -117,7 +117,6 @@ export class MapsComponent implements OnInit {
             if (this.polylines[0].temperature) {
                 this.markers = {temperature: this.polylines[0].temperature};
             }
-            console.log(this.markers);
     }
 
     setRouteVisible() {

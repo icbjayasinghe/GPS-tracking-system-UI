@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <button type="submit" style="background: black; width:100%; height: 40px;">
+                        <button type="submit" class="btn" style="background: black; width:100%; height: 40px;">
                             <div class="text-center" style="color: white">LOGIN</div>
                         </button>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="text-center" style="font-size: 11px">
-                            <a (click)="deleteVehicleConfirmDialog()" >Forgot Password?</a>
+                            <a [routerLink]="['/login']" (click)="forgotPassword()" >Forgot Password?</a>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
@@ -76,7 +76,7 @@
                         <br>
                         <p style="line-height: 40px">
                             <a href="http://www.nikini.lk/" style="text-underline: black; text-decoration-color: black">www.nikini.lk</a>
-                            <a href="#" style="text-underline: black; text-decoration-color: black">Help/Support</a>
+                            <a [routerLink]="['/login']" (click)="helpSupport()" style="text-underline: black; text-decoration-color: black">Help/Support</a>
                         </p>
                     </div>
                 <!-- </div> -->

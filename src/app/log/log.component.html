@@ -1,5 +1,5 @@
-<div class="row overlay" style=" height: 100%; margin: 0; min-height: 100%">
-    <div class="col-lg-9 col-md-12" style="margin: -5px">
+<div class="row overlay" style=" height: 100%; margin: 0; min-height: 100%; background-color: #ffffff; vertical-align: middle; line-height: 40px;">
+    <div class="col-lg-9 col-md-12" style="margin: -5px 0 0 -5px">
         <img width="100%" height="100%" src=".../../assets/img/nikini.jpg" class="img">
         <div id="foo">
             <a href=""><b>
@@ -7,29 +7,6 @@
                     <font style="color: #ce2029">Nikini</font>
                 </b></a>
         </div>
-        <style>
-            #foo {
-                 position: absolute;
-                 bottom: 0;
-                 right: 30px;
-                 font: bold;
-                 font-style: "Arial Black";
-                 font-weight: 700;
-                 font-size: 13px;
-             }
-             .overlay {
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                left: 0;
-                top: 0;
-                z-index: 10;
-             }
-            .img {
-                width: calc(100% + 20px);
-                margin-left: -10px; 
-            }
-         </style>
     </div>
     <div class="col-lg-3 col-md-12">
         <div class="row">
@@ -40,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
             <form (submit)="loggingData()">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -64,7 +41,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <button type="submit" style="background: black; width:100%">
+                        <button type="submit" style="background: black; width:100%; height: 40px;">
                             <div class="text-center" style="color: white">LOGIN</div>
                         </button>
                     </div>
@@ -89,22 +66,64 @@
                     </div>
                     <div class="col-md-1"></div>
                 </div>
-                <br><br><br>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="text-center" style="font-size: 11px">
-                            &copy;&middot;2019 Nikini Automation Systems, <br>All Right Reserved.
-                            <br>
-                            <p>
-                                <a href="http://www.nikini.lk/" style="text-underline: black; text-decoration-color: black">www.nikini.lk</a>
-                                <a href="#" style="text-underline: black; text-decoration-color: black">Help/Support</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
             </form>
         </div>
+        <div id="footer">
+                <!-- <div class="col-md-1"></div> -->
+                <!-- <div class="col-md-10"> -->
+                    <div class="text-center" style="font-size: 11px; align-self: center">
+                        &copy;&middot;2019 Nikini Automation Systems, <br>All Right Reserved.
+                        <br>
+                        <p style="line-height: 40px">
+                            <a href="http://www.nikini.lk/" style="text-underline: black; text-decoration-color: black">www.nikini.lk</a>
+                            <a href="#" style="text-underline: black; text-decoration-color: black">Help/Support</a>
+                        </p>
+                    </div>
+                <!-- </div> -->
+                <!-- <div class="col-md-1"></div> -->
+            </div>
     </div>
 </div>
+
+<style>
+        #foo {
+             position: absolute;
+             bottom: 0;
+             right: 30px;
+             font: bold;
+             font-style: "Arial Black";
+             font-weight: 700;
+             font-size: 13px;
+         }
+         .overlay {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            scroll-behavior: auto;
+         }
+        .img {
+            width: calc(100% + 20px);
+            margin-left: -10px; 
+        }
+        #footer {
+            /* position: relative;
+            bottom: 0;
+            padding-top: 90%; */
+            padding-bottom: 0%;
+            /* padding-left: 20%; */
+            /* padding-right: 50%; */
+
+            /* background-color: #ce2029; */
+            line-height: 20px;
+            position: relative;
+      /* bottom: 0; */
+      /* right: 8%; */
+      /* font: bold;  */
+      /* font-style: "Arial Black"; */
+      /* font-weight: 700;  */
+      /* font-size: 13px; */
+        }
+     </style>

@@ -5,7 +5,9 @@ import {DataService} from '../services/data.service';
 import { isEmpty } from 'rxjs/operators';
 import { isUndefined } from 'util';
 import {CheckPointService} from '../services/check-point.service';
-
+import {DeleteUserPopup} from '../dashboard/dashboard.component';
+import {MatDialog} from '@angular/material';
+import {AuthService} from '../services/auth.service';
 @Component({
   selector: 'app-vehicle-map',
   templateUrl: './vehicle-map.component.html',
@@ -21,6 +23,7 @@ export class VehicleMapComponent implements OnInit {
   dotIcon: any;
   officeIcon: any;
   checkPoints = [];
+  checkPointOwner: any;
   polylines = [];
   vehicleNumber: 'false';
   selectVehicle: string;
@@ -28,7 +31,9 @@ export class VehicleMapComponent implements OnInit {
 
   constructor(
     private vehicleDetails: MapService,
-    private checkPointDetails: CheckPointService
+    private checkPointDetails: CheckPointService,
+    private dialog: MatDialog,
+    private data: DataService,
   ) { }
 
   ngOnInit() {
@@ -36,18 +41,44 @@ export class VehicleMapComponent implements OnInit {
           this.rebuildPolylines(result);
       });
       this.checkPointDetails.getAllCheckPoints(JSON.parse(localStorage.getItem('user')).userName).subscribe(result => {
-          this.getCheckPoints(result.location);
+          this.getCheckPoints(result);
       });
     this.interval = setInterval(() => {
       this.vehicleDetails.getTrackingData(this.vehicleNumber).subscribe(result => {
           this.rebuildPolylines(result);
       });
   }, 30000);
+      this.interval = setInterval(() => {
+          this.data.currentMessage5.source.subscribe(translatedValue => {
+              if (translatedValue) {
+                  this.checkPointDetails.getAllCheckPoints(JSON.parse(localStorage.getItem('user')).userName).subscribe(result => {
+                      this.getCheckPoints(result);
+                  });
+              }
+          });
+      }, 1000);
   }
-private getCheckPoints(result = []) {
+private getCheckPoints(result: any) {
       this.officeIcon = '.../../assets/img/office.png';
-      this.checkPoints = result;
+      this.checkPoints = result.location;
+      this.checkPointOwner = result._id;
 }
+
+    removeCheckPoint(checkPointId) {
+      const locationDetails = {
+          userId : this.checkPointOwner,
+          locationId: checkPointId
+      };
+      this.data.changeMessage4(locationDetails);
+        const dialogRef = this.dialog.open(DeleteCheckPointPopupComponent, {
+            height: '350px',
+            width: '400px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    };
+
 private rebuildPolylines(result = []) {
     this.markers.length = 0;
     this.polylines = result;
@@ -84,7 +115,6 @@ private rebuildPolylines(result = []) {
 
             this.markers[i] = endMarker;
         }
-        console.log(this.polylines);
 }
 
     requestRoute(vehicleNumber: any) {
@@ -98,23 +128,35 @@ search() {
 this.markers = this.markers.filter(res => {
     return res.num.toLocaleLowerCase().match(this.selectVehicle.toLocaleLowerCase());
 });
-}
+} }
 
 
-/*private moniterNewData(result: any) {
-    this.oldDataAmount = this.dataAmount;
-    this.dataAmount = result.dataAmount;
-    for (let i = 0; i < result.vehicle.length; i++) {
-        if (result.vehicle[i].trackingData.length === 0) {
-            result.vehicle.splice(i, 1);
-            i--;
-        }
+@Component({
+    selector: 'delete-checkPoint-popup',
+    templateUrl: 'delete-checkPoint-popup.html',
+})
+export class DeleteCheckPointPopupComponent {
+    constructor(
+        private delVehicles: VehicleServiceService,
+        private data: DataService,
+        private auth: AuthService,
+        private checkPointDetails: CheckPointService
+
+    ) { };
+
+    deleteCheckPoint() {
+        this.data.currentMessage4.source.subscribe(translatedValue => {
+            const checkPointDetails = translatedValue;
+            this.checkPointDetails.deleteCheckPoint(checkPointDetails).subscribe(result => {
+                if (result.success) {
+                    this.data.changeMessage5(true);
+                    this.auth.displayMessage(result, 'success', 'top');
+                } else {
+                    this.auth.displayMessage(result, 'danger', 'top');
+                }
+            });
+        });
     }
-    if (this.dataAmount !== this.oldDataAmount) {
-        this.rebuildPolylines(result.vehicle);
-    }
-}*/
-
 
 }
 

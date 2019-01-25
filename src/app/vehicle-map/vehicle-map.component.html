@@ -88,7 +88,7 @@
                                     <hr>
                                     <div class="text-center">Type : {{c.type}}</div>
                                     <br>
-                                    <div class="text-center"><a [routerLink]="['/vehicleMap']">Remove?</a></div>
+                                    <div class="text-center"><a [routerLink]="['/vehicleMap']" (click)="removeCheckPoint(c._id)">Remove?</a></div>
 
                                 </ng-template>
                             </div></div>

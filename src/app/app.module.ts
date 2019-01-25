@@ -37,7 +37,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatDialog, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
-import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
+import {DeleteCheckPointPopupComponent, VehicleMapComponent} from './vehicle-map/vehicle-map.component';
 import { DeleteUserPopup, UpdateVehiclePopup, DeleteVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
@@ -90,7 +90,8 @@ import { ReportComponent } from './report/report.component';
     VehicleSummaryPopup,
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
-    StoppedLocationPopupComponent
+    StoppedLocationPopupComponent,
+    DeleteCheckPointPopupComponent
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -107,7 +108,8 @@ import { ReportComponent } from './report/report.component';
     VehicleSummaryPopup,
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
-    StoppedLocationPopupComponent
+    StoppedLocationPopupComponent,
+    DeleteCheckPointPopupComponent
   ],
   providers: [
       VehicleServiceService,

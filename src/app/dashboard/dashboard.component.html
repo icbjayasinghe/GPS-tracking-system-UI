@@ -14,7 +14,7 @@
                             <div class="col-lg-8 col-md-12" >
                                 <div class="text-center">
                                     <br>
-                                    <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">TOTAL NUMBER OF <br>
+                                    <h1 class="mat-card-title" style="font-size: medium;">TOTAL NUMBER OF <br>
                                         COMPANIES <br>
                                         {{userVal}}</h1>
                                 </div>
@@ -46,7 +46,7 @@
                                 <div class="col-lg-8 col-md-12">
                                     <div class="text-center">
                                         <br>
-                                        <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">TOTAL NUMBER OF <br>
+                                        <h1 class="mat-card-title" style="font-size: medium;">TOTAL NUMBER OF <br>
                                             ACTIVE VEHICLES <br>
                                             {{vehicleVal}}</h1>
                                     </div>
@@ -78,7 +78,7 @@
                           <div class="col-lg-8 col-md-12">
                       <div class="text-center">
                           <br>
-                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">VEHICLES
+                          <h1 class="mat-card-title" style="font-size: medium;">VEHICLES
                               LOCATION<br>
                                IN REAL TIME <br> {{vehicleVal}}</h1>
                       </div>
@@ -108,7 +108,7 @@
                               <div class="col-lg-8 col-md-12">
                       <div class="text-center">
                           <br>
-                          <h1 class="mat-card-title" style="font-size: medium; font-family: 'Lucida Bright',serif">REVIEW VEHICLES <br>
+                          <h1 class="mat-card-title" style="font-size: medium;">REVIEW VEHICLES <br>
                               REPORTS <br> IN DAILY</h1>
                       </div>
                       <h1 class="mat-card-title" align="center"></h1>
@@ -236,7 +236,7 @@
                     <table class="table">
                         <thead class=" text-default">
                             <th>Vehicle Number</th>
-                            <th>Device IMEI</th>
+                            <th *ngIf="isAdmin">Device IMEI</th>
                             <th>Vehicle Details</th>
                             <th *ngIf="isAdmin">Client Name</th>
                             <th *ngIf="isAdmin">Edit</th>
@@ -245,7 +245,7 @@
                         <tbody>
                             <tr *ngFor= "let vehicle of allVehicles; let i = index">
                                 <td>{{vehicle.vehicleNumber}}</td>
-                                <td>{{vehicle.imeiNumber}}</td>
+                                <td *ngIf="isAdmin">{{vehicle.imeiNumber}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
                                 <td *ngIf="isAdmin">{{vehicle.userName}}</td>
                                 <td *ngIf="isAdmin">
@@ -297,7 +297,7 @@
                       <table class="table">
                           <thead class=" text-default">
                           <th>Vehicle Number</th>
-                          <th>Distance</th>
+                          <th>Distance (km)</th>
                           <th>Trips</th>
                           </thead>
                           <tbody>

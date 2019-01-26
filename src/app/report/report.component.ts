@@ -8,8 +8,9 @@ import {DataService} from '../services/data.service';
 import {m} from '@angular/core/src/render3';
 
 let dateToDisplay: any;
-const speedLimit = 60.000;
+let speedLimit = 60.000;
 let displayData = 'false';
+let SpeedTimes = -1;
 let vehicleNum: any;
 let selectLatitude: any;
 let selelctLongitude: any;
@@ -30,6 +31,7 @@ export class ReportComponent implements OnInit {
     protected confirmDateToDisplay: any;
     protected confirmSpeedLimit: Number;
     protected confirmVehicleNumber: any;
+    protected speedTimes: number;
 
   constructor(public dialog: MatDialog,
               protected data: DataService) { }
@@ -52,8 +54,12 @@ export class ReportComponent implements OnInit {
               this.data.currentMessage3.source.subscribe(translatedValue => {
                   this.vehicleReport = translatedValue.history;
                   this.overSpeedData = this.vehicleReport.overSpeedData;
+                  this.speedTimes = this.overSpeedData.speedingTime;
                   this.reports = this.vehicleReport.reports;
                   this.stopDetails =  this.vehicleReport.stopDetails;
+                  if (SpeedTimes >= 0) {
+                      this.speedTimes = SpeedTimes;
+                  }
               });
           }
 
@@ -77,6 +83,18 @@ export class ReportComponent implements OnInit {
       selectLatitude = latitude;
 
         const dialogRef = this.dialog.open(StoppedLocationPopupComponent, {
+            height: '400px',
+            width: '600px',
+        }, );
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    }
+
+
+    requestSpeedDetails() {
+        const dialogRef = this.dialog.open(SpeedPopupComponent, {
             height: '400px',
             width: '600px',
         }, );
@@ -133,6 +151,8 @@ export class VehicleReportPopupComponent implements OnInit {
         this.vehicles.requestReport(this.vehicleNumber, this.selectDate).subscribe(res => {
 
             if (res.success) {
+                SpeedTimes = -1;
+                speedLimit = 60.000;
                 displayData = 'OK';
                 this.auth.displayMessage(res, 'success', 'top');
                 this.data.changeMessage3(res);
@@ -163,5 +183,56 @@ export class StoppedLocationPopupComponent implements OnInit {
         this.longitude = selelctLongitude;
         this.latitude = selectLatitude;
 
+    }
+}
+
+
+@Component({
+
+    selector: 'speed-popup',
+    templateUrl: 'speed-popup.html'
+})
+export class SpeedPopupComponent implements OnInit {
+
+    protected allVehiclesResult: any;
+    protected vehicleNumber: string;
+    protected selectDate: string;
+    protected selectSpeed: number;
+
+    constructor(
+        private auth: AuthService,
+        private data: DataService,
+        public vehicles: VehicleServiceService
+    ) { };
+
+
+    ngOnInit() {
+        this.vehicles.getVehicleList().subscribe(result => {
+            this.getUserVehicles(result);
+        });
+    }
+
+    getUserVehicles(result) {
+        this.allVehiclesResult = result;
+    }
+
+    requestSpeedDetails() {
+        const speedDetails = {
+            date: dateToDisplay,
+            vehicleNumber: vehicleNum,
+            speed: this.selectSpeed
+        };
+        this.vehicles.requestSpeedDetail(speedDetails).subscribe(res => {
+            speedLimit = this.selectSpeed;
+
+            if (res.success) {
+                SpeedTimes = res.amount;
+                console.log(SpeedTimes);
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+
+        });
     }
 }

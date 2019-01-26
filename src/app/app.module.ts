@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -25,7 +25,7 @@ import {
     VehicleSummaryPopup, VehicleTechnicalPopup
 } from './dashboard/dashboard.component';
 
-import { VehicleReportPopupComponent, StoppedLocationPopupComponent } from './report/report.component';
+import {VehicleReportPopupComponent, StoppedLocationPopupComponent, SpeedPopupComponent} from './report/report.component';
 
 
 
@@ -93,7 +93,8 @@ import { ReportComponent } from './report/report.component';
     DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
     LogComponent,
-    HelpSupportPopup
+    HelpSupportPopup,
+    SpeedPopupComponent
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -113,7 +114,8 @@ import { ReportComponent } from './report/report.component';
     StoppedLocationPopupComponent,
     DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
-    HelpSupportPopup
+    HelpSupportPopup,
+    SpeedPopupComponent
   ],
   providers: [
       VehicleServiceService,

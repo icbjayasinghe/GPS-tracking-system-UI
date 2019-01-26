@@ -89,4 +89,13 @@ export class VehicleServiceService {
         return this.http.get(url, {headers: headers}).pipe(map(res => res.json()));
     }
 
+    requestSpeedDetail(speedDetails){
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://123.231.52.227/api/getOverSpeed';
+        return this.http.post(url, speedDetails, {headers: headers}).pipe(map(res => res.json()));
+    }
+
 }

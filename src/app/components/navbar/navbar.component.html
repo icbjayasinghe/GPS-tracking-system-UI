@@ -17,7 +17,7 @@
                         </p>
                     </a>
                 </li> -->
-                <li class="nav-item dropdown" *ngIf="isAdmin">
+                <li class="nav-item dropdown">
                     <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         
                         <!-- <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon"> -->
@@ -30,8 +30,8 @@
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a [routerLink]="['/dashboard']" class="dropdown-item" (click)="addUserDialog()">Add User</a>
-                        <a [routerLink]="['/dashboard']" class="dropdown-item" (click)="addVehicleDialog()">Add Vehicle</a>
+                        <a [routerLink]="['/dashboard']" class="dropdown-item" (click)="addUserDialog()" *ngIf="isAdmin">Add User</a>
+                        <a [routerLink]="['/dashboard']" class="dropdown-item" (click)="addVehicleDialog()" *ngIf="isAdmin">Add Vehicle</a>
                         <a [routerLink]="['/dashboard']" class="dropdown-item" (click)="addCheckPointDialog()">Add Location</a>
                         <!-- <a class="dropdown-item" href="#">Another Notification</a>
                         <a class="dropdown-item" href="#">Another One</a> -->

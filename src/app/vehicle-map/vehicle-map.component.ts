@@ -53,6 +53,7 @@ export class VehicleMapComponent implements OnInit {
               if (translatedValue) {
                   this.checkPointDetails.getAllCheckPoints(JSON.parse(localStorage.getItem('user')).userName).subscribe(result => {
                       this.getCheckPoints(result);
+                      this.data.changeMessage5(false);
                   });
               }
           });

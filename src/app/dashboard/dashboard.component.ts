@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { UserService } from '../services/user.service';
 import { VehicleServiceService } from '../services/vehicle-service.service';
-import {MatDialog} from '@angular/material';
-import {AuthService} from '../services/auth.service';
-import {DataService} from '../services/data.service';
+import { MatDialog } from '@angular/material';
+import { AuthService } from '../services/auth.service';
+import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Vehicle } from '../models/table.model';
 import { AppState } from '../app.state';
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 let uId;
 let userfullName;
@@ -26,8 +26,8 @@ import * as _moment from 'moment';
 
 // tslint:disable-next-line:no-duplicate-imports
 
-import {default as _rollupMoment, Moment} from 'moment/src/moment';
-import {FormControl} from '@angular/forms';
+import { default as _rollupMoment, Moment } from 'moment/src/moment';
+import { FormControl } from '@angular/forms';
 
 const moment = _rollupMoment || _moment;
 
@@ -47,9 +47,9 @@ export const MY_FORMATS = {
 
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
     vehiclesNgrx: Observable<Vehicle[]>;
@@ -205,7 +205,7 @@ export class DashboardComponent implements OnInit {
         const dialogRef = this.dialog.open(UpdateVehiclePopup, {
             height: '400px',
             width: '600px',
-        }, );
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -216,7 +216,7 @@ export class DashboardComponent implements OnInit {
         const dialogRef = this.dialog.open(VehicleSummaryPopup, {
             height: '400px',
             width: '600px',
-        }, );
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -228,7 +228,7 @@ export class DashboardComponent implements OnInit {
         const dialogRef = this.dialog.open(VehicleTechnicalPopup, {
             height: '400px',
             width: '600px',
-        }, );
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -298,7 +298,7 @@ export class DashboardComponent implements OnInit {
             }),
             low: 0,
             high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {top: 0, right: 0, bottom: 0, left: 0},
+            chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
         }
 
         const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
@@ -307,28 +307,28 @@ export class DashboardComponent implements OnInit {
         this.startAnimationForLineChart(dailySalesChart);
     }
     showVehicle() {
-    this.getVehicles.getAllVehicles().subscribe(result => {
-      this.allVehicles = result.vehicle;
-      this.vehicleVal = result.vehicle.length;
-    });
-  }
-  showUser() {
-    this.getUsers.getAllUsers().subscribe(result => {
-      this.allUsers = result;
-      this.userVal = result.length;
-    });
-  }
+        this.getVehicles.getAllVehicles().subscribe(result => {
+            this.allVehicles = result.vehicle;
+            this.vehicleVal = result.vehicle.length;
+        });
+    }
+    showUser() {
+        this.getUsers.getAllUsers().subscribe(result => {
+            this.allUsers = result;
+            this.userVal = result.length;
+        });
+    }
 
-  scrollToElement($element): void {
-    console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-  }
+    scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }
 
 }
 
 @Component({
-  selector: 'delete-user-popup',
-  templateUrl: 'delete-user-popup.html',
+    selector: 'delete-user-popup',
+    templateUrl: 'delete-user-popup.html',
 })
 export class DeleteUserPopup {
     public username: string;
@@ -336,21 +336,21 @@ export class DeleteUserPopup {
     ngOnInit() {
         this.username = userfullName;
     }
-  constructor(
-    private delUser: UserService,
-    private auth: AuthService,
-    private data: DataService
-  ) { };
-  deleteUser() {
-    this.delUser.deleteUser(uId).subscribe(res => {
-        if (res.success) {
-            this.data.changeMessage(true);
-            this.auth.displayMessage(res, 'success', 'top');
-        } else {
-            this.auth.displayMessage(res, 'danger', 'top');
-        }
-    });
-  }
+    constructor(
+        private delUser: UserService,
+        private auth: AuthService,
+        private data: DataService
+    ) { };
+    deleteUser() {
+        this.delUser.deleteUser(uId).subscribe(res => {
+            if (res.success) {
+                this.data.changeMessage(true);
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
 }
 
 
@@ -365,12 +365,12 @@ export class RestPasswordPopup {
         private auth: AuthService
     ) { };
     ngOnInit() {
-      this.username = userfullName;
+        this.username = userfullName;
     }
     restPassword() {
         const userRestPasswordDetails = {
-          userId : uId,
-          userName : currentUserName
+            userId: uId,
+            userName: currentUserName
         };
         this.user.restPassword(userRestPasswordDetails).subscribe(res => {
             if (res.success) {
@@ -391,9 +391,9 @@ export class RestPasswordPopup {
         // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
         // application's root module. We provide it at the component level here, due to limitations of
         // our example generation script.useClass
-        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 
-        {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+        { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     ],
 })
 export class VehicleSummaryPopup {
@@ -464,7 +464,7 @@ export class VehicleTechnicalPopup {
         public vehicles: VehicleServiceService
     ) { };
 
-    requestReport() {}
+    requestReport() { }
 }
 
 
@@ -474,7 +474,7 @@ export class VehicleTechnicalPopup {
 })
 export class EditUserPopup {
     private userDetails: any;
-    protected  fullName: string;
+    protected fullName: string;
     protected userName: string;
     protected role: string;
     protected address: string;
@@ -490,7 +490,7 @@ export class EditUserPopup {
     ) { };
     ngOnInit() {
         this.userDetails = userDetails;
-        console.log(this.userDetails);
+        // console.log(this.userDetails);
         this.fullName = this.userDetails.fullName;
         this.userName = this.userDetails.userName;
         this.role = this.userDetails.roles;
@@ -501,11 +501,11 @@ export class EditUserPopup {
     }
     updateUser() {
         const userUpdateDetails = {
-            fullName :  this.fullName,
-            userName : this.userName,
-            roles : this.role,
-            address : this.address,
-            emailAddress : this.email,
+            fullName: this.fullName,
+            userName: this.userName,
+            roles: this.role,
+            address: this.address,
+            emailAddress: this.email,
             contactNumber: this.contactNumber,
             status: this.status,
             userId: this.userDetails._id
@@ -551,61 +551,61 @@ export class UserLogsPopup {
 }
 
 @Component({
-  selector: 'update-vehicle-popup',
-  templateUrl: 'update-vehicle-popup.html',
+    selector: 'update-vehicle-popup',
+    templateUrl: 'update-vehicle-popup.html',
 })
 export class UpdateVehiclePopup {
-  id = vehi._id;
-  vehicleNo = vehi.vehicleNumber;
-  deviceImei = vehi.imeiNumber;
-  userName = vehi.userName;
-  vehicleDetails = vehi.vehicleDetails;
-  constructor(
-    private updVehicles: VehicleServiceService,
-    private auth: AuthService,
-    private data: DataService
-  ) { };
-  updateVehicle() {
-    const vehicleDetails = {
-      vehicleNo: this.vehicleNo,
-        Imie: this.deviceImei,
-        userName: this.userName,
-        details: this.vehicleDetails
-    };
-    this.updVehicles.updateVehicle(this.id, vehicleDetails).subscribe(res => {
-      if (res.success) {
-          // this.data.changeMessage(true);
-          this.data.changeMessage(true);
-          this.auth.displayMessage(res, 'success', 'top');
-      } else {
-          console.log(res.err);
-          this.auth.displayMessage(res, 'danger', 'top');
-      }
-    });
-  }
+    id = vehi._id;
+    vehicleNo = vehi.vehicleNumber;
+    deviceImei = vehi.imeiNumber;
+    userName = vehi.userName;
+    vehicleDetails = vehi.vehicleDetails;
+    constructor(
+        private updVehicles: VehicleServiceService,
+        private auth: AuthService,
+        private data: DataService
+    ) { };
+    updateVehicle() {
+        const vehicleDetails = {
+            vehicleNo: this.vehicleNo,
+            Imie: this.deviceImei,
+            userName: this.userName,
+            details: this.vehicleDetails
+        };
+        this.updVehicles.updateVehicle(this.id, vehicleDetails).subscribe(res => {
+            if (res.success) {
+                // this.data.changeMessage(true);
+                this.data.changeMessage(true);
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                console.log(res.err);
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
 }
 
 @Component({
-  selector: 'delete-vehicle-popup',
-  templateUrl: 'delete-vehicle-popup.html',
+    selector: 'delete-vehicle-popup',
+    templateUrl: 'delete-vehicle-popup.html',
 })
 export class DeleteVehiclePopup {
-  constructor(
-    private delVehicles: VehicleServiceService,
-    private data: DataService,
-    private auth: AuthService
-    // private store: Store<AppState>
-  ) { };
-  deleteVehicle() {
-    this.delVehicles.deleteVehicle(vNumber).subscribe(res => {
-      if (res.success) {
-        // this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
-          this.data.changeMessage(true);
-          this.auth.displayMessage(res, 'success', 'top');
-      } else {
-          this.auth.displayMessage(res, 'danger', 'top');
-      }
-    });
-  }
+    constructor(
+        private delVehicles: VehicleServiceService,
+        private data: DataService,
+        private auth: AuthService
+        // private store: Store<AppState>
+    ) { };
+    deleteVehicle() {
+        this.delVehicles.deleteVehicle(vNumber).subscribe(res => {
+            if (res.success) {
+                // this.store.dispatch(new VehicleActions.RemoveVehicle(index) )
+                this.data.changeMessage(true);
+                this.auth.displayMessage(res, 'success', 'top');
+            } else {
+                this.auth.displayMessage(res, 'danger', 'top');
+            }
+        });
+    }
 }
 

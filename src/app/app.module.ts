@@ -15,7 +15,7 @@ import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
 import { MapService} from './services/map.service';
-import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup, ChangePasswordPopup} from './components/navbar/navbar.component';
+import { AddVehiclePopup, AddUserPopUp, AddCheckPointPopup, ChangePasswordPopup} from './components/navbar/navbar.component';
 import { AuthService} from './services/auth.service'
 import {
     DashboardComponent,
@@ -90,7 +90,7 @@ import { ReportComponent } from './report/report.component';
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
     StoppedLocationPopupComponent,
-    DeleteCheckPointPopupComponent
+    DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
     LogComponent,
     HelpSupportPopup
@@ -111,7 +111,7 @@ import { ReportComponent } from './report/report.component';
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
     StoppedLocationPopupComponent,
-    DeleteCheckPointPopupComponent
+    DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
     HelpSupportPopup
   ],

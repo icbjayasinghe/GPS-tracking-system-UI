@@ -22,6 +22,7 @@ import { VehicleMapComponent} from '../../vehicle-map/vehicle-map.component';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from '../../reducer/vehicle.reducer';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 import {
   MatButtonModule,
@@ -53,6 +54,7 @@ import { from } from 'rxjs';
     MatIconModule,
     ReactiveFormsModule,
     AgmSnazzyInfoWindowModule,
+    ScrollToModule.forRoot(),
       AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'}),
   ],
   declarations: [

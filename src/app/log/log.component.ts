@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import {MAT_CHECKBOX_CLICK_ACTION} from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material';
 
 
 
@@ -16,7 +17,8 @@ export class LogComponent implements OnInit {
   password: string;
 
   constructor(private auth: AuthService,
-              private router: Router) { }
+              private router: Router,
+              public dialog: MatDialog,) { }
 
   ngOnInit() {
   }
@@ -38,4 +40,41 @@ export class LogComponent implements OnInit {
         }
         });
     }
+    forgotPassword() {
+        const dialogRef = this.dialog.open(ForgotPasswordPopup, {
+            height: '360px',
+            width: '400px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            // console.log( index);
+        });
+    };
+    helpSupport(){
+        const dialogRef = this.dialog.open(HelpSupportPopup, {
+            height: '360px',
+            width: '400px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+            // console.log( index);
+        });
+    }
 }
+
+@Component({
+    selector: 'forgot-password-popup',
+    templateUrl: 'forgot-password-popup.html'
+})
+export class ForgotPasswordPopup{
+    
+}
+
+@Component({
+    selector: 'help-support-popup',
+    templateUrl: 'help-support-popup.html'
+})
+export class HelpSupportPopup{
+    
+}
+

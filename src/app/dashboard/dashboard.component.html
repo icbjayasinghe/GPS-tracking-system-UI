@@ -239,6 +239,7 @@
                             <th *ngIf="isAdmin">Device IMEI</th>
                             <th>Vehicle Details</th>
                             <th *ngIf="isAdmin">Client Name</th>
+                            <th>Last Record <sub>previous hour</sub> </th>
                             <th *ngIf="isAdmin">Edit</th>
                             <th *ngIf="isAdmin">Delete</th>
                         </thead>
@@ -248,6 +249,7 @@
                                 <td *ngIf="isAdmin">{{vehicle.imeiNumber}}</td>
                                 <td>{{vehicle.vehicleDetails}}</td>
                                 <td *ngIf="isAdmin">{{vehicle.userName}}</td>
+                                <td>{{vehicle.lastReceived}}</td>
                                 <td *ngIf="isAdmin">
                                     <button mat-raised-button type="button" matTooltip="Edit Vehicle" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" (click)="updateDialog(vehicle)">
                                         <i class="material-icons">edit</i>
@@ -257,6 +259,9 @@
                                     <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="deleteVehicleConfirmDialog(vehicle.vehicleNumber,i)">
                                         <i class="material-icons">close</i>
                                     </button>
+                                </td>
+                                <td>
+
                                 </td>
                             </tr>
                             <tr *ngFor="let vehicle of vehiclesNgrx | async; let i = index">

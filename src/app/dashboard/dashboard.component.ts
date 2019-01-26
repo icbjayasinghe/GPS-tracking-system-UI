@@ -490,7 +490,7 @@ export class EditUserPopup {
     ) { };
     ngOnInit() {
         this.userDetails = userDetails;
-        console.log(this.userDetails);
+        // console.log(this.userDetails);
         this.fullName = this.userDetails.fullName;
         this.userName = this.userDetails.userName;
         this.role = this.userDetails.roles;

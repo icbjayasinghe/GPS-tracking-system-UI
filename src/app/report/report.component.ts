@@ -97,7 +97,7 @@ export class ReportComponent implements OnInit {
 
     showMore(){
         this.showMoreStatus = !this.showMoreStatus;
-
+    }
     requestSpeedDetails() {
         const dialogRef = this.dialog.open(SpeedPopupComponent, {
             height: '400px',

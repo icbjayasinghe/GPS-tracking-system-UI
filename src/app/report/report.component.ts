@@ -30,12 +30,15 @@ export class ReportComponent implements OnInit {
     protected confirmDateToDisplay: any;
     protected confirmSpeedLimit: Number;
     protected confirmVehicleNumber: any;
+    showMoreStatus: boolean;
+    stopDetailsCount: Number;
 
   constructor(public dialog: MatDialog,
               protected data: DataService) { }
 
   ngOnInit() {
-
+    
+    this.showMoreStatus = false;
       this.confirmDisplayData = displayData;
 
       this.interval = setInterval(() => {
@@ -54,12 +57,12 @@ export class ReportComponent implements OnInit {
                   this.overSpeedData = this.vehicleReport.overSpeedData;
                   this.reports = this.vehicleReport.reports;
                   this.stopDetails =  this.vehicleReport.stopDetails;
+                  this.stopDetailsCount = this.stopDetails.length;
               });
           }
 
       }, 1000);
   }
-
 
     requestReport() {
         const dialogRef = this.dialog.open(VehicleReportPopupComponent, {
@@ -84,6 +87,11 @@ export class ReportComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
+    }
+
+    showMore(){
+        this.showMoreStatus = !this.showMoreStatus;
+        console.log(this.showMoreStatus);
     }
 
 }

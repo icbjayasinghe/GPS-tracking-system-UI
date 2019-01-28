@@ -1,0 +1,13 @@
+<h6>{{vehicleNumber}} | {{dateSelected}}</h6>
+<agm-map [latitude]="7.2906" [longitude]="80.6337" style="height: 90%">
+
+    <agm-polyline *ngFor="let p of polylines;" [strokeColor]="'#00b3fd'" [strokeOpacity]= "1.0" [strokeWeight]="3">
+        <agm-polyline-point  *ngFor="let t of p.overSpeedPath;" [latitude]="t.latitude" [longitude]="t.longitude">
+        </agm-polyline-point>
+    </agm-polyline>
+
+</agm-map>
+
+<div class="text-center">
+    <button mat-button mat-dialog-close>Cancel</button>
+</div>

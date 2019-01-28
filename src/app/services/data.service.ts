@@ -8,7 +8,7 @@ export class DataService {
   private message3: any;
   private message4 = {};
   private message5 = false;
-  private message6: number;
+  private message6: any;
 
 
   private messageSource = new BehaviorSubject <any>(this.message);
@@ -27,7 +27,7 @@ export class DataService {
     currentMessage5 = this.messageSource5.asObservable();
 
     private messageSource6 = new BehaviorSubject<any>(this.message6);
-    currentMessage6 = this.messageSource5.asObservable();
+    currentMessage6 = this.messageSource6.asObservable();
 
   constructor() { }
 

@@ -14,6 +14,8 @@ let SpeedTimes = -1;
 let vehicleNum: any;
 let selectLatitude: any;
 let selelctLongitude: any;
+let speedDownIndex: number;
+let speedUpIndex: number;
 
 @Component({
   selector: 'app-report',
@@ -34,6 +36,8 @@ export class ReportComponent implements OnInit {
     showMoreStatus: boolean;
     stopDetailsCount: Number;
     protected speedTimes: number;
+    protected confirmToDisplaySpeedDetails = 'false';
+    protected speedResult = [];
 
   constructor(public dialog: MatDialog,
               protected data: DataService) { }
@@ -63,6 +67,14 @@ export class ReportComponent implements OnInit {
                   this.stopDetailsCount = this.stopDetails.length;
                   if (SpeedTimes >= 0) {
                       this.speedTimes = SpeedTimes;
+                      if (SpeedTimes > 0) {
+                          this.confirmToDisplaySpeedDetails = 'OK';
+                          this.data.currentMessage6.source.subscribe(speedResult => {
+                              this.speedResult = speedResult;
+                          });
+                      } else {
+                          this.confirmToDisplaySpeedDetails = 'false';
+                      }
                   }
               });
           }
@@ -94,6 +106,20 @@ export class ReportComponent implements OnInit {
             console.log(`Dialog result: ${result}`);
         });
     }
+
+    requestSpeededLocation(downIndex, upIndex) {
+        speedDownIndex = downIndex;
+        speedUpIndex = upIndex;
+        const dialogRef = this.dialog.open(SpeedLocationPopupComponent, {
+            height: '400px',
+            width: '600px',
+        }, );
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+}
+
 
     showMore(){
         this.showMoreStatus = !this.showMoreStatus;
@@ -236,11 +262,48 @@ export class SpeedPopupComponent implements OnInit {
 
             if (res.success) {
                 SpeedTimes = res.amount;
+                this.data.changeMessage6(res.overSpeedData);
                 this.auth.displayMessage(res, 'success', 'top');
             } else {
                 this.auth.displayMessage(res, 'danger', 'top');
             }
 
+        });
+    }
+}
+
+
+@Component({
+
+    selector: 'speed-location-popup',
+    templateUrl: 'speed-location-popup.html'
+})
+export class SpeedLocationPopupComponent implements OnInit {
+
+    protected polylines = [];
+    protected vehicleNumber: string;
+    protected dateSelected: string;
+
+
+    constructor(public vehicles: VehicleServiceService) { };
+
+
+    ngOnInit() {
+        this.vehicleNumber = vehicleNum;
+        this.dateSelected = dateToDisplay;
+        this.requestSpeedPath();
+    }
+
+    requestSpeedPath() {
+        const speedInfo = {
+            vehicleNumber: vehicleNum,
+            date: dateToDisplay,
+            speedUpIndex: speedUpIndex,
+            speedDownIndex: speedDownIndex
+        };
+        this.vehicles.getSpeedPath(speedInfo).subscribe(res => {
+            console.log(res);
+            this.polylines[0] = res;
         });
     }
 }

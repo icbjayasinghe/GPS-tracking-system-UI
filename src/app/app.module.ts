@@ -25,7 +25,12 @@ import {
     VehicleSummaryPopup, VehicleTechnicalPopup
 } from './dashboard/dashboard.component';
 
-import {VehicleReportPopupComponent, StoppedLocationPopupComponent, SpeedPopupComponent} from './report/report.component';
+import {
+    VehicleReportPopupComponent,
+    StoppedLocationPopupComponent,
+    SpeedPopupComponent,
+    SpeedLocationPopupComponent
+} from './report/report.component';
 
 
 
@@ -94,7 +99,8 @@ import { ReportComponent } from './report/report.component';
     ForgotPasswordPopup,
     LogComponent,
     HelpSupportPopup,
-    SpeedPopupComponent
+    SpeedPopupComponent,
+    SpeedLocationPopupComponent
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -115,7 +121,8 @@ import { ReportComponent } from './report/report.component';
     DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
     HelpSupportPopup,
-    SpeedPopupComponent
+    SpeedPopupComponent,
+    SpeedLocationPopupComponent
   ],
   providers: [
       VehicleServiceService,

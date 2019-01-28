@@ -91,7 +91,6 @@ export class ReportComponent implements OnInit {
 
     showMore(){
         this.showMoreStatus = !this.showMoreStatus;
-        console.log(this.showMoreStatus);
     }
 
 }

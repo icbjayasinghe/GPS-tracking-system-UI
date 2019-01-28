@@ -303,23 +303,18 @@ export class NavbarComponent implements OnInit {
     templateUrl: 'add-check-point-popup.html',
   })
   export class AddCheckPointPopup {
-    userName: String ;
     locationName: String ;
     locationType: String ;
     latitude: any ;
     longitude: any ;
-    range: String;
       lat = 7.2906;
       lng = 80.6337;
       userMarkers = [];
-      allUser: any;
     constructor(
       private addNewCheckPoints: CheckPointService,
       private getUsers: UserService,
       private auth: AuthService
-    ) { this.getUsers.getAllUsers().subscribe(result =>
-        this.allUser = result
-    ) };
+    ) { };
 
       onChooseLocation(event) {
 
@@ -339,15 +334,13 @@ export class NavbarComponent implements OnInit {
 
     addCheckPoint() {
       const checkPointObj = {
-        userName: this.userName,
+        userName: JSON.parse(localStorage.getItem('user')).userName,
         locationName: this.locationName,
         locationType: this.locationType,
         latitude: this.latitude,
-        longitude: this.longitude,
-        range: this.range
+        longitude: this.longitude
       };
-      console.log(checkPointObj);
-      this.addNewCheckPoints.addNewCheckPoint(checkPointObj, this.userName).subscribe(res => {
+      this.addNewCheckPoints.addNewCheckPoint(checkPointObj).subscribe(res => {
           if (res.success) {
               this.auth.displayMessage(res, 'success', 'top');
           } else {

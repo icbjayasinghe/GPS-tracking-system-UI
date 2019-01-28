@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -15,7 +15,7 @@ import { VehicleServiceService } from './services/vehicle-service.service';
 import { UserService } from './services/user.service';
 import { CheckPointService } from './services/check-point.service';
 import { MapService} from './services/map.service';
-import { AddVehiclePopup,AddUserPopUp, AddCheckPointPopup, ChangePasswordPopup} from './components/navbar/navbar.component';
+import { AddVehiclePopup, AddUserPopUp, AddCheckPointPopup, ChangePasswordPopup} from './components/navbar/navbar.component';
 import { AuthService} from './services/auth.service'
 import {
     DashboardComponent,
@@ -25,7 +25,7 @@ import {
     VehicleSummaryPopup, VehicleTechnicalPopup
 } from './dashboard/dashboard.component';
 
-import { VehicleReportPopupComponent, StoppedLocationPopupComponent } from './report/report.component';
+import {VehicleReportPopupComponent, StoppedLocationPopupComponent, SpeedPopupComponent} from './report/report.component';
 
 
 
@@ -37,7 +37,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import {MatDialog, MatDatepickerModule, MatAutocompleteModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
-import { VehicleMapComponent } from './vehicle-map/vehicle-map.component';
+import {DeleteCheckPointPopupComponent, VehicleMapComponent} from './vehicle-map/vehicle-map.component';
 import { DeleteUserPopup, UpdateVehiclePopup, DeleteVehiclePopup } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import {DataService} from './services/data.service';
@@ -90,9 +90,11 @@ import { ReportComponent } from './report/report.component';
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
     StoppedLocationPopupComponent,
+    DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
     LogComponent,
-    HelpSupportPopup
+    HelpSupportPopup,
+    SpeedPopupComponent
   ],
   entryComponents: [
     AddVehiclePopup,
@@ -110,8 +112,10 @@ import { ReportComponent } from './report/report.component';
     VehicleReportPopupComponent,
     VehicleTechnicalPopup,
     StoppedLocationPopupComponent,
+    DeleteCheckPointPopupComponent,
     ForgotPasswordPopup,
-    HelpSupportPopup
+    HelpSupportPopup,
+    SpeedPopupComponent
   ],
   providers: [
       VehicleServiceService,

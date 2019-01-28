@@ -19,7 +19,7 @@
                         <div class="card-body table-responsive">
                             <div class="text-center">
                                 <table class="table">
-                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false'; else noData">
                                         <!-- <tr style="color: black"> -->
                                         <th scope="col">Date</th>
                                         <th scope="col">First start time</th>
@@ -50,14 +50,18 @@
                 <!-- {{newMessage}} -->
                 <div class="col-lg-12 col-md-12" *ngIf="confirmDisplayData !== 'false'">
                     <div class="card-header card-header-warning" style="height: 50px">
-                        <h4 class="card-title">SPEEDING RECORDS</h4>
+                        <h4 class="card-title">SPEEDING RECORDS
+                            <a [routerLink]="['/reports']" style="float: right;" (click)="requestSpeedDetails()"><i class="material-icons">
+                                filter_list
+                            </i> FILTER</a>
+                        </h4>
                     </div>
                     <br>
                     <div class="container">
                         <div class="card-body table-responsive">
                             <div class="text-center">
                                 <table class="table">
-                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false'; else noData">
                                         <!-- <tr style="color: black; font-family: bold,serif"> -->
                                         <th scope="col">Date</th>
                                         <th scope="col">Speeding limits (kmh<sup class="sup">-1</sup>)</th>
@@ -70,7 +74,7 @@
                                         <tr *ngIf="confirmDisplayData !== 'false'">
                                             <th scope="row">{{confirmDateToDisplay}}</th>
                                             <td>{{confirmSpeedLimit.toFixed(3)}}</td>
-                                            <td>{{overSpeedData.speedingTime}}</td>
+                                            <td>{{ speedTimes}}</td>
                                             <!--<td>{{overSpeedData.overSpeedAvg.toFixed(3)}}</td>-->
                                             <td>{{overSpeedData.highestSpeed.toFixed(3)}}</td>
                                         </tr>
@@ -95,7 +99,7 @@
                         <div class="card-body table-responsive">
                             <div class="text-center">
                                 <table class="table">
-                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false' else noData">
+                                    <thead class="text-default" *ngIf="confirmDisplayData !== 'false'; else noData">
                                         <!-- <tr style="color: black; font-family: bold,serif"> -->
                                             <th scope="col">Date</th>
                                             <th scope="col">Start time</th>

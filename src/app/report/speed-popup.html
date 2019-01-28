@@ -1,0 +1,17 @@
+<h3>Request Speed Details</h3>
+<div class="card-body table-responsive">
+    <form #form2control="ngForm">
+        <div class="row ">
+            <!-- <div class="col-md-2"></div> -->
+
+            <div class="col-md-12" style="text-align: center">
+                <hr>
+                <mat-form-field class="example-full-width" >
+                    <input matInput type="number" placeholder="Select Speed" [(ngModel)]="selectSpeed" name="selectSpeed" required>
+                </mat-form-field>
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-stroked-button mat-dialog-close cdkFocusInitial [disabled]="(!form2control.form.valid)" (click)="requestSpeedDetails()">SEARCH>></button>
+            </div>
+        </div>
+    </form>
+</div>

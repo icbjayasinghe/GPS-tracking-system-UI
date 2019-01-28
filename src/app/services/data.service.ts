@@ -6,6 +6,9 @@ export class DataService {
   private message: any;
   private message2: any;
   private message3: any;
+  private message4 = {};
+  private message5 = false;
+  private message6: number;
 
 
   private messageSource = new BehaviorSubject <any>(this.message);
@@ -17,17 +20,38 @@ export class DataService {
   private messageSource3 = new BehaviorSubject<any>(this.message3);
     currentMessage3 = this.messageSource3.asObservable();
 
+  private messageSource4 = new BehaviorSubject<any>(this.message4);
+    currentMessage4 = this.messageSource4.asObservable();
+
+    private messageSource5 = new BehaviorSubject<any>(this.message5);
+    currentMessage5 = this.messageSource5.asObservable();
+
+    private messageSource6 = new BehaviorSubject<any>(this.message6);
+    currentMessage6 = this.messageSource5.asObservable();
+
   constructor() { }
 
   changeMessage(message: any) {
     this.messageSource.next(message);
   }
 
-  changeMessage2(message2: any) {
-    this.messageSource2.next(message2);
+  changeMessage2(message: any) {
+    this.messageSource2.next(message);
   }
 
-    changeMessage3(message3: any) {
-        this.messageSource3.next(message3);
+    changeMessage3(message: any) {
+        this.messageSource3.next(message);
+    }
+
+    changeMessage4(message: any) {
+        this.messageSource4.next(message);
+    }
+
+    changeMessage5(message: any) {
+        this.messageSource5.next(message);
+    }
+
+    changeMessage6(message: any) {
+        this.messageSource6.next(message);
     }
 }

@@ -107,15 +107,37 @@
                                             <th scope="col">At location</th>
                                         <!-- </tr> -->
                                     </thead>
-                                    <tbody *ngIf="confirmDisplayData !== 'false'">
-                                        <tr *ngFor="let t of stopDetails;">
-                                            <th scope="row">{{confirmDateToDisplay}}</th>
-                                            <td>{{t.stopedTime.substring(11,16)}}</td>
-                                            <td>{{t.startedTime.substring(11,16)}}</td>
-                                            <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)"
-                                                    style="color:black">Click to show</a></td>
-                                        </tr>
-                                    </tbody>
+                                    <!-- <ng-template > -->
+                                            <tbody *ngIf="confirmDisplayData !== 'false'">
+                                                    <tr *ngFor="let t of stopDetails; index as i">
+                                                        <ng-template  [ngIf]="i < 5 && showMoreStatus == false">
+                                                                <th scope="row">{{confirmDateToDisplay}}</th>
+                                                                <td>{{t.stopedTime.substring(11,16)}} {{i}}</td>
+                                                                <td>{{t.startedTime.substring(11,16)}}</td>
+                                                                <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)"
+                                                                        style="color:black">Click to show</a></td>
+                                                        </ng-template >
+                                                        <ng-template [ngIf]="showMoreStatus">
+                                                                <th scope="row">{{confirmDateToDisplay}}</th>
+                                                                <td>{{t.stopedTime.substring(11,16)}} {{i}}</td>
+                                                                <td>{{t.startedTime.substring(11,16)}}</td>
+                                                                <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)"
+                                                                        style="color:black">Click to show</a></td>
+                                                        </ng-template >
+                                                        
+                                                    </tr>
+                                                    <ng-template [ngIf] = "showMoreStatus == true">
+                                                            <button class="btn box" style="align-content: center" (click)="showMore()">Collapse</button>     
+                                                   </ng-template>
+                                                   <ng-template [ngIf] = "showMoreStatus == false">
+                                                        <button class="btn" (click)="showMore()">Show all</button>     
+                                                   </ng-template>
+                                                            
+                                                       
+                                                </tbody>
+
+                                    <!-- </ng-template> -->
+                                    
                                 </table>
                             </div>
                         </div>

@@ -31,13 +31,16 @@ export class ReportComponent implements OnInit {
     protected confirmDateToDisplay: any;
     protected confirmSpeedLimit: Number;
     protected confirmVehicleNumber: any;
+    showMoreStatus: boolean;
+    stopDetailsCount: Number;
     protected speedTimes: number;
 
   constructor(public dialog: MatDialog,
               protected data: DataService) { }
 
   ngOnInit() {
-
+    
+    this.showMoreStatus = false;
       this.confirmDisplayData = displayData;
 
       this.interval = setInterval(() => {
@@ -57,6 +60,7 @@ export class ReportComponent implements OnInit {
                   this.speedTimes = this.overSpeedData.speedingTime;
                   this.reports = this.vehicleReport.reports;
                   this.stopDetails =  this.vehicleReport.stopDetails;
+                  this.stopDetailsCount = this.stopDetails.length;
                   if (SpeedTimes >= 0) {
                       this.speedTimes = SpeedTimes;
                   }
@@ -65,7 +69,6 @@ export class ReportComponent implements OnInit {
 
       }, 1000);
   }
-
 
     requestReport() {
         const dialogRef = this.dialog.open(VehicleReportPopupComponent, {
@@ -92,6 +95,8 @@ export class ReportComponent implements OnInit {
         });
     }
 
+    showMore(){
+        this.showMoreStatus = !this.showMoreStatus;
 
     requestSpeedDetails() {
         const dialogRef = this.dialog.open(SpeedPopupComponent, {

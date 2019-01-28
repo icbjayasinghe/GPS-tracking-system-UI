@@ -34,7 +34,8 @@ export class ReportComponent implements OnInit {
     protected confirmSpeedLimit: Number;
     protected confirmVehicleNumber: any;
     showMoreStatus: boolean;
-    stopDetailsCount: Number;
+    showMoreSpeedPath: boolean;
+    stopDetailsCount: number;
     protected speedTimes: number;
     protected confirmToDisplaySpeedDetails = 'false';
     protected speedResult = [];
@@ -43,8 +44,9 @@ export class ReportComponent implements OnInit {
               protected data: DataService) { }
 
   ngOnInit() {
-    
+
     this.showMoreStatus = false;
+    this.showMoreSpeedPath = false;
       this.confirmDisplayData = displayData;
 
       this.interval = setInterval(() => {
@@ -75,6 +77,8 @@ export class ReportComponent implements OnInit {
                       } else {
                           this.confirmToDisplaySpeedDetails = 'false';
                       }
+                  } else {
+                      this.confirmToDisplaySpeedDetails = 'false';
                   }
               });
           }
@@ -121,8 +125,12 @@ export class ReportComponent implements OnInit {
 }
 
 
-    showMore(){
+    showMore() {
         this.showMoreStatus = !this.showMoreStatus;
+    }
+
+    showMoreSpeed() {
+      this.showMoreSpeedPath = !this.showMoreSpeedPath;
     }
     requestSpeedDetails() {
         const dialogRef = this.dialog.open(SpeedPopupComponent, {

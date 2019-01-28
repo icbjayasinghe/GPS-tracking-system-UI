@@ -101,18 +101,35 @@
                                     <!-- <tr style="color: black; font-family: bold,serif"> -->
                                     <th scope="col">Date</th>
                                     <th scope="col">Start time</th>
-                                    <th scope="col">Duration</th>
+                                    <th scope="col">Duration(HH:MM:SS)</th>
                                     <th scope="col">At location</th>
                                     <!-- </tr> -->
                                     </thead>
                                     <tbody *ngIf="confirmDisplayData !== 'false'">
-                                    <tr *ngFor="let s of speedResult;">
+                                    <tr *ngFor="let s of speedResult; index as j">
+                                        <ng-template  [ngIf]="j < 5 && showMoreSpeedPath == false">
                                         <th scope="row">{{confirmDateToDisplay}}</th>
                                         <td>{{s.speededTime.substring(11,16)}}</td>
                                         <td>{{s.duration}}</td>
                                         <td><a [routerLink]="['/reports']" (click)="requestSpeededLocation(s.speedDownIndex, s.speedUpIndex)"
                                                style="color:black">Click to show</a></td>
+                                        </ng-template>
+                                        <ng-template  [ngIf]="showMoreSpeedPath">
+                                            <th scope="row">{{confirmDateToDisplay}}</th>
+                                            <td>{{s.speededTime.substring(11,16)}}</td>
+                                            <td>{{s.duration}}</td>
+                                            <td><a [routerLink]="['/reports']" (click)="requestSpeededLocation(s.speedDownIndex, s.speedUpIndex)"
+                                                   style="color:black">Click to show</a></td>
+                                        </ng-template>
                                     </tr>
+
+                                    <ng-template [ngIf] = "showMoreSpeedPath == true">
+                                        <button class="btn box" style="align-content: center" (click)="showMoreSpeed()">Collapse</button>
+                                    </ng-template>
+                                    <ng-template [ngIf] = "showMoreSpeedPath == false && speedTimes > 5">
+                                        <button class="btn" (click)="showMoreSpeed()">Show all</button>
+                                    </ng-template>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -165,7 +182,7 @@
                                                     <ng-template [ngIf] = "showMoreStatus == true">
                                                             <button class="btn box" style="align-content: center" (click)="showMore()">Collapse</button>     
                                                    </ng-template>
-                                                   <ng-template [ngIf] = "showMoreStatus == false">
+                                                   <ng-template [ngIf] = "showMoreStatus == false && stopDetailsCount > 5">
                                                         <button class="btn" (click)="showMore()">Show all</button>     
                                                    </ng-template>
                                                             

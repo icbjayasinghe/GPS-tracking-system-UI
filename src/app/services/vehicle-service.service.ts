@@ -94,7 +94,7 @@ export class VehicleServiceService {
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
-        const url = 'http://localhost:3000/api/getOverSpeed';
+        const url = 'http://123.231.52.227/api/getOverSpeed';
         return this.http.post(url, speedDetails, {headers: headers}).pipe(map(res => res.json()));
     }
 
@@ -103,7 +103,7 @@ export class VehicleServiceService {
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);
         headers.append('Content-Type', 'application/json');
-        const url = 'http://localhost:3000/api/getOverSpeedPath';
+        const url = 'http://123.231.52.227/api/getOverSpeedPath';
         return this.http.post(url, speedInfo, {headers: headers}).pipe(map(res => res.json()));
   }
 

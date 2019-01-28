@@ -174,6 +174,8 @@ export class StoppedLocationPopupComponent implements OnInit {
 
     protected longitude: any;
     protected latitude: any;
+    protected vehicleNumber: string;
+    protected dateSelected: string;
 
 
     constructor() { };
@@ -182,6 +184,8 @@ export class StoppedLocationPopupComponent implements OnInit {
     ngOnInit() {
         this.longitude = selelctLongitude;
         this.latitude = selectLatitude;
+        this.vehicleNumber = vehicleNum;
+        this.dateSelected = dateToDisplay;
 
     }
 }
@@ -227,7 +231,6 @@ export class SpeedPopupComponent implements OnInit {
 
             if (res.success) {
                 SpeedTimes = res.amount;
-                console.log(SpeedTimes);
                 this.auth.displayMessage(res, 'success', 'top');
             } else {
                 this.auth.displayMessage(res, 'danger', 'top');

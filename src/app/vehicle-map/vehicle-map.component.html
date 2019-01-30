@@ -31,12 +31,15 @@
                                     <hr>
                                     Speed : {{m.speed}}
                                     <br>
-                                    <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                                    <a *ngIf="m.battery">Battery : {{m.battery / 1000}}V
                                         <br>
                                     </a>
                                     <a *ngIf="m.temperature">Temperature : {{m.temperature}}
                                         <br>
                                     </a>
+                                        <a *ngIf="m.fuel">Fuel : {{m.fuel}}
+                                            <br>
+                                        </a>
                                         Date : {{m.tim.substring(0,10)}}
                                         <br>
                                     Time : {{m.tim.substring(11,16)}}

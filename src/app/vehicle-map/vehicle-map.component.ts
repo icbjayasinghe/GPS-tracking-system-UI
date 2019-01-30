@@ -102,16 +102,20 @@ private rebuildPolylines(result = []) {
                 speed: this.polylines[i].trackingData[0].speed,
                 num: this.polylines[i].vehicleNumber,
                 tim: this.polylines[i].trackingData[0].date,
+                battery: false,
                 fuel: false,
                 temperature: false,
                 truckIcon: this.truckIcon,
                 dotIcon: this.dotIcon
             };
-            if (this.polylines[i].trackingData[0].fuel) {
-                endMarker.fuel = this.polylines[i].trackingData[0].fuel;
+            if (this.polylines[i].trackingData[0].batteryVoltage) {
+                endMarker.battery = this.polylines[i].trackingData[0].batteryVoltage;
             }
             if (this.polylines[i].trackingData[0].temperature) {
                 endMarker.temperature = this.polylines[i].trackingData[0].temperature;
+            }
+            if (this.polylines[i].trackingData[0].fuel) {
+                endMarker.fuel = this.polylines[i].trackingData[0].fuel;
             }
 
             this.markers[i] = endMarker;

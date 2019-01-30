@@ -165,7 +165,7 @@
                                                     <tr *ngFor="let t of stopDetails; index as i">
                                                         <ng-template  [ngIf]="i < 5 && showMoreStatus == false">
                                                                 <th scope="row">{{confirmDateToDisplay}}</th>
-                                                                <td>{{t.stopedTime.substring(11,16)}} {{i}}</td>
+                                                                <td>{{t.stopedTime.substring(11,16)}} </td>
                                                                 <td>{{t.startedTime.substring(11,16)}}</td>
                                                                 <td><a [routerLink]="['/reports']" (click)="requestStoppedLocation(t.location.longitude, t.location.latitude)"
                                                                         style="color:black">Click to show</a></td>

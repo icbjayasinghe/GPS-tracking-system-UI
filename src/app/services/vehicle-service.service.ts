@@ -107,4 +107,14 @@ export class VehicleServiceService {
         return this.http.post(url, speedInfo, {headers: headers}).pipe(map(res => res.json()));
   }
 
+
+    requestBattery(details) {
+        const headers = new Headers();
+        this.auth.fetchToken();
+        headers.append('Authorization', this.auth.token);
+        headers.append('Content-Type', 'application/json');
+        const url = 'http://123.231.52.227/api/history/batteryLevel';
+        return this.http.post(url, details, {headers: headers}).pipe(map(res => res.json()));
+}
+
 }

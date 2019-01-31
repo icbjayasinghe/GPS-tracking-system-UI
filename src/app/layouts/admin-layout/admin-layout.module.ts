@@ -55,7 +55,7 @@ import { from } from 'rxjs';
     ReactiveFormsModule,
     AgmSnazzyInfoWindowModule,
     ScrollToModule.forRoot(),
-      AgmCoreModule.forRoot({apiKey: 'AIzaSyDVlAsbOreXu07Sct_--NMYuJ8hxyzJZi0'}),
+      AgmCoreModule.forRoot({apiKey: 'AIzaSyCD0s34tQtTLSHh9Lfu7I6qL9X0WL2ghpY'}),
   ],
   declarations: [
     DashboardComponent,

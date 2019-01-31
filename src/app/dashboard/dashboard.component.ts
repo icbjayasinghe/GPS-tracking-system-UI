@@ -21,6 +21,8 @@ declare var $: any;
 let vNumber;
 let index;
 let userDetails: any;
+let battery = [];
+let temperature = [];
 
 import * as _moment from 'moment';
 
@@ -286,9 +288,15 @@ export class DashboardComponent implements OnInit {
 
 
         const dataDailySalesChart: any = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+            labels: [],
             series: [
-                [ 0, 0, 0, 0, 0, 0, 0]
+                battery
+            ]
+        };
+        const dataDailySalesChart2: any = {
+            labels: [],
+            series: [
+                temperature
             ]
         };
 
@@ -297,12 +305,12 @@ export class DashboardComponent implements OnInit {
                 tension: 0
             }),
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+             // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: { top: 5, right: 0, bottom: 0, left: 0 },
         }
 
         const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-        const dailySalesChart2 = new Chartist.Line('#dailySalesChart2', dataDailySalesChart, optionsDailySalesChart);
+        const dailySalesChart2 = new Chartist.Line('#dailySalesChart2', dataDailySalesChart2, optionsDailySalesChart);
 
         this.startAnimationForLineChart(dailySalesChart);
     }
@@ -457,14 +465,30 @@ export class VehicleTechnicalPopup {
     }
 
 
-
     constructor(
         private auth: AuthService,
         private data: DataService,
         public vehicles: VehicleServiceService
-    ) { };
+    ) {
+    };
 
-    requestReport() { }
+    requestBattery() {
+        temperature = [];
+        battery = [];
+        const details = {
+            date: this.selectDate,
+            vehicleNumber: this.vehicleNumber
+        };
+        this.vehicles.requestBattery(details).subscribe(result => {
+            if (result.success) {
+                this.auth.displayMessage(result, 'success', 'top');
+                temperature = result.temp;
+                battery = result.battery;
+            } else {
+                this.auth.displayMessage(result, 'danger', 'top');
+            }
+        });
+    }
 }
 
 

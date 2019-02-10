@@ -56,7 +56,6 @@ export class AuthService {
 
     logout() {
         this.trackLogoutTime().subscribe(result => {
-            console.log(result.message);
             this.token = null;
             this.user = null;
             localStorage.clear();

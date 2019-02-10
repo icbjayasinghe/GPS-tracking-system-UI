@@ -30,11 +30,9 @@ export class LogComponent implements OnInit {
     };
     this.auth.loggingData(user).subscribe(result => {
         if (result.success) {
-            console.log(result);
             this.auth.storeData(result);
             this.router.navigate(['/dashboard']);
         } else {
-            console.log(result);
             this.router.navigate(['/login']);
             this.auth.displayMessage(result, 'danger', 'top');
         }

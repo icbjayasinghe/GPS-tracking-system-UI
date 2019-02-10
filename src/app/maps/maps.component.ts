@@ -90,7 +90,6 @@ export class MapsComponent implements OnInit {
 
     private rebuildPolylines(result: any) {
             this.distance = result[0].distance.toFixed(3);
-            console.log(result);
             this.polylines = result[0].trackingData;
                 if (this.polylines[0].speed > 60) {
                     this.truckIcon = '.../../assets/img/red-truck-front.png';

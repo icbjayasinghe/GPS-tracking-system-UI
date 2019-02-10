@@ -176,13 +176,18 @@ export class VehicleReportPopupComponent implements OnInit {
     requestReport() {
         const date = new Date(this.selectDate);
         let month: any;
-        if (date.getMonth() + 1 < 10) {
+        if (date.getMonth() < 10) {
           month = '0' + (date.getMonth() + 1);
         } else {
             month = date.getMonth() + 1;
         }
         const year = date.getFullYear();
-        const day = date.getDate();
+        let day: any;
+        if ( date.getDate() <= 10) {
+            day = '0' + (date.getDate());
+        } else {
+            day = date.getDate();
+        }
         this.selectDate = year + '-' + month + '-' + day;
         dateToDisplay = this.selectDate;
         vehicleNum = this.vehicleNumber;
@@ -310,7 +315,6 @@ export class SpeedLocationPopupComponent implements OnInit {
             speedDownIndex: speedDownIndex
         };
         this.vehicles.getSpeedPath(speedInfo).subscribe(res => {
-            console.log(res);
             this.polylines[0] = res;
         });
     }

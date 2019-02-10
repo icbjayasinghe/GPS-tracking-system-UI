@@ -27,7 +27,6 @@ export class UserService {
     }
 
     deleteUser(userId) {
-        console.log(userId);
         const headers = new Headers();
         this.auth.fetchToken();
         headers.append('Authorization', this.auth.token);

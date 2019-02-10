@@ -23,6 +23,8 @@ let index;
 let userDetails: any;
 let battery = [];
 let temperature = [];
+let displayGraphDate: string;
+let displayGraphVehicle: string;
 
 import * as _moment from 'moment';
 
@@ -69,6 +71,9 @@ export class DashboardComponent implements OnInit {
     vehicleVal: number;
     change: any;
     summaryVehicle: any;
+    displayGraph = 0;
+    displayGraphVehicle: string;
+    displayGraphDate: string;
 
     constructor(
         private getUsers: UserService,
@@ -252,8 +257,12 @@ export class DashboardComponent implements OnInit {
         const today = new Date();
         const month = today.getMonth();
         const year = today.getFullYear();
-        const date = year + '-' + month + 1;
-        console.log(date);
+        let date: any;
+        if (month < 10) {
+            date = year + '-0' + (month + 1);
+        } else {
+            date = year + '-' + (month + 1);
+        }
         this.getVehicles.requestSummary(date).subscribe(res => {
             if (res.success) {
                 this.data.changeMessage2(res);
@@ -284,9 +293,26 @@ export class DashboardComponent implements OnInit {
                 this.data.changeMessage(false);
             }
 
+            this.data.currentMessage7.subscribe(message => {
+                if (message) {
+                    this.showGraph();
+                    this.displayGraph = 1;
+                    this.displayGraphVehicle = displayGraphVehicle;
+                    this.displayGraphDate = displayGraphDate;
+                    this.data.changeMessage7(false);
+                }
+            });
+
         }, 1000);
+        this.showGraph();
+    }
 
-
+    showGraph() {
+        if (battery.length > 0 || temperature.length > 0) {
+            this.displayGraph = 1;
+            this.displayGraphVehicle = displayGraphVehicle;
+            this.displayGraphDate = displayGraphDate;
+        }
         const dataDailySalesChart: any = {
             labels: [],
             series: [
@@ -305,7 +331,7 @@ export class DashboardComponent implements OnInit {
                 tension: 0
             }),
             low: 0,
-             // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: { top: 5, right: 0, bottom: 0, left: 0 },
         }
 
@@ -329,7 +355,7 @@ export class DashboardComponent implements OnInit {
 
     scrollToElement($element): void {
         console.log($element);
-        $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 
 }
@@ -416,7 +442,12 @@ export class VehicleSummaryPopup {
     ) { };
 
     requestSummary() {
-        const date = this.selectDate._i.year + '-' + this.selectDate._i.month + 1;
+        let date: any;
+        if (this.selectDate._i.month < 10) {
+            date = this.selectDate._i.year + '-0' + (this.selectDate._i.month + 1);
+        } else {
+            date = this.selectDate._i.year + '-' + (this.selectDate._i.month + 1);
+        }
         this.vehicles.requestSummary(date).subscribe(res => {
             if (res.success) {
                 this.auth.displayMessage(res, 'success', 'top');
@@ -452,6 +483,8 @@ export class VehicleTechnicalPopup {
     protected allVehiclesResult: any;
     protected vehicleNumber: string;
     protected selectDate: string;
+    protected displayVehicle: string;
+    protected displayDate: string;
 
 
     ngOnInit() {
@@ -475,6 +508,23 @@ export class VehicleTechnicalPopup {
     requestBattery() {
         temperature = [];
         battery = [];
+        const date = new Date(this.selectDate);
+        let month: any;
+        if (date.getMonth() < 10) {
+            month = '0' + (date.getMonth() + 1);
+        } else {
+            month = date.getMonth() + 1;
+        }
+        const year = date.getFullYear();
+        let day: any;
+        if ( date.getDate() <= 10) {
+            day = '0' + (date.getDate());
+        } else {
+            day = date.getDate();
+        }
+        this.selectDate = year + '-' + month + '-' + day;
+        displayGraphVehicle = this.vehicleNumber;
+        displayGraphDate = this.selectDate;
         const details = {
             date: this.selectDate,
             vehicleNumber: this.vehicleNumber
@@ -487,6 +537,7 @@ export class VehicleTechnicalPopup {
             } else {
                 this.auth.displayMessage(result, 'danger', 'top');
             }
+            this.data.changeMessage7(true);
         });
     }
 }
